@@ -1,0 +1,27 @@
+{
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "sub": true,
+  "undef": true,
+  "unused": "vars",
+  "boss": true,
+  "eqnull": true,
+  "trailing": true,
+  "strict": true,
+  "indent": 2,
+
+  "node": true,
+  "browser": true,
+  "jquery": true,
+
+  "predef" : [
+    "SyntaxHighlighter",
+    "vimwikiCtx",
+    "_",
+    "QRCode"
+  ]
+}

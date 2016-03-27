@@ -1,0 +1,16 @@
+{
+  "name": "recycle.bin",
+  "version": "0.0.1",
+  "description": "My personal WIKI site.",
+  "author": "lexiongjia@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xiongjia/recycle.bin.git"
+  },
+  "license": "MIT",
+  "scripts": {},
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  },
+  "dependencies": {}
+}
