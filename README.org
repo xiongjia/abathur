@@ -1,0 +1,32 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: Abathur
+* Introduction
+My Org static website
+** Org project settings
+#+BEGIN_SRC emacs-lisp
+  ;; project
+  (defconst abathur-root
+    (expand-file-name "<the root folder>"
+    "abathur root folder.")
+  (setq org-publish-project-alist `(
+    ("abathur-content"
+     :base-directory ,(concat abathur-root "/content")
+     :publishing-directory ,(concat abathur-root "/dist")
+     :base-extension "org"
+     :recursive t
+     :publishing-function org-html-publish-to-html
+     :headline-levels 4
+     :auto-preamble t
+     :auto-sitemap nil
+     :export-creator-info nil 
+     :export-author-info nil
+     :auto-postamble nil
+     :table-of-contents nil
+     :section-numbers nil
+     :html-head-include-default-style  nil
+     :html-head-include-scripts nil
+     :html-postamble "&nbsp;"
+     :html-preamble  "&nbsp;")
+    ("abathur" :components ("abathur-content"))))
+#+END_SRC
+
