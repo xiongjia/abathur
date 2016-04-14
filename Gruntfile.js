@@ -9,6 +9,5 @@ module.exports = function (grunt) {
   grunt.initConfig(gruntCfg.root);
 
   /* default task */
-  grunt.registerTask('default', []);
+  grunt.registerTask('default', ['jshint']);
 };
-

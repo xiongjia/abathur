@@ -1,4 +1,23 @@
 # grunt config
 
+# task config - bower
+gruntBower: &gruntBower
+  install:
+    options:
+      targetDir: './bower_components'
+
+# task config - jshint
+gruntJSHint: &gruntJSHint
+  options:
+    jshintrc: '.jshintrc'
+  gruntfile:
+    src: 'Gruntfile.js'
+  config:
+    src:
+      # TODO Add .js files at here
+      - 'Gruntfile.js'
+
 # grunt config root
-gruntConfRoot:
+root:
+  bower: *gruntBower
+  jshint: *gruntJSHint
