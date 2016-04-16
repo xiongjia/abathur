@@ -1,13 +1,21 @@
 'use strict';
 
 module.exports = function (grunt) {
-  var gruntCfg;
+  var gruntCfg, tasks, optNoCompress, _;
 
+  _ = require('lodash');
   /* load grunt config and plugins */
+  optNoCompress = grunt.option('no-compress');
   require('load-grunt-tasks')(grunt);
   gruntCfg = grunt.file.readYAML('grunt_conf.yml');
   grunt.initConfig(gruntCfg.root);
 
   /* default task */
-  grunt.registerTask('default', ['jshint']);
+  tasks = {
+    build: ['clean', 'bower', 'jshint', 'copy']
+  };
+  tasks.default = tasks.build;
+  _.mapKeys(tasks, function (val, key) {
+    grunt.registerTask(key, val);
+  });
 };

@@ -1,7 +1,9 @@
 {
   "name": "abathur",
   "version": "0.0.1",
-  "authors": ["lexiongjia@gmail.com"],
+  "authors": [
+    "lexiongjia@gmail.com"
+  ],
   "license": "MIT",
   "private": true,
   "ignore": [
@@ -9,5 +11,7 @@
     "node_modules",
     "bower_components"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "normalize-css": "^4.1.1"
+  }
 }

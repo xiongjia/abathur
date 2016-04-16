@@ -3,8 +3,10 @@
 #+AUTHOR: xiong-jia.le
 #+EMAIL: lexiongjia@gmail.com
 #+OPTIONS: num:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/abathur.css" /> 
 
-Test data
+The Test data
 
 * Dev
 

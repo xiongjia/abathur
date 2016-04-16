@@ -1,5 +1,11 @@
 # grunt config
 
+# settings (e.g. folder name, server port numbers)
+abathur:
+  dist: &dist 'dist'
+  output: &output 'output'
+
+
 # task config - bower
 gruntBower: &gruntBower
   install:
@@ -17,7 +23,23 @@ gruntJSHint: &gruntJSHint
       # TODO Add .js files at here
       - 'Gruntfile.js'
 
+# task config - clean
+gruntClean: &gruntClean
+  - *dist
+
+# grunt task config - copy
+gruntCopy: &gruntCopy
+  content:
+    expand: true
+    cwd: *output
+    src:
+      - '**/*.html'
+    dest: *dist
+
 # grunt config root
 root:
   bower: *gruntBower
   jshint: *gruntJSHint
+  clean: *gruntClean
+  copy: *gruntCopy
+
