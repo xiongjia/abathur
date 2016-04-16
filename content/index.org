@@ -4,10 +4,13 @@
 #+EMAIL: lexiongjia@gmail.com
 #+OPTIONS: num:nil
 #+HTML_INCLUDE_STYLE: nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/abathur.css" /> 
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/css/main.css" /> 
 
 The Test data
 
-* Dev
+* DEV
+The dev contents
 
 * Misc
+
+The misc contents

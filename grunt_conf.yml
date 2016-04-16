@@ -4,7 +4,7 @@
 abathur:
   dist: &dist 'dist'
   output: &output 'output'
-
+  mainCSS: &mainCSS 'dist/assets/css/main.css'
 
 # task config - bower
 gruntBower: &gruntBower
@@ -27,7 +27,7 @@ gruntJSHint: &gruntJSHint
 gruntClean: &gruntClean
   - *dist
 
-# grunt task config - copy
+# task config - copy
 gruntCopy: &gruntCopy
   content:
     expand: true
@@ -36,10 +36,19 @@ gruntCopy: &gruntCopy
       - '**/*.html'
     dest: *dist
 
+# task config - concat
+gruntConcat: &gruntConcat
+  css:
+    src:
+      - 'bower_components/normalize-css/normalize.css'
+      - 'content/assets/css/abathur.css'
+    dest: *mainCSS
+ 
 # grunt config root
 root:
   bower: *gruntBower
   jshint: *gruntJSHint
   clean: *gruntClean
   copy: *gruntCopy
+  concat: *gruntConcat
 

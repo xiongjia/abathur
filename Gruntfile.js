@@ -12,7 +12,7 @@ module.exports = function (grunt) {
 
   /* default task */
   tasks = {
-    build: ['clean', 'bower', 'jshint', 'copy']
+    build: ['clean', 'bower', 'jshint', 'copy', 'concat']
   };
   tasks.default = tasks.build;
   _.mapKeys(tasks, function (val, key) {
