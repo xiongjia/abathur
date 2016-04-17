@@ -3,13 +3,18 @@
 # settings (e.g. folder name, server port numbers)
 abathur:
   dist: &dist 'dist'
+  assets: &assets 'dist/assets'
   output: &output 'output'
-  mainCSS: &mainCSS 'dist/assets/css/main.css'
+  mainCSS: &mainCSS 'dist/assets/css/main_v0.1.css'
+  mainJS: &mainJS 'dist/assets/js/main_v0.1.js'
 
 # task config - bower
 gruntBower: &gruntBower
   install:
     options:
+      install: true
+      copy: true
+      verbose: true
       targetDir: './bower_components'
 
 # task config - jshint
@@ -20,8 +25,7 @@ gruntJSHint: &gruntJSHint
     src: 'Gruntfile.js'
   config:
     src:
-      # TODO Add .js files at here
-      - 'Gruntfile.js'
+      - 'content/assets/js/abathur.js'
 
 # task config - clean
 gruntClean: &gruntClean
@@ -35,15 +39,56 @@ gruntCopy: &gruntCopy
     src:
       - '**/*.html'
     dest: *dist
-
+  conf:
+    src:
+      - 'content/htaccess'
+    dest: 'dist/.htaccess'
+  fonts:
+    expand: true
+    cwd: 'bower_components/bootstrap/dist'
+    src:
+      - '**/*.{eot,svg,ttf,woff}'
+    dest: *assets
+ 
 # task config - concat
 gruntConcat: &gruntConcat
   css:
     src:
-      - 'bower_components/normalize-css/normalize.css'
+      - 'bower_components/bootstrap/dist/css/bootstrap.css'
       - 'content/assets/css/abathur.css'
     dest: *mainCSS
- 
+  js:
+    src:
+      - 'bower_components/jquery/jquery.js'
+      - 'content/assets/js/abathur.js'
+    dest: *mainJS
+
+# task config - cssmin
+gruntCssmin: &gruntCssmin
+  minify:
+    src:
+      - *mainCSS
+    dest: *mainCSS
+
+# task config - uglify
+gruntUglify: &gruntUglify
+  dist:
+    src: *mainJS
+    dest: *mainJS
+
+# task config - htmlmin
+gruntHtmlmin: &gruntHtmlmin
+  dist:
+    options:
+      removeComments: true
+      collapseWhitespace: true 
+    files:
+      - 
+        expand: true
+        cwd: 'dist'
+        src: '**/*.html'
+        dest: 'dist'
+
 # grunt config root
 root:
   bower: *gruntBower
@@ -51,4 +96,6 @@ root:
   clean: *gruntClean
   copy: *gruntCopy
   concat: *gruntConcat
-
+  cssmin: *gruntCssmin
+  uglify: *gruntUglify
+  htmlmin: *gruntHtmlmin

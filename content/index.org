@@ -4,7 +4,8 @@
 #+EMAIL: lexiongjia@gmail.com
 #+OPTIONS: num:nil
 #+HTML_INCLUDE_STYLE: nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/css/main.css" /> 
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/css/main_v0.1.css" /> 
+
 
 The Test data
 
@@ -14,3 +15,4 @@ The dev contents
 * Misc
 
 The misc contents
+

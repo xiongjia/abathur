@@ -1,27 +1,13 @@
 /* abathur.css */
 
 body {
-  max-width: 100%;
+  max-width: 98%;
   margin: 1%;
   font: normal normal normal 16px/1.6em Open Sans, sans-serif;
   color: #333
 }
 
-@media all and (min-width:95ex) {
-  body {
-    max-width: 95ex;
-    margin: 1% auto
-  }
-  .creator { float: right }
-}
-
-@media not all and (min-width:110ex) {
-  .creator { float: left }
-  p img {width: 95%}
-}
-
 h1, h2, h3, h4, h5, h6 {
-  color: #a5573e;
   line-height: 1.6em;
   font-family: Droid Serif, serif
 }
@@ -30,57 +16,86 @@ h4, h5, h6 {
   font-size: 1em
 }
 
-.tag {
-  background-color: #eee;
-  font-size: 80%;
-  font-weight: 400;
-  padding: 2px
+h1 {
+  color: grey;
+}
+h2 {
+  border-bottom: 1px solid #ddd;
 }
 
-.timestamp {
-  color: #bebebe
+a { text-decoration: none; font-weight: 400; }
+a:visited { text-decoration: none; font-weight: 400; }
+a:hover { text-decoration: underline; }
+
+.ab-footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 100px;
+  color: #777;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
 }
 
-.linenr {
-  font-size: smaller
-}
-
-.code-highlighted {
-  background-color: #ff0
+#content {
+  font-size:110%;
+  padding-left: 15px;
+  width: 80%;
+  line-height: 120%
 }
 
 #table-of-contents {
-  font-size: 10pt;
-  position: fixed;
-  right: 0em;
-  top: 0em;
-  background: white;
-  -webkit-box-shadow: 0 0 1em #777777;
-  -moz-box-shadow: 0 0 1em #777777;
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomleft: 5px;
-  text-align: right;
-  max-height: 80%;
+  font-size: 9pt;
+  display: block;
+  background: #f8f8f8;
+  padding: 0;
   overflow: auto;
+  overflow-x: hidden;
+  border: 1px solid #e7e7e7;
+  color: #0;
+  position: relative;
+  z-index: 101;
+  cursor: pointer;
+  -moz-border-radius: 0 0 5px 5px;
+       border-radius: 0 0 5px 5px;
+  padding-left: 8px;
+  padding-bottom: 8px;
+  padding-top: 0px;
+  -webkit-box-shadow: 0 1px 8px #000;
+     -moz-box-shadow: 0 1px 8px #000;
+          box-shadow: 0 1px 8px #000;
 }
 
 #table-of-contents h2 {
-  font-size: 10pt;
-  max-width: 9em;
-  font-weight: normal;
-  padding-left: 0.5em;
-  padding-left: 0.5em;
-  padding-top: 0.05em;
-  padding-bottom: 0.05em;
+  font-size: 12pt;
+  border: 2;
+  padding: 0;
+  padding-top: 0px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
 
 #table-of-contents #text-table-of-contents {
-  display: none;
   text-align: left;
+  padding: 0px;
 }
 
-#table-of-contents:hover #text-table-of-contents {
-  display: block;
-  padding: 0.5em;
-  margin-top: -1.5em;
+#table-of-contents ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 20px;
+}
+
+#table-of-contents li { color: #eff; }
+#table-of-contents a { color: #000000; }
+
+.ab-right {
+  position: absolute;
+  width: 220px;
+  z-index: 100;
+  top: 17%;
+  right: 2%;
+  padding: 0;
 }
