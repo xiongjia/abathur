@@ -13,7 +13,8 @@ module.exports = function (grunt) {
   tasks = {
     noCompress: ['clean', 'bower', 'jshint', 'copy', 'concat']
   };
-  tasks.build = _.concat(tasks.noCompress, ['cssmin', 'uglify', 'htmlmin']);
+  tasks.build = ['noCompress', 'cssmin', 'uglify', 'htmlmin'];
+  tasks.serv = tasks.server = ['build', 'connect', 'watch'];
   tasks.default = tasks.build;
   _.mapKeys(tasks, function (val, key) {
     grunt.registerTask(key, val);

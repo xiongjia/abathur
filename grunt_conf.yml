@@ -89,6 +89,25 @@ gruntHtmlmin: &gruntHtmlmin
         src: '**/*.html'
         dest: 'dist'
 
+# task config - watch
+gruntWatch: &gruntWatch
+  content:
+    files:
+      - 'output/**/*.html'
+    tasks:
+      - 'copy:content'
+      - 'htmlmin'
+    options:
+      spawn: false
+
+# task config - connect
+gruntConnect: &gruntConnect
+  server:
+    options:
+      port: 9001
+      debug: true
+      base: 'dist'
+
 # grunt config root
 root:
   bower: *gruntBower
@@ -99,3 +118,5 @@ root:
   cssmin: *gruntCssmin
   uglify: *gruntUglify
   htmlmin: *gruntHtmlmin
+  watch: *gruntWatch
+  connect: *gruntConnect

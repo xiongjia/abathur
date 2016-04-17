@@ -93,9 +93,9 @@ a:hover { text-decoration: underline; }
 
 .ab-right {
   position: absolute;
-  width: 220px;
+  width: 205px;
   z-index: 100;
-  top: 17%;
-  right: 2%;
+  top: 90px;
+  right: 35px;
   padding: 0;
 }
