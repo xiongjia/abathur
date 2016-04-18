@@ -1,18 +1,29 @@
 # -*- mode: org; mode: auto-fill -*-
-#+TITLE: HOME
+#+TITLE: 
 #+AUTHOR: xiong-jia.le
 #+EMAIL: lexiongjia@gmail.com
 #+OPTIONS: num:nil
 #+HTML_INCLUDE_STYLE: nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/css/main_v0.1.css" /> 
 
+資料整理 + 日常記錄。
 
-The Test data
+* Technology
+** DEV
+   此分類用於記錄開發用到的基礎知識或者 Framework; Open Source 的總結或備忘:
 
-* DEV
-The dev contents
+** MISC
+   此分類用於記錄一些輔助工具的用法和其他一些無法分類的東西:
 
-* Misc
+* Practices
+  此分類用於記錄自己實現的一些工具(挖過的坑):
+** [[https://www.npmjs.com/package/nspider][nspider]]
+   - 一個 Node.js 實現的 Web Spider 封裝。可以通過 npm install nspider 從 npm 安裝。
+   - github repository: [[https://github.com/xiongjia/nspider][nspider]]
 
-The misc contents
+* General
+** 日常
+   此分類用於記錄 3 次元的數據:
 
+** Games
+   此分類用於記錄 2.5 次元的數據:

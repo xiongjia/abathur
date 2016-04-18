@@ -6,21 +6,26 @@ body {
   font: normal normal normal 16px/1.6em Open Sans, sans-serif;
   color: #333
 }
-
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1.6em;
-  font-family: Droid Serif, serif
+    font-family: Trebuchet MS, Helvetica, sans-serif;
+    font-weight: bold;
+    line-height: 100%;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
 }
 
-h4, h5, h6 {
-  font-size: 1em
-}
-
-h1 {
-  color: grey;
-}
+h1 {font-size: 2.0em; color: #000000;}
 h2 {
+  font-size: 1.8em; color: #404040;
   border-bottom: 1px solid #ddd;
+}
+h3 {font-size: 1.6em; color: #707070;}
+h4 {font-size: 1.4em; color: #909090;}
+h5 {font-size: 1.2em; color: #989898;}
+h6 {font-size: 1.0em; color: #9c9c9c;}
+
+.title {
+  text-align: left;
 }
 
 a { text-decoration: none; font-weight: 400; }
@@ -37,14 +42,15 @@ a:hover { text-decoration: underline; }
 }
 
 #content {
-  font-size:110%;
+  font-size: 90%;
   padding-left: 15px;
-  width: 80%;
-  line-height: 120%
+  line-height: 110%;
+  width: 78%;
 }
 
 #table-of-contents {
   font-size: 9pt;
+  line-height: 128%;
   display: block;
   background: #f8f8f8;
   padding: 0;
