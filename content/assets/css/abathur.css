@@ -26,6 +26,7 @@ h6 {font-size: 1.0em; color: #9c9c9c;}
 
 .title {
   text-align: left;
+  color: #5e5e5e;
 }
 
 a { text-decoration: none; font-weight: 400; }
@@ -49,7 +50,7 @@ a:hover { text-decoration: underline; }
 }
 
 #table-of-contents {
-  font-size: 9pt;
+  font-size: 12pt;
   line-height: 128%;
   display: block;
   background: #f8f8f8;
@@ -85,7 +86,7 @@ a:hover { text-decoration: underline; }
 
 #table-of-contents #text-table-of-contents {
   text-align: left;
-  padding: 0px;
+  padding: 5px;
 }
 
 #table-of-contents ul {

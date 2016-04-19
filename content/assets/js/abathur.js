@@ -2,22 +2,37 @@
 (function () {
   'use strict';
 	$(document).ready(function() {
+    var curPath;
+
+    curPath = window.location.pathname;
+
     /* adding preamble */
     (function (preamble) {
-      var contents;
+      var contents, isHome, isAbout, linkBtns;
+
+      isHome  = (curPath === '/' || curPath === '/index.html');
+      isAbout = (curPath === '/about.html');
+      linkBtns = (function() {
+        if (isHome) {
+          return '<li class="active"><a href=#>Home</a></li>' +
+                 '<li><a href="/about.html">About</a></li>';
+        }
+        else if (isAbout) {
+          return '<li><a href="/index.html">Home</a></li>' +
+                 '<li class="active"><a href=#>About</a></li>';
+        }
+        return '<li><a href="/index.html">Home</a></li>' +
+               '<li><a href="/about.html">About</a></li>';
+      })();
       contents =
         '<div class="navbar navbar-default" >' +
-        ' <div class="navbar-header">' +
-        '  <a class="navbar-brand" href="./index.html">Recycle Bin</a>' +
+        '  <div class="navbar-header">' +
+        '    <a class="navbar-brand" href="/index.html">Recycle Bin</a>' +
+        '  </div> ' +
+        '  <div class="collapse navbar-collapse">' +
+        '    <ul class="nav navbar-nav">' + linkBtns + '</ul>' +
         '  </div>' +
         '</div>';
-        // <div class="collapse navbar-collapse">
-        // <ul class="nav navbar-nav">
-        // <li><a href="%root_path%index.html">Home</a></li>
-        // <li><a href="%root_path%about.html">About</a></li>
-        // </ul>
-        // </div>
-        // </div>
       preamble.before($(contents));
     })($('#preamble'));
 

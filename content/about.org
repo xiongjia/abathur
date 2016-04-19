@@ -1,0 +1,30 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: About
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: num:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/css/main_v0.1.css" /> 
+
+* 俺
+#+BEGIN_SRC javascript
+var self = {
+  mail: 'lexiongjia@gmail.com',
+  sites: {
+    github: 'https://github.com/xiongjia',
+    blog: 'http://xiongjia.github.io/',
+    google: 'https://google.com/+XiongJiaLe',
+    facebook: 'http://www.facebook.com/xiongjia.le',
+    twitter: 'https://twitter.com/XiongJia',
+    douban: 'http://www.douban.com/people/lexiongjia',
+    fanfou: 'http://fanfou.com/xiongjia_le',
+    zhihu: 'http://www.zhihu.com/people/xiongjia'
+  },
+  tags: ['dev', 'animation-comic', 'gamer', 'Otaku']
+};
+#+END_SRC
+
+* recycle.bin
+- Recycle.bin is just my personal Wiki site.
+- This site is based on Emacs Org mode: [[https://github.com/xiongjia/abathur]]
+
