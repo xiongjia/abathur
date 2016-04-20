@@ -49,7 +49,11 @@ gruntCopy: &gruntCopy
     src:
       - '**/*.{eot,svg,ttf,woff}'
     dest: *assets
- 
+  icon:
+    src:
+      - 'content/favicon.ico'
+    dest: 'dist/favicon.ico'
+
 # task config - concat
 gruntConcat: &gruntConcat
   css:
