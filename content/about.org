@@ -4,7 +4,7 @@
 #+EMAIL: lexiongjia@gmail.com
 #+OPTIONS: num:nil
 #+HTML_INCLUDE_STYLE: nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/css/main_v0.1.css" /> 
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
 
 * 俺
 #+BEGIN_SRC javascript
@@ -27,4 +27,3 @@ var self = {
 * recycle.bin
 - Recycle.bin is just my personal Wiki site.
 - This site is based on Emacs Org mode: [[https://github.com/xiongjia/abathur]]
-

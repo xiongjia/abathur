@@ -34,7 +34,7 @@
         '  </div>' +
         '</div>';
       preamble.before($(contents));
-    })($('#preamble'));
+    })($('#content'));
 
     /* adding postamble */
     (function (postamble) {

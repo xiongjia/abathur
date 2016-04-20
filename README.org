@@ -11,7 +11,7 @@ My Org static website
   (setq org-publish-project-alist `(
     ("abathur-content"
      :base-directory ,(concat abathur-root "/content")
-     :publishing-directory ,(concat abathur-root "/dist")
+     :publishing-directory ,(concat abathur-root "/output")
      :base-extension "org"
      :recursive t
      :publishing-function org-html-publish-to-html
@@ -25,8 +25,8 @@ My Org static website
      :section-numbers nil
      :html-head-include-default-style  nil
      :html-head-include-scripts nil
-     :html-postamble "&nbsp;"
-     :html-preamble  "&nbsp;")
+     :html-postamble "<script type='text/javascript' src='/assets/js/main_v0.1.js'></script>"
+     :html-preamble  "")
     ("abathur" :components ("abathur-content"))))
 #+END_SRC
 

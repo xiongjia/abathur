@@ -4,7 +4,7 @@
 #+EMAIL: lexiongjia@gmail.com
 #+OPTIONS: num:nil
 #+HTML_INCLUDE_STYLE: nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/css/main_v0.1.css" /> 
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
 
 資料整理 + 日常記錄。
 
@@ -27,3 +27,4 @@
 
 ** Games
    此分類用於記錄 2.5 次元的數據:
+   - [[file:game/ingress.org][Ingress]] - Ingress 資料收集

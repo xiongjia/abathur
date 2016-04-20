@@ -1,0 +1,34 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: Ingress
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: num:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
+
+* Documentation
+- Ingress 官方手冊: [[https://support.ingress.com]]
+- Ingress 官方中文手冊: [[https://support.ingress.com/hc/zh-cn]]
+- 基本是從官方手冊導出的，中文 .pdf 入門手冊 
+   (可以從我的 Dropbox 或 BaiduPan 共享目錄中找到)
+   - =ingress_tutorial_ENL(green).pdf= ( Enlightened 啓蒙軍，綠軍入門手冊 )
+   - =ingress_tutorial_RES(blue).pdf= ( Resistance 反抗軍，藍軍的入門手冊 )
+   - DropBox 共享目錄: [[https://www.dropbox.com/sh/8tpu53m88cskvmp/AAD6V6n1FMdOe1_0v_vj_vdAa/game-ingress][Ingress tutorial in my DropBox]]
+   - BaiduPan 共享目錄: [[http://pan.baidu.com/s/1qWRvpb2][Ingress tutorial in my BaiduPan]]
+
+* Community/Resources
+我的活動領域主要集中在中國上海的浦東地區並且我是啓蒙軍。一些參與的上海這裡的啓蒙
+軍社區:
+- G+ 上的 Shanghai Enlightened: [[https://plus.google.com/communities/107172143025899099525]]
+- 上海启蒙军: [[http://enl.sh/]]
+- QQ Groups :
+  - Shanghai Enlightened: 287575595
+  - Sh-Enl-PD (上海浦東): 99948968
+- Ingress 全球形勢總攬圖:
+  - [[https://www.ingress.com/intel]]
+  - 可以現在上面找到自己經常路過，並且 Portals 比較集中的地方。
+- Github 上的 tutorials: [[https://github.com/GhostFlying/ingress-tutorials]]
+- 知乎上的 Ingress 話題 ( [[https://www.zhihu.com/topic/19785574]] )。
+  有些討論比較有意思:
+  - Ingress 中有哪些「黑话」？https://www.zhihu.com/question/30000532
+  - 怎样申请 portal 成功的几率大？https://www.zhihu.com/question/20943473
