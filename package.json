@@ -8,7 +8,11 @@
     "url": "git://github.com/xiongjia/recycle.bin.git"
   },
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "npm prune & npm install & grunt",
+    "serv": "grunt serv",
+    "dbgServ": "grunt dbgServ"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-bower-task": "^0.4.0",

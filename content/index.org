@@ -12,25 +12,24 @@
 #+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
 
-
-資料整理 + 日常記錄。
+资料整理 + 日常记录。
 
 * Technology
 ** DEV
-   此分類用於記錄開發用到的基礎知識或者 Framework; Open Source 的總結或備忘:
+   此分类用于记录开发用到的基础知识或者 Framework; Open Source 的总结或备忘:
 
 ** MISC
-   此分類用於記錄一些輔助工具的用法和其他一些無法分類的東西:
+   此分类用于记录一些辅助工具的用法和其他一些无法分类的东西:
 
 * Practices
-  此分類用於記錄自己實現的一些工具(挖過的坑):
-  - [[https://www.npmjs.com/package/nspider][nspider]] - 在一個 Node.js 實現的 Web Spider 封裝。可以通過 npm install nspider 從 npm 安裝。
+  此分类用于记录自己实现的一些工具(挖过的坑):
+  - [[https://www.npmjs.com/package/nspider][nspider]] - 在一个 Node.js 实现的 Web Spider 封装。可以通过 npm install nspider 从 npm 安装。
     github repository: [[https://github.com/xiongjia/nspider][nspider]]
 
 * General
 ** 日常
-   此分類用於記錄 3 次元的數據:
+   此分类用于记录 3 次元的数据:
 
 ** Games
-   此分類用於記錄 2.5 次元的數據:
-   - [[file:game/ingress.org][Ingress]] - Ingress 資料收集
+   此分类用于记录 2.5 次元的数据:
+   - [[file:game/ingress.org][Ingress]] - Ingress 资料收集
