@@ -1,0 +1,50 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: Minecraft
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: num:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+#+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
+#+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
+#+HTML_HEAD: <meta http-equiv="expires" content="0" />
+#+HTML_HEAD: <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+#+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
+
+俺作为一个 Minecraft 的鶸鸡，记录一下用到的资料。
+
+* Tips
+- Proxy Minecraft Launcher 会在 Amazon S3 上更新数据。在 "结界" 内此数据一般无法正常访问。
+  - 所以需要用 proxy 启动 Launcher。比如用 socks proxy:
+    =java -DsocksProxyHost=<host> -DsocksProxyPort=<port> -jar ./game/launcher.jar=
+  - 不同版本的 Launcher 的 jar 位置可能不一样。我目前用的 Windows 版本是在: =game/launcher.jar=
+    #+BEGIN_SRC text
+    /Minecraft/
+    |~game/
+    | `-launcher.jar
+    |+runtime/
+    |+tools/
+    `-MinecraftLauncher.exe
+    #+END_SRC
+- Joystick，在 PC 版本上用手柄玩 Minecraft:
+  - 用 antimicro ( [[https://github.com/Ryochan7/antimicro]] ) 来转换手柄操作。
+  - 基本设置和其他资料: [[http://xiongjia.github.io/misc/2015/09/04/minecraft-and-joystick/]]
+
+* Bukkit
+[[https://bukkit.org/][Bukkit]] 是另一个实现的 server。
+- 他源代码和 API 都可以在 Github 上找到: [[https://github.com/Bukkit]]
+  这一点对于俺这个码农来说，增加了游戏得 1000% 得趣味性.
+- Bukkit 有不少有趣的 plugins, 也增加不少游戏得趣味性
+
+* Plugins
+可以从列表里找到: [[http://plugins.bukkit.org/]]
+(入门阶段得，还有很多不懂.等用过或看过源代码后慢慢总结)
+- World Edit
+  这个'WE' plugin 可能是我还没有开始玩 Minecraft 时,就听说过得了。 \\
+  通过 'WE' 可以在游戏里较为方便得操作方块。
+  很多宏伟得大规模 minecraft 建筑工程，可能都少不了 'WE' 吧(??)
+  - 描述: [[http://dev.bukkit.org/bukkit-plugins/worldedit/]]
+  - 代码: [[https://github.com/sk89q/worldedithttps://github.com/sk89q/worldedit]]
+
+

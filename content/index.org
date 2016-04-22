@@ -32,4 +32,5 @@
 
 ** Games
    此分类用于记录 2.5 次元的数据:
+   - [[file:game/minecraft.org][Minecraft]] - Minecraft 资料收集
    - [[file:game/ingress.org][Ingress]] - Ingress 资料收集
