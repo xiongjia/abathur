@@ -23,6 +23,8 @@
 
 * Practices
   此分类用于记录自己实现的一些工具(挖过的坑):
+  - [[file:dev/vim-fanfou.org][vim-fanfou]]  - 一个基于 VIM Plugin 实现的 [[http://fanfou.com/][Fanfou]] (饭否) client， 
+    代码 (Python + Vim Script) 所在的 github repository: [[https://github.com/xiongjia/vim-fanfou]]  
   - [[https://www.npmjs.com/package/nspider][nspider]] - 在一个 Node.js 实现的 Web Spider 封装。可以通过 npm install nspider 从 npm 安装。
     github repository: [[https://github.com/xiongjia/nspider][nspider]]
 
