@@ -17,7 +17,10 @@
 * Technology
 ** DEV
    此分类用于记录开发用到的基础知识或者 Framework; Open Source 的总结或备忘:
-
+   - 开发:
+     - [[file:dev/scratch.org][Scratch]]  - 一些日常用到的草稿，代码片段。
+   - Performance Testing Tools/Frameworks: 
+   - GUI Testing Tools/Frameworks:
 ** MISC
    此分类用于记录一些辅助工具的用法和其他一些无法分类的东西:
    - [[file:dev/bookmarks.org][Bookmarks]] - 日常看到的文章、网址等的备忘
