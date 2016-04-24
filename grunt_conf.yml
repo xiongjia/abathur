@@ -53,6 +53,12 @@ gruntCopy: &gruntCopy
     src:
       - 'content/favicon.ico'
     dest: 'dist/favicon.ico'
+  map:
+    expand: true
+    cwd: 'bower_components/bootstrap/dist/css'
+    src:
+      - '*.map'
+    dest: 'dist/assets/css/'
 
 # task config - concat
 gruntConcat: &gruntConcat

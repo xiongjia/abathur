@@ -1,0 +1,70 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE:  颜文字 Emoticon Emoji
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: title:nil num:nil *:nil ^:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+#+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
+#+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
+#+HTML_HEAD: <meta http-equiv="expires" content="0" />
+#+HTML_HEAD: <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+#+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
+
+* 常用颜文字
+** 收集 - 猫系
+: |大眼貓: (=θωθ=) |夜視眼: (ФωФ) |眯: (=￣ω￣=) 
+
+** 收集 - 痛苦系
+: |吐血: T 皿 T |煩惱: ヽ(#`Д´)ﾉ  |升天: 0(:3　)～ |備胎: (｡・`ω´･)"  |沮喪: (￣^￣) |臥佛: _(:3ゝ∠)_
+: |中刀: _(´ཀ`」 ∠)_ |吓尿: ≥﹏≤ |胖了: (*´д`) |投"翔":╰(〒皿〒)╯ |Pia: (ｏ ‵-′)ノ” |艹: 凸(艹皿艹 )
+: |吓: Σ(っ °Д °;)っ |笨蛋！:l(｡-ω-)l  |无辜:（o´・ェ・｀o） |羞:o(*////▽////*)q 
+
+** 收集 - 無法分類系 
+: |慶祝: []~(￣▽￣)~* |慶祝: ╰(*°▽°*)╯ |二刀流: p<´･ω･｀>q |掀桌: (/= _ =)/~┴┴ |桌歸位: ┬─┬ ノ( ' - 'ノ)
+: |得意: <(￣︶￣)> |崇拜: m( __　__ )m |嘟嘴: ~=(๑•́ ₃ •̀๑) |發現: (￣.￣)+ |睏: (￣o￣) . z Z |托盤: ლ(╹◡╹ლ)
+: |波動: (((o(ﾟ▽ﾟ)o))) |音樂: (^○^)♬ |拍桌:o(*≧▽≦)ツ┏━┓ |怪我嘍: (*￣︶￣)y |掩面: (**/ω＼**) |睡: (︶^︶)
+: |邪惡: ψ(｀∇´)ψ |开心: ＼(^o^)／ |狙击: (  ´-ω ･)▄︻┻┳══━一 |接住: (/ﾟДﾟ)/ |卖萌: (๑´ㅂ`๑) |吃: （¯﹃¯）
+: |吃: （ ﹃ ） |驚訝: ლ(ﾟдﾟლ) |推倒: (╯°Д°）╯︵ /(.□ . )” |呵呵:(**´∇｀**) |干杯:- ( ゜- ゜)つロ |一展身手: `(๑و•̀ω•́)و`
+: |提供: (´提ω供`) |银桑: (￢_￢)ﾉ |你好:ヾ(´･ω･｀)ﾉ |抱抱:\(￣︶￣*\))抱抱~ |拖走:ヽ(゜▽゜　)－C<(/;◇;)/~[拖走]
+: |怪:(´・ω・`) |傻白:(☉㊀☉)つ |射箭:=( ￣ー￣)——)-＝＝＝＝＝＝＝>-->> |隐身！:(*￣□￣)(￣□:;.…::;.:.:::;..::;.:...
+: |眯眼:(☆-ｖ-）|望天:(´◔ω◔) |蓋長被子:(:3[▓▓▓▓▓▓▓▓▓] |盖被子:(:3[▓▓] |芝麻官: О---( ￣┏＿┓￣)---О 
+
+** 收集 - 元素
+: | ♬  | 〒 | T | √  | ω  | ﹃ | θ | Ф | Дﾟ | д | ╰ | ╯ | 皿 | ▽ | ∇ | ψ | ლ |  ︶ | ロ | ▄ | ︻ | ツ | ๑  | ♡ | ✈ | ▼ |
+
+** 收集 - 劇情系
+- 黑帮到底是怎么交货的？ 出处: [[http://www.zhihu.com/question/20187747]]
+  - Version 1
+    : (︶^︶)=凸 (￣ε￣；)
+    : (￣ε(# ￣)☆╰╮o(￣皿￣///)
+    : (#>Д<) ╰（‵△′）╯
+    : （╯‵□′）╯︵┴─┴︵╰（‵□′╰）
+    : ( *・ω・)✄╰ひ╯ 一┳═┻︻▄(▼へ▼メ)
+    : (＞﹏＜) <(￣︶￣)>
+    : 〈（_　_）〉〈（_　_）〉
+    : *~(￣▽￣)~[]　[]~(￣▽￣)~*
+  - Version 2
+    : (￣ε(# ￣)☆╰╮o(￣皿￣///)飞踢 嚯！！各种混乱 打！！！！
+    : (　ﾟдﾟ)╰（‵△′）╯大家不要这样，都是生意人，有话好好说 
+    : <(￣︶￣)>piapia 拍沙发，坐下来好好说有什么不能解决的呢
+    : （唧唧歪歪交易时间）
+    : ( *・ω・)✄╰ひ╯交易成功~剪彩咩哈哈 
+    : *~(￣▽￣)~[]　[]~(￣▽￣)~*干杯~下次再合作哟 ~么么哒~ 
+- 面壁
+  : [你，面壁去！]( ￣ ￣)σ........( ＿ ＿)ノ||壁. 
+
+
+* Tools
+** cool-ascii-faces
+   [[https://github.com/maxogden/cool-ascii-faces][cool-ascii-faces]] NODE 实现随机返回写在 JS 数组里的颜文字。
+   内容较少，不过实现简单可以考虑自己 fork 并扩展。
+   - 安装 =npm install cool-ascii-faces -g=
+   - 使用 =cool-face [-a | --all]=, [-a|-all] 列出所有; 如果不加参数则随机输出一个。
+
+** asciiart
+   [[https://github.com/nodanaonlyzuul/asciiart][asciiart]] Ruby 實現的將圖片轉換成 ascii art 的工具。(嚴格說不能算作顏文字）
+   - 安裝 =gem install asciiart=
+   - 使用方法 =asciiart -h=
+

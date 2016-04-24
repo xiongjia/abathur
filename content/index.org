@@ -2,7 +2,7 @@
 #+TITLE: Home
 #+AUTHOR: xiong-jia.le
 #+EMAIL: lexiongjia@gmail.com
-#+OPTIONS: num:nil
+#+OPTIONS: title:nil num:nil
 #+HTML_INCLUDE_STYLE: nil
 #+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 #+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
@@ -32,6 +32,7 @@
 * General
 ** 日常
    此分类用于记录 3 次元的数据:
+   - [[file:general/emoticon.org][顏文字]] - 日常颜文字备用，以及一些工具
 
 ** Games
    此分类用于记录 2.5 次元的数据:
