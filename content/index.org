@@ -24,6 +24,7 @@
 ** MISC
    此分类用于记录一些辅助工具的用法和其他一些无法分类的东西:
    - [[file:dev/bookmarks.org][Bookmarks]] - 日常看到的文章、网址等的备忘
+   - [[file:dev/tips.org][Tips]] - 小常识
 
 * Practices
   此分类用于记录自己实现的一些工具(挖过的坑):

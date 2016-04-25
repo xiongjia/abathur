@@ -1,0 +1,189 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: Tips
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: title:nil num:nil ^:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+#+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
+#+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
+#+HTML_HEAD: <meta http-equiv="expires" content="0" />
+#+HTML_HEAD: <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+#+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
+
+* Tools
+** scp
+   secure copy (remote file copy program) 
+   - 常用操作, 上傳／下載 文件或目錄:
+     - source 放在前面，target 放在后面。
+     - =-r= - (Recursively) 表示递归 source。
+      | Upload file     | ~scp SourceFile user@host:directory/TargetFile~        |
+      | Upload folder   | ~scp -r SourceFolder user@host:directory/TargetFolder~ |
+      | Download file   | ~scp user@host:directory/SourceFile TargetFile~        |
+      | Download folder | ~scp -r user@host:directory/SourceFolder TargetFolder~ |
+   - Windows OS 上的 scp
+     - [[http://www.chiark.greenend.org.uk/~sgtatham/putty/][Putty]] 提供了  Windows 版 SSH client 的实现。 =pscp.exe= 可以实现与 scp 的功能。
+     - 安装 Cygwin or Mingw 并选上对应的 ssh 组件。
+   - Auto-login
+     有时會把 scp 写在 script 里自动执行。不希望每次输入口令, 希望能夠自動登錄。有多種解決辦法:
+     - 使用 ssh 证书认证。 在 scp 命令里加入 =-i <private key file>= (应该是最佳选择)
+     - 使用 sshpass 如: =sshpass -p "password" scp -r user@host:directory/SourceFolder TargetFolder= 。 
+       这个做法缺点很多：
+       1) 需要把 password 写在脚本里
+       2) 不是所有平台都有 sshpass, 比如：osx 上目前版本的 brew 便无法安装 sshpass。
+     - 通过 Expect 自动登录。
+       Expect 是一个经典的 Unix Shell automation tool。下面这段 expect sample 就是個例子:
+       #+BEGIN_SRC text
+       #!/usr/bin/expect -f
+       
+       # launch the scp process
+       spawn  scp "user@host:directory/SourceFile" TargetFile
+
+       # expect settings
+       expect {
+         -re  ".*es.*o.*" {
+           exp_send  "yes\r"
+           exp_continue
+         }
+         -re  ".*sword.*" {
+           exp_send  "Your PASSWORD\r"
+         }
+       }
+       #+END_SRC
+       - =spawn scp "user@host:directory/SourceFile" TargetFile= 根据需要创建一个 scp process
+       - -re ".*sword.*"  表示匹配到屏幕上出现 "Password:" 之类的输入提示，
+         这是用 exp_send 把你的 password 加\r 发送到屏幕去。
+       - -re ".*es.*o.*" 表示匹配到 "YES or NO" 之类的提示时，自动输入 yes。
+
+** rsync
+   增量同步工具
+   - 日常操作:
+    =rsync -e "/usr/bin/ssh"  --bwlimit=2000 -av local_dir user@host:remote_dir=
+    - local_directory - 本地同步的目录。
+      如果以 '/' 结尾表示同步此目录下的。不加则会上传这个目录。例如:
+      './dist/' - 表示同步 dist 目录下 'dist' - 会吧 'dist' 这级也传上去。
+    - --bwlimit=KBPS - 带宽限制
+   - Windows OS 上安裝 Rsync 推薦使用 Chocolatey ( [[https://chocolatey.org/]] Windows package manager) 
+     來安裝/管理。
+     - RSync for Windows: [[https://chocolatey.org/packages/rsync]] ( 我目前 windows 上用的是這個 )
+     - cwRsync Free edition: [[https://chocolatey.org/packages/cwrsync]] (沒有測試過,應該也是可以的吧)
+
+** nssm
+   Non-Sucking Service Manager - 是一個簡易的 Windows services Manager。   
+   - 可以方便的把任何可執行文件，變成 Service 運行。
+     比如: 把某個 java 的 .jar 用 Service 運行。
+     =nssm install ServiceName java.exe  -jar test.jar=
+   - 可以通過 'install'; 'set'; 'start'; 'stop'; 'get' 等 command 來操作 Service。
+     具體參考官網上的 usage: [[https://nssm.cc/usage]]
+
+
+* Developer Tools
+** Ack / Ag
+   - ack is a tool like grep, optimized for programmers. 
+     相對於 grep 來說, Ack 更加適合開發者使用。
+     - 提供多種 type sets 可以方便的選擇文件，比如: =ack --js PATTERN= 表示 search .js 文件。
+       還有很多 default 設置的 type sets 可以在 ack documentation 中找到。
+     - 方便的 ignore-dir，開發中很多臨時 (或是第三方生成) 的文件,目錄需要被跳過。
+       比如: nodejs 開發中，需要跳過 "node_modules" 。
+       ack 的默認設置就會 ignore 這些。
+       ( 可以用 =ack --create-ackrc= 看一下默認規則 ) 
+       如果默認規則不夠，還可以通過自己的 "$HOME/.ackrc" 來增加。
+     - 相對 grep 來說 ack 的輸出結果更便於閱讀。
+     - 可配置，可以自己在 =.ackrc= 中增加需要的設置。
+   - 以下是 ack 的相關資料:
+     - ack: [[http://beyondgrep.com/]]
+     - ack documentation: [[http://beyondgrep.com/documentation/]]
+     - 查看 ack 的默認設置:  =ack --create-ackrc=
+     - Vim 中使用 ack: [[https://github.com/mileszs/ack.vim]]
+       相對與 vimgrep 來說在 ack.vim 的方便處在於可以方便的指定 file types 和 ignore folders 
+     - ackrc: 用戶可以自己添加 "$HOME/.ackrc" 文件來增加設置。
+       我自己用的一份: [[https://github.com/xiongjia/dotfiles/blob/master/misc/ackrc]]
+     - Installation:
+       ack 依賴一些 Perl 的環境具體看一下 [[http://beyondgrep.com/install/]]
+       Linux 上比較簡單, OS X 上最好用 Homebrew, Windows 上則最好用 Chocolatey。
+   - Ag ( The Silver Searcher )   
+     Ag 是 ack 的改進版本，用法與 Ack 類似。但是其性能好過 ack 很多。
+     因為用了 C 來實現所以也不依賴於 Perl。
+     - ag: [[https://github.com/ggreer/the_silver_searcher]]
+   - 在 windows 上安裝 ack / ag   
+     - 推薦使用 Chocolatey ( [[https://chocolatey.org/]] Windows package manager) 來安裝/管理。
+     - ag:  [[https://chocolatey.org/packages/ag]]
+     - ack: [[https://chocolatey.org/packages/ack]]
+
+** gnuplot
+   gnuplot ( [[http://www.gnuplot.info/]] ), 作為日常數據可視化的工具。
+   - Installation: [[http://www.gnuplot.info/download.html]]
+     - OS X 上可以用 =brew install gnuplot --qt= 來裝，
+       因為 Yosemite 默認沒有 X11 所以最好指定 "--qt"，以方便 GUI 輸出。
+   - 閱讀文檔和自帶 Demo, gnuplot 入門還是比較簡單的:
+     [[http://www.gnuplot.info/documentation.html]]
+
+** Jekyll
+Jekyll [[http://jekyllrb.com/]] 是一個 Ruby 實現的靜態站點生成工具。
+- Setup environment
+  代碼可以從 [[https://github.com/jekyll/jekyll]] 上找到。
+  配置和安裝可以參考: [[http://jekyllbootstrap.com/]] or [[https://github.com/plusjade/jekyll-bootstrap]]
+- 字符集問題
+ 在 Windows + Ruby 的環境下，如果對應的 post 裏有中文的話可能會造成
+ =jekyll server= 不能正常啓動。
+ 目前的 workaround 是設置 =RUBYOPT= 環境變量增加 =-Ku= 的 option。
+ 比如: Windows console: ~set RUBYOPT=-Ku~ , Windows Powershell: $env:RUBYOPT="-Ku"
+ Unix ( Unix 上應該不需要,從來沒有在 Linux 或 os x 上遇到過這個問題): ~export RUBYOPT=-Ku~
+- 基本配置
+  - 安裝 Theme 
+    Jekyll 的 rake 文件提供了安裝&切換 Theme 的功能。基本用法:
+    - Install: rake theme:install git="https://github.com/jekyllbootstrap/theme-the-program.git"
+    - Switch: rake theme:switch name="the-program"
+    - 可以上 [[http://jekyllthemes.org/]]  找到更多 Theme
+    - jekyllbootstrap 上也有一份 Theme 的使用說明 [[http://jekyllbootstrap.com/usage/jekyll-theming.html]]
+  - Syntax Highlighter 
+    支持語法高亮的方法應該不至一種。最方便的是使用 [[http://pygments.org/][pygments]] 。啟用它需要做以下改動:
+    - _config.yml 中啟用 pygments (默認狀態應該就是啟用的). 
+      可以增加 =pygments: true= 在 _config.yml 裏來啟用它。
+    - 安裝 [[http://pygments.org/][pygments]] , 需要先安裝 python 再用 pip 去安裝 Pygments 包就可以了。
+    - 用 pygments 生成 Syntax Highlighter 的 css 文件. pygments 提供了多種 style, 
+      可以先上 [[http://pygments.org/demo/]] 找一個自己中意的。
+      比如: =pygmentize -S emacs -f html > pygments.css= 表生成 emacs 風格的 pygments.css。 
+    - 再 Jekyll 的 layouts 裏引用對應得 pygments.css:
+      - copy pygments.css 到 Jekyll 得 assets 目錄
+      - 在對因得 default page 裏加入 css 引用，這可能牽涉到當前所用得 Theme。比如:我在用 twitter theme 則對應得文件是:
+        =_includes/JB/themes/twitter/default.html=. 在這個文件 css 引用得最後增加
+        ~<link href="{{ ASSET_PATH }}/css/pygments.css" rel="stylesheet" type="text/css">~
+    - 在對應得 md 文件中增加 Syntax 設置.比如下面這個 sample 表示新增 JavaScript 語法高亮。
+      #+BEGIN_SRC text
+      {% highlight javascript %}
+        NativeModule.wrap = function(script) {
+          return NativeModule.wrapper[0] + script + NativeModule.wrapper[1];
+        };
+      
+        NativeModule.wrapper = [
+          '(function (exports, require, module, __filename, __dirname) { ',
+          '\n});'
+        ];
+      {% endhighlight %}
+      #+END_SRC
+  - 日常使用
+    - create new post  \\
+      對應的 rake task 是 rake post title="Hello World"
+    - launch server  \\
+      =jekyll server [--watch] [--draft]= 。 \\
+      --draft 會把 draft 目錄下的 post 也生成靜態網頁。
+      --watch 會監視 post 的改動並自動更新到網站。
+
+* Others
+** Pixiv
+-  Pixiv 動圖 
+  - Pixiv 有很多動圖資源。只是 Pixiv 並不是使用普通的 GIF 格式，而是一組靜態圖的打包。
+    (其實是將多張 .jpg /.png 文件打包在一個 .zip 文件中) 分為下載和轉換 2 個步驟:
+   - 下載: \\
+     從 網頁的  HTML source 中找到, .zip 的 url (查看 source 隨後 search ".zip" 就可以)。
+     直接下載會遇到錯誤。這是 P 站的防盜連。需要改變 HTTP 的 Refer 到 P 站才可以正常下載。
+     推薦使用 Firefox 的 "RefControl" 來作這個。
+   - 轉換: \\
+     下載後 .zip 解壓出來就是一組數字命名的文件。
+     可以用自己習慣的工具轉換成 .GIF 比如: GIMP。
+  - 這個下載方式，是從一個 Gist 的工具裡看到的。原版 Gist 工具是用 Ruby 寫的，
+    並且需要 Image Magick 環境(腳本裡用它來做圖片格式的轉換)。  \\
+    這份是 Fork 下來的 Gist: [[https://gist.github.com/xiongjia/1af63ef92c8ec498b910]]
+
