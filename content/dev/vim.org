@@ -1,0 +1,237 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: Vim
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: title:nil num:nil *:nil ^:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+#+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
+#+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
+#+HTML_HEAD: <meta http-equiv="expires" content="0" />
+#+HTML_HEAD: <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+#+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
+
+* Documentation & Resources
+** Documentation
+   - =:help= ( vim 自帶的文檔非常全面，至今沒有能讀完 )
+   - [[http://book.douban.com/subject/3767413/][<Learning the vi and Vim Editors>]]
+   - [[http://book.douban.com/subject/10599776/][<Practical Vim>]]
+   - [[http://vim.wikia.com/][Online VIM wiki]]
+
+** My .vimrc
+正在用的 .vimrc, 沒有用到 [[https://github.com/gmarik/Vundle.vim][Vundle]] 這種插件管理
+(因為覺得那樣不好維護)。
+  - my .vimrc on github [[https://github.com/xiongjia/dotfiles/tree/master/vim]]
+    - 安裝時可以通過上一级目录的 Rakefile 
+    - 目前可能不能工作於 MS Windows 環境。
+      (主要是 Windows 可能需要手動安裝一些依賴，目前自動化沒實現。比如: 
+      Grep.vim plugin 依賴 GNU Win32 的 grep; vim diff 是用的 GNU Diff 也需要額外裝;
+      另外還有些 Python, nodejs 等的依賴)
+
+** Writing Vim Plugins
+VIM Plugins 的開發/編寫可以有多種方式。
+ - 可以用 VIM 本身的 script 去寫，這樣依賴比較少。缺點是開發複雜功能時可能 VIM script 
+   不能完成這些任務，而需要 Fork 一些 process 來完成工作。
+   (比如: 下載數據可能會用 VIM Script 去調用 curl / wget )
+ - 另一種方式是我實踐中使用的，直接在 VIM 中調用自己擅長的語言。
+   比如: VIM 支持 Ruby, Python, Perl 等。 
+   開發會較爲輕鬆。不過缺點也很明顯，這個方式要求 VIM 提供某語言支持。
+   (比如用了 Python, VIM Build 時的參數必須有 Python Module 的支持)
+   可以用 =:version= 察看，如果輸出中有 "+python/dyn" 就是表示有 Python 2 的支持。
+
+如何用 VIM Script 可以多看 VIM 手冊，和別人 Plugins 裏的例子。
+只列一下我用 Python 寫 VIM Plugin 的資料:
+ - Vim 通過輸出一個 Python module 的方式來達到與 Python 交互的目的。
+   主要可以參考 VIM Documentation =:help if_pyth=
+ - 我的 gist 中有個簡單的、基本的 Python 與 VIM 交互的 Sample, 
+   參考: [[https://gist.github.com/xiongjia/64e1353afb9415e85479]]
+ - 以前用 Python 2 實現的一個 VIM Plugin。是用 Python 來訪問 Fanfou 的 API，支持 OAuth。
+   Github repository: [[https://github.com/xiongjia/vim-fanfou]]
+
+** Building Vim/GVim
+Unix 上比較簡單，用標準的 =configure= & =make= 基本就可以了。
+Windows 上比較複雜，需要用裝好依賴的開發工具，並設置對具體的 environments。 
+可以參考: [[https://mgiuffrida.github.io/2015/06/27/building-vim-on-windows.html]]
+- 按照這篇文章的介紹按照開發工具和 SDK
+- 用這篇文章裏的 bat 來就可以編譯、打包。(可能需要修改一些路徑的位置)
+- VIM 的代碼管理已經從 google code 移到了 github，文章裏的倉庫應改爲: https://github.com/vim/vim
+
+* Tips
+** options
+日常使用中很多用 options 的地方。所以這個大概算是基本中的基本。
+比如: =set tabstop=4= 這裡 =tabstop= 就是一個 option。
+- VIM Option types:
+  - Number: 數字類型. 比如: =set tabstop=4= 中的 =tabstop= . 
+  - String: 字符串類型. 比如: =set wildignore+=*/tmp/*,*.swp= 中的 =wildignore= .
+  - Boolean toggle: 開關類型,該類型只可以有 on / off 兩個狀態. 
+    比如: =set autochdir= 表示啓用 =autochdir= ( =autochdir= = on ); 
+    相反 =set noautochdir= 表示關閉 (=autochdir= = off)
+- 常用操作:
+  - =set= & =set all=:  =set= 顯示所有與默認設置不同的 options. =set all= 顯示所有 options.
+  - =set {option}?= 顯示當前 option 的值. 比如 =set tabstop?=; =set autochdir?=
+  - =set {option}= 如果 option 是 Boolean toggle 表示啓用該 option. 其它代表顯示當前值. 
+  - =set no{option}= 關閉 Boolean toggle option.
+  - =set inv{option}= or =set {option}!=: 反選某個 Boolean Toggle option. 
+    比如 =set autochdir!= 如果原來 =autochdir= 是 on 則此操作會把它改成 off, 反之則改成 on.
+  - =set {option}&= 重置 option 到 vim 默認值
+  - =set {option}={value}=: 設置 option 的值比如: =set tabstop=4=
+  - =set {option}+={value}= or =set {option}-={value}= : 
+    - option 是 number 代表 value 數字加減. 比如: =set tabstop+=2= 表示比原來的 tabstop 增加 2.
+    - option 是 string 代表在 string 列表列增/刪.
+      比如: 原來 =wildignore=*.swp= 用 =set wildignore+=*.so= 后變成 =wildignore=*.swp,*.so= . 
+      再運行 =set set wildignore-=*.so= 又會把 wildignore 變回 =wildignore=*.swp=
+  - =setlocal {...}= : ={...}= 部分和上面 =set= 一樣.
+    區別在於 =setlocal= 只針對當前 buffer .
+  - =help option-list= 查看 vim 的 options list .
+
+** swap file
+swap file 是 vim 用来存储你修改中的内容的一个文件。
+- 查看幫助 =:help swap=  
+- 查看當前的 swap file name =:swapname= 或者 =:sw=
+- 關閉 swap file =:set noswapfile=; 再次啟用 swap file =:set noswapfile!= 。 
+  關閉 swap 會導致 vim 把改動放在內存中。此期間如果 vim crash ,會導致修改丟失。
+  平時應該啟用 swap, 特殊需要時可以臨時關閉。
+- swap file 位置:
+  - 默認設置中, swap file 會和被編輯文件放在同一個目錄。並且 vim 會增加 "." 前綴和 ".swp" 後綴。
+    如:  =~/test.c= 的默認 swap file 是 =~/.test.c.swp=
+  - 很多時候不想在工作目錄中產生臨時文件(如:在 git/svn 目錄中不希望有臨時文件被不小心提交).
+    有這種需求的話,可以配置 vim 讓其在固定目錄生成 swap。
+    如: =:set directory=$HOME/.vim/swap-files//= 此 set 會使所有 swap 文件生成到 =~/.vim/swap-files= 下，
+    并以被編輯文件的 full filename 作為命名依據。
+    可以將 =set directory=$HOME/.vim/swap-files//= 加入 vimrc 使其默認生效。
+
+** Substitute
+vim 中可以通過 =:substitute= 命令來查找替換。
+(如果是 GUI 版本的 vim 也可以使用 =:promptrepl=,來調用 GUI 提供的 Search/Replace dialog )
+- 查看幫助 =:help :substitute= , =:help :promptrepl=
+- Online vim wiki: [[http://vim.wikia.com/wiki/Search_and_replace]]
+- 基本使用: 
+ - 如 vim document 中列出的, substitute 語法: =:[range]s[ubstitute]/{pattern}/{string}/[flags] [count]=
+ - =[range]= 代表，查找替換的範圍
+  - =.= 或者沒有 range，代表當前行。如: =:s/{pattern}/{string}/[flags]=  or =:.s/{pattern}/{string}/[flags]=
+  - 同理 =$= 表示最後一行.
+  - =%= 代表全文即當前 buffer。=:%s/{pattern}/{string}/[flags]= 
+  - 一個數字,代表範圍的具體行。如: 僅限第三行 =:3s/{pattern}/{string}/[flags]= 
+  - 可以用 =,= 表示某個範圍。如: 第一行至第三行 =:1,3s/{pattern}/{string}/[flags]=
+  - range 本身也可以是一個 pattern, 代表 匹配 pattern 的行。
+    如: 所有 'baz' 開頭的行 =:g/^baz/s/{pattern}/{string}/[flags]=
+  - 實用的組合, 比如: 
+   - 當前行往下的 3 行:  =:.+3s/{pattern}/{string}/[flags]= (同理 =.-3= 是往上的 3 行)
+   - 從第一行至當前行: =:0,.s/{pattern}/{string}/[flags]= (同理 =.,$= 當前行至最後行) 
+  - 更多的說明，請參看 vim 手冊 =:help cmdline-ranges=
+ - {pattern} 代表要替換的字符
+  - 关于這個可以參看 vim 手冊 =:help pattern=. 
+ - {string} 要替換成的字符串
+  - 基本使用,如: =%s/123/123/gci= 把所有的 "123" 替換成 "123"
+  - 如果是刪除則直接不填寫，如: =%s/123//gci= 相當于把所有的 "123" 刪除.
+  - 在替換字符串中有些有特殊意義的表達式:
+    - \r is newline,
+    - \n is a null byte (0x00).
+    - \& is ampersand (& is the text that matches the search pattern).
+    - \0 inserts the text matched by the entire pattern
+    - \1 inserts the text of the first back reference.
+    - \2 inserts the second backreference, and so on. 
+ - [flags] 代表替換的參數
+  - 這個可以參看 vim 手冊 =:help :s_flags= 
+  - 常用组合 'gci' , 比如: =%s/123/123/gci= 這裡的 'g' 代表替換所有匹配到地方, 
+    'c' 代表每次替換需要用戶確認, 'i' 代表匹配时忽略大小写。
+- 在多個 buffer 中做替換.
+ - 可以參考 vim online wiki : [[http://vim.wikia.com/wiki/Search_and_replace_in_multiple_buffers]]
+ - 基本方法是使用 =bufdo= 在多個 buffer 中執行 substitute。
+   如: =:bufdo! %s/pattern/replace/gec= 
+
+** Copy, cut and Past
+- 基礎的 Copy, cut and past，應該是所有人都會的日常操作。可以參考：
+ - Online wiki: [[http://vim.wikia.com/wiki/Copy,_cut_and_paste]]
+- Command-line mode 下的 copy past ( Vim 下方輸入命令的小窗口)
+ - 首先說明一下 vim 的 Command-line mode.
+  - 可以參考手冊 =:help Command-line-mode= , 在 command line mode 下可以輸入 vim 命令或者 search patterns。
+    輸入命令時用 =:= 進入; 輸入 search pattern 時用 =/= 。
+ - Copy 內容到 command-line mode
+  - 首先把要複製的內容放入 vim register。比如: 選中 content; 按 'y'。 
+    這樣 選中內容就被放入了默認 register '*' 中。可以用 =:reg= 命令來確認這一點。
+  - 進入 command-line-mode。 再按  =CTL + r=; =*= 。
+    表示將 '*' register 中的內容複製到 command line 
+ - 反之從 command-line mode 中的內容 copy 到 buffer 
+  - 基本時利用 command-line-window 來做的 =:help command-line-window=,
+    在 command-line-window 中可以像普通 buffer 一樣操作。
+  - =q:= 或者 =q/= 可以進入 command-line-window。前者是用來進入執行命令的 command,
+    後者是進入 search 的 command。之後和普通 buffer 一樣操作就可以了。
+
+** Search
+*** Filename search
+可以用 VIM 自帶的也可以用一些 Plugins。
+ - VIM 自帶的 Filename search  
+   有很多 VIM plugins 可以做 File name fuzzy search .
+   不過很多生産綫上的 Server 一般都是不裝這些 plugins 的,
+   所以在無 plugins 幫助下基本的功能也是應該掌握的.
+   - =:Explore= 
+     VIM 的 Explore 會把目錄結構顯示在一個 VIM Buffer 中,並可以用樹型結構管理查找文件.
+     使用比較方便,只是效率不高 (只能一層層的找). 
+     同樣還用 =:Vexplore= , =:Hexplore= 可以在新 split 的 buffer 中打開 Explore.
+     具體參看 =:help :Explor=.
+   - Completion mode 
+     VIM 自帶的補全,可以幫助尋找文件. 
+     比如: 當前目錄有文件名為 "testfile.txt" 這時用 =:edit ./test*.txt<Tab>= 
+     (有多層目錄時可用 =**= 表示比如 =./**/test*.txt= 表示下一級目錄的 testfile.txt).  
+     按下 <Tab> 時 VIM 會按表達式 search 文件名並補齊.
+     - 如果有多個文件符合條件,可以用 <Tab> / <Shift - Tab> 來切換匹配到的文件.
+     - 如果有大量符合條件,可以考慮改變 vim 默認的提示方式. 
+       比如用 =:set wildmode=list:full= (會把所有符合條件的文件都列出來).
+       還可以用 =:set wildmenu=, 啓用后可以用 <CTL-n> / <CTL-p> 在 vim 列出的匹配列表中切換.
+ - 常見 Filename Search Plugins 
+   目前比較常見的 Fuzzy Search Plugins 有: =Ctrlp.vim=; =Command-T=; =FuzzyFinder=.
+   自己常用的是 Ctrlp.vim: [[https://github.com/kien/ctrlp.vim]] .
+   具體用法可以參看 CtrlP.vim 的 readme.
+
+*** Files content search
+單個 file/buffer 的 search 直接用 VIM 的 Search command 參考: =:help /=。
+多個 files 的 search。
+ - VIM 自帶的 Files search: 
+   - 主要是用 =:vimgrep= , 可以參考: =:help vimgrep= 或 [[http://vim.wikia.com/wiki/Find_in_files_within_Vima]]
+   - 基本用法: =:vim[grep][!] /{pattern}/[g][j] {file}= 之後配合 =:cwindow= 
+   - 比如説 在 "*.txt" 中 search string "123" , 運行 =:cw= 后就會列出找到的 lines
+     - =:vimgrep! /123/ *.txt=
+     - =:cw=
+
+ - 常見 File content Search Plugins 
+   比較常見的是 =ack= 和 =ag=。这兩個工具都是適合開發者的，因爲這個兩個工具有很多配置都和開發有關。
+   比如: 可以默認或配置 filter 掉部分常見的開發中的零時 files。
+   - Ack 的文檔: =ack --help= 或 [[http://beyondgrep.com/documentation/]]
+   - Ag ( [[https://github.com/ggreer/the_silver_searcher]] ) 是 Ack 一個改良，基本兼容于 Ack 的功能。
+     主要區別在於 ack 用 perl 實現。Ag 用 c/c++ 實現。在性能上快出 Ack 數倍。
+   - Windows 安裝 ack 和 ag 的話，推薦使用 Chocolatey ( [[https://chocolatey.org/]] Windows package manager) 
+    來安裝/管理。
+     - ag: [[https://chocolatey.org/packages/ag]]
+     - ack: [[https://chocolatey.org/packages/ack]]
+   - 在 VIM 中使用 Ack 最好用 Ack plugin: [[https://github.com/mileszs/ack.vim]]
+   - 在 VIM 中使用 Ag 可以同樣借助于 ack.vim plugin 只是要增加如下設置，告訴 VIM 使用 Ag 作 search: 
+     =let g:ackprg = 'ag --nogroup --nocolor --column'=
+   - 我自己的 =.ackrc=: [[https://github.com/xiongjia/dotfiles/blob/master/misc/ackrc]]
+
+** Encryption
+Vim (7.4.399 or higher) 自帶有 3 种加密算法: =zip=; =blowfish=; =blowfish2=。 
+Vim 可以保證加密的 file 在 disk 上一定是加密后的 (包括 swap file, undo file ) 只有在内存中 file 才使明文。
+ - 可以主要參考 Vim Online Wiki 中這部分的介紹: [[http://vim.wikia.com/wiki/Encryption]]
+ - 基本操作:
+   - 設置加密算法: =:set cm=blowfish2=  (察看當前 =:set cm?=) 
+     =blowfish2= 是一個目前推薦用的加密算法, 其他 2 個 (=zip=; =blowfish=) 
+     如果不是因爲要兼容老版本 Vim 就不要去用了。
+   - 加密一個 Buffer 用 command: =:X= 他會提示你輸入加密的 Key (口令) 
+   - 讀取加密 file 時, 需要設置口令 =:setlocal key=<your password>= ，
+     Vim 會從 =key= 這個 options 去找到當前 Buffer 的 password。
+ - 注意事項:
+   - blowfish ( [[https://en.wikipedia.org/wiki/Blowfish_%28cipher%29]] ) 是一個位操作爲主的算法, 對於純文本應該是
+     高效的。blowfish 會有隨機種子。同樣的 file content 加密 2 次，應該不會產生同樣的結果。(這可以
+     保證，別人不能通過比較加密結果猜測内容)
+   - 用 =:setlocal key=<your password>= 設置 password 時，Vim 可以保證 password 不出現在 command history 裏。
+     用 =:setlocal key?= 查看當前 password 也是不能看到你的口令的。
+   - 清除 =key= option 用 command: =setlocal key==。如果口令不被清除，就會一直加密。
+     如果有時不想加密了，就清一下 =key= 再存一下。
+   - 千萬不要把你的 =setlocal key=<your password>= 放在 .vimrc 裏。
+     用 shell 啓動時，如果用了 =setlocal key=<your password>= 的話，也千萬記住，這個 password 可能會被 
+     bash/zsh 之類的 history file 記錄。
+ - 使用第三方加密工具/算法
+   - 可以參考 Vim Online Wiki 中這部分的介紹: [[http://vim.wikia.com/wiki/Encryption]] gpg 部分的介紹。
+   - 如果用了 gpg 的話，swap file; undo file 之類需要自己處理一下。
