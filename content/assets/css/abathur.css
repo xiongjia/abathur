@@ -102,11 +102,20 @@ li {margin: 0.3em auto;}
 
 .ab-right {
   position: absolute;
-  width: 205px;
+  width: 235px;
   z-index: 100;
   top: 110px;
   right: 35px;
   padding: 0;
+}
+
+#ab-disqus {
+  font-size: 90%;
+  padding-left: 15px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  line-height: 130%;
+  width: 78%;
 }
 
 .example {
@@ -115,4 +124,8 @@ li {margin: 0.3em auto;}
   margin: 1em 0px 1em;
   background-color:transparent;
   border: 0px
+}
+
+td.gsc-clear-button {
+  display: none !important;
 }
