@@ -13,15 +13,11 @@
   "trailing": true,
   "strict": true,
   "indent": 2,
-
   "node": true,
   "browser": true,
   "jquery": true,
-
   "predef" : [
-    "SyntaxHighlighter",
-    "vimwikiCtx",
-    "_",
-    "QRCode"
+    "abCtx",
+    "_"
   ]
 }

@@ -77,7 +77,6 @@
    - 可以通過 'install'; 'set'; 'start'; 'stop'; 'get' 等 command 來操作 Service。
      具體參考官網上的 usage: [[https://nssm.cc/usage]]
 
-
 * Developer Tools
 ** Ack / Ag
    - ack is a tool like grep, optimized for programmers. 

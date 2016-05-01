@@ -2,9 +2,11 @@
 (function () {
   'use strict';
 	$(document).ready(function() {
-    var curPath;
+    var curPath, ctx;
 
     curPath = window.location.pathname;
+    ctx = (typeof abCtx !== 'undefined') ? abCtx : {};
+
     /* install disqus */
     function installDisqus(commentsElement) {
       var disqus;
@@ -74,7 +76,9 @@
         '</div></footer>';
       postamble.after($(contents));
 
-      setTimeout(function () { installDisqus(postamble); }, 10);
+      if (!ctx.disableDisq) {
+        setTimeout(function () { installDisqus(postamble); }, 10);
+      }
     })($('#postamble'));
 
     /* right bar */
@@ -88,6 +92,11 @@
         toc.hide();
         return;
       }
+      if (ctx.disableToc) {
+        toc.hide();
+        return;
+      }
+
       /* google cse */
       toc.after('<div style="width: 100%;">' +
                 '  <gcse:search></gcse:search>' +
