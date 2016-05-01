@@ -18,11 +18,14 @@
 ** DEV
    此分类用于记录开发用到的基础知识或者 Framework; Open Source 的总结或备忘:
    - Others:
+     - [[file:dev/boost.org][Boost]] - Boost 資料整理；使用備忘。
      - [[file:dev/scratch.org][Scratch]]  - 一些日常用到的草稿，代码片段
      - [[file:dev/vim.org][Vim]]  - Vim 的一些日常使用
+     - [[file:dev/shell.org][Shell]] - Shell Script 的備忘或總結 
    - Performance Testing Tools/Frameworks: 
      - [[file:dev/ab.org][ab]] - Apache HTTP server benchmarking tool
    - GUI Testing Tools/Frameworks:
+     - [[file:dev/win-uia.org][Windows UI Automation]] - MS UIA ( MS 提供的 GUI 測試接口) 的備忘或總結
 ** MISC
    此分类用于记录一些辅助工具的用法和其他一些无法分类的东西:
    - [[file:dev/bookmarks.org][Bookmarks]] - 日常看到的文章、网址等的备忘

@@ -1,0 +1,101 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: Boost
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: title:nil num:nil *:nil ^:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+#+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
+#+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
+#+HTML_HEAD: <meta http-equiv="expires" content="0" />
+#+HTML_HEAD: <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+#+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
+
+記錄/備忘一些 Boost 使用實例。
+
+* Documentation
+- [[http://www.boost.org/][Boost.org]]
+- [[http://www.boost.org/doc/][Boost Document (All versions)]]
+- [[http://en.highscore.de/cpp/boost/frontpage.html][highscore]]
+
+* Environment
+自己主要的編譯/開發環境, 为 CMake + Boost: 
+- 通過 cmake script 來保證各個平台的可兼容的統一性。
+  比如: gist 實例 [[https://gist.github.com/xiongjia/11399415]] 其中 
+  =CMakeLists.txt= 文件就是一個可以在各個平台使用的 cmake 配置腳本。
+
+* Practice
+** property_tree
+property_tree 有很多作用，可以解析各種類型的格式的輸入，比如: xml, json, ini 等。
+- 一個簡單的 .ini 讀取, 解析。
+  - gist: [[https://gist.github.com/xiongjia/6045153]]
+  - 代碼上需要注意的就是 utf8 的處理: 用到了  =std::wifstream= ; =std::wstring= 等。
+  - 默認讀取當前目錄的 test.ini ,可以通過 -f 指定對應的 .ini 文件
+  - CMake 中需要注意的是,增加了基本的 Boost 外還增加了 =program_options= 。
+    只是因為用到了 =boost::program_options::detail::utf8_codecvt_facet()= 。
+  - UTF8 string 在 terminate 的輸出，各個平台處理有點不一樣，
+    - 在 OSX 上直接使用了 =wstring_convert= 。我測試中這個方式好像只有 OSX 上的 gcc/clang 才工作。 
+      (可能是和 locale/lang 設置有一定關聯)
+    - 其他平台需要設置對正確的 locale 才能輸出，比如要輸出中文，則要把 locale 更新到 zh-CN。
+      這個 example 會讀取 -l 參數來自動更新語言集。比如: =read-ini -l zh-CN= 表示以中文輸出。
+
+** program_options
+program_options 是一個專爲程序读取配置、参数准备的。
+- 一個簡單得從 argv 读取參數的 sample:
+  - gist: [[https://gist.github.com/xiongjia/11399415]]
+  - 基本的 usage 参考注解。
+  - 比较复杂的时 std::vector<std::string> 的数组情况，需要告诉 boost 怎么解析。
+    这里用的是 multitoken() 
+
+** Serialization
+Boost.Serialization 可把 Memory 中的 Class 存放根據需要存入文件中，再根據需要讀回 Memory.
+- 一個簡單的 Serialization 使用
+  - gist: [[https://gist.github.com/xiongjia/c6689d8ef1db4b8e19b5]]
+  - 主要功能: 把 srcData 存入文件 mydata.dat 中，再把這個文件讀入 destData 中。
+  - Boost 在編譯時可能沒有 build Serialization。 
+    (可以看一下 stage 目錄下有沒有 libboost_serialization* 來確認有沒有編譯 Serialization。)
+    如果沒有則可以用 
+    ~b2 link=static runtime-link=static --with-serialization --build-type=complete~ 
+    來 build Serialization。
+  - Boost Serialization 可以通過 BOOST_CLASS_VERSION 定義 version。
+    在做數據兼容性時可以用此 Version 來做判斷。
+  - Boost Serialization 支持幾種輸出格式。 
+    Gist sample 中用的是 Text 文件，也可以用 Binary, XML  等。
+  - Boost 1.55 以及下版本的 Serialization 在 MS VS 2013 編譯時會出現編譯錯誤。建議升級到 1.56+。
+ 
+** Pool
+Boost Memory Pool。用來做內存管理，可以把內存的分配與釋放變得更加方便和高效。也有利於減少 Memory leak。
+- 一個簡單的 Pool 使用。
+  - gist: [[https://gist.github.com/xiongjia/5c222ad60e7a4bb2d0f3]]
+  - TestAllocator 是一個自定義的 Allocator。這一個 Allocator 是可選的，
+    主要是為了 Log 一下 Malloc/Free 的次數才特意加的。普通情況可以用 Boost 自己的 Default Allocator。
+
+** Log
+Boost.Log 是 1.54 以後被加入的 Boost Logging library。 
+- 一個簡單的 Log 使用。
+  - gist: [[https://gist.github.com/xiongjia/e23b9572d3fc3d677e3d]]
+  - 主要功能: customize formatter, filter + FS & Console sink + Name scope
+  - 可以先從 Boost Document 看一下 Boost.Log 的介紹，了解一下基本的 Sink, formatter 等。
+  - Build 時需要檢查 Boost 是否高於 1.54
+ 
+** unit test framework
+unit_test_framework 是 boost 自帶的一套 c/c++ unit test framework.
+- 一個簡單的 cmake 和 boost unit test framework 配合的例子。
+  - gist:  [[https://gist.github.com/xiongjia/72f3734f0e60a4d2a681]]
+  - 把單元測試實現在 "0_my_lib_test.cxx" ( 加一個 "0_" prefix 是為了讓他在 gist 中居於 top
+  - 對應 CMakeList.txt 會把要測試的 my_lib.cxx build 成為一個 static library 供單元測試使用
+  - 對應的單元測試會被 build 成一個可執行文件。
+  - 最後只需要執行對應的文件，就可以得到單元測試結果。
+  - 詳細的 Boost test framework 參見 boost 文檔: [[http://www.boost.org/doc/libs/]] ("Test" 章節)
+
+** ASIO
+asio 是一個 I/O Framework 經常被用於異步的 I/O 操作
+- 一個簡單的,只實現了部分功能的,基於 boost asio 的 socks proxy  
+  - 代碼: [[https://github.com/xiongjia/scratch/tree/master/zeratul]]
+  - 主要目的是測試 ASIO 庫，只實現了 socks5 proxy (rfc1928) 的部分功能。
+    ( Socks5 , IPv4, No Author 的 Connection command )
+  - 默認 port 用了 9090；目前把 protocol 實現都堆在了 zeratul.cxx 裏。
+  - 可以用 curl 來測試這個 proxy。比如: ~curl --socks5 localhost:9090 http://www.boost.org/~
+  - 對於得 CMakeLists.txt 配置了對於得 Boost ASIO 和 Log， 
+    並且在 Windows 上用了 boost static library。

@@ -1,0 +1,408 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: Shell
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: title:nil num:nil *:nil ^:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+#+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
+#+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
+#+HTML_HEAD: <meta http-equiv="expires" content="0" />
+#+HTML_HEAD: <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+#+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
+
+俺覺得 Shell Script 的主要難點是需要較廣的知識面。有時會與不會只是對於某個 command 的了解與否。 
+(比如: 不了解 =tail= , =head= 等就不能方便的讀取行。不了解 =pgrep= 不能方便的查找 process。)
+
+大概也就多參考別人寫的，自己多練才會慢慢進步吧(??)。
+所以這裡大概記錄些遇到過的知識。
+
+* Resources
+- awesome-shell - github 上別人歸檔的 Shell 資料: [[https://github.com/alebcay/awesome-shell]]
+- leetcode 中 Shell 分類的題目: [[https://leetcode.com/problemset/shell/]]
+  - 我當時的解法: [[http://xiongjia.github.io/dev/2015/06/23/shell-problems/]]
+- Bash FAQ: [[http://mywiki.wooledge.org/BashFAQ]]
+- <The Linux Command Line> - 中、英語版: [[https://github.com/billie66/TLCL]]
+- <Advanced Bash-Scripting Guide> - [[http://tldp.org/LDP/abs/html/index.html]]
+- <Linux Shell Scripting Cookbook> - [[http://book.douban.com/subject/5974281/]]
+  (此書以舉例爲主，說得不深，看得也不累)
+
+* Tips
+** 并行执行
+Shell Script 的主要工作基本都是去調用各個 commands 去完成的。
+所以如果能讓這些 commands 並行執行是會非常有助於提高效率的。
+
+完成这一個工作需要用到 =wait= command。 
+比如下面這個例子: 用 2 條加了 =&= 的 =sleep= commands 表示 2 個任務。
+=wait= 沒有參數表示等待 2 個 =sleep= 都結束。 =sleep= 只是個例子，
+也可以是從網上下載數據或是其他操作。由於並行執行所以應該會快出很多。
+#+BEGIN_SRC shell
+#!/usr/bin/env shell
+sleep 100 &
+sleep 200 &
+wait
+#+END_SRC
+
+也可以讓 =wait= 只等待某一個任務結束。 
+比如下面這個例子, =$!= 表示第一個 =sleep= 的 process id。加在 =wait= 的參數裏表示只等待
+某個 process。這 shell script 應該在 100 秒后退出而，第二個 =sleep= 在 script 退出時還在運行。
+#+BEGIN_SRC shell
+#!/usr/bin/env sh
+sleep 100 &
+first_sleep=$!
+sleep 1000 &
+wait ${first_sleep}
+#+END_SRC
+
+舉一個實際工作中的簡單例子。copy 比較大的 files。如果正常 copy 是一個完成后再另一個。
+可以多個文件同時 copy 最大程度的發揮出 disk 的 I/O 吞吐量。 
+比如下面這個例子，從一個列表裏讀出源，執行 =cp= ，最後在用 =wait= 等待所有 copy 任務結束:
+#+BEGIN_SRC shell
+#!/usr/bin/env sh
+
+dest=/your_dest_folder
+
+for file in "bigfile1" "bigfile2" "bigfile3"
+do
+    cp -v "${file}" "${dest}" &
+done
+wait
+#+END_SRC
+
+** debugging methods
+實際腳本中，會加一些臨時的調試方法 (比如輸出些只有調試用的 log 或是生成些調試文件）。
+實踐中較好的習慣是保留這些代碼。而不是每次在需要時臨時添加。比如某 =test.sh= 内容如下:
+#+BEGIN_SRC shell
+#!/usr/bin/env bash
+
+function DBG()
+{
+    [[ "$_DEBUG" == "on" ]] && $@ || :
+}
+
+DBG echo "Debug log"
+DBG wget -v http://localhost/dbg_file
+#+END_SRC 
+- 正常執行 =test.sh=  是會跳過 "DBG" 開頭的語句的
+- 需要啓用調試時，只需定義 "_DEBUG" 比如: =_DEBUG=on ./test.sh= 。
+  如此便可保留自己的調試代碼，又不干擾生産環境。
+- 這裡用到的 ~[[ "$_DEBUG" == "on" ]] && $@ || :~ 為單行條件語句。
+  - "_DEBUG" 為 "on" 時，就執行 =$@= 即 DBG function 的參數。
+  - "_DEBUG" 不為 "on" 時，就執行 =:= 。 =:= 在 shell script 是一種空操作，相當於什麽也不做。
+
+** 執行時間的計算
+可以用 =time= 來精確測量執行時間，比如, 下面輸出重 "real", "user", "sys", 就是 =time= 計算出來的 =ls= 所佔用的各個時間統計:
+#+BEGIN_SRC shell
+$ time ls
+test.txt
+next.txt
+real 0m0.008s
+user 0m0.001s
+sys 0m0.003s
+#+END_SRC
+
+可以調整用 =-f= 參數調整 =time= 輸出的格式或内容,比如:  ~time -f "\t%E real,\t%U user,\t%S sys" ls~ 。
+除了時間之外，還可以統計 memory 和 I/O 具體可以參考: 
+- [[http://linux.die.net/man/1/time]] (手冊)
+- [[http://www.cyberciti.biz/faq/unix-linux-time-command-examples-usage-syntax/]] (samples)
+
+** Archiving with tar
+=tar= 是常用的打包工具。以下自己遇到過的些許注意事項:
+- exclude 
+  - 不需要和不能打包的文件不要打包進去。常見的問題:  
+    - 不小心把機器上的 private key 或 password 打包發佈了造成安全隱患。
+      有時候這件事的發生是很間接的，難以被察覺。比如: 
+      - 把本地 =.git= 目錄打包了，目錄裏的證書雖然被排除了可是 git repository 裏有。
+      - 打包了 log file, 在 log file 裏有些特殊的 debug logging 把口令留在了那裏。
+    - 把自己平台特殊的 modules 打包了(比如: node 的 node_modules )，造成其它系統不能正確運行。
+    - 把 log files 或者臨時數據文件打包了造成，tar 文件的大小增大。
+  - 有幾种常用的 exclude 的方式: 
+    - 添加 =--exclude-vcs-ignores= ，這樣 tar 就回去讀 vcs 的 ignores 文件比如: =.gitignore=
+    - 添加 =--exclude= 參數。比如: 排出 "node_modules" 目錄，
+      可以用 =tar czvf <targert>.tgz  <source folder> --exclude node_modules=
+    - 使用 =--exclude-from= 指定 ignore 配置文件，比如: 
+      =tar czvf <targert>.tgz  <source folder> --exclude-from=ignore.txt= 
+      這裡 ignore.txt 的内容是一個行文本, =tar= 會讀入這個文本，符合表達式的文件會被直接 exclude。
+      比如下面這個 ignore list 可以排除大部分的通用臨時文件，private key 等: (具體還是要看 project 來作調整)
+      #+BEGIN_SRC text
+      .DS_Store
+      .DS_Store?
+      .AppleDouble
+      .LSOverride
+      Thumbs.db
+      ehthumbs.db
+      Desktop.ini
+      *.swp
+      *.log
+      *.pid
+      *.out
+      *.tar
+      *.tgz
+      *.tar.gz
+      *.pem
+      *.srl
+      *.fp
+      *.ppk
+      *.a
+      *.lib
+      *.pdb
+      *.obj
+      *.tlog
+      *.exp
+      #+END_SRC
+   - 更多的 exclude 的方式參考 =tar= 手冊: [[http://www.gnu.org/software/tar/manual/html_section/tar_49.html]]
+- 一些 tar 的操作
+  - Compress
+    - 默認只要加了 =z= option 就會以 gzip 來壓縮，比如: =tar czvf arch.tar.gz [FILES]= 。
+      gzip 是個比較普及的壓縮工具，基本是默認安裝的。
+    - 壓縮效率更高可以選擇 LZMA，只是一般需要額外安裝。
+      - =tar= 用 LZMA 可以這麽指定: =tar -cvvf --lzma archive.tar.lzma [FILES]=
+      - 參考: wikipedia 上對 LZMA 的註解 "a high compression ratio (generally higher than bzip2)" 
+        普遍情況下 LZMA 壓縮效率高于 bzip2。[[https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Markov_chain_algorithm]]
+      - 如果是發佈出去的包就還是用 gzip 因爲客戶不一定裝了 LZMA。如果是内部使用可以考慮用 LZMA。
+
+** json parser
+有很多的 configuration file 多用 JSON 格式。在 Shell script 裏有時也需要讀取這些配置的值。
+比如下面這個例子，通過 =node= 來的到 .json file 裏面某個字段的值。
+如果 JSON 内容是 {"port": 8080 } 則 =PORT= 會賦為 "8080"。
+但如果 JSON 内容文件有誤，則 =PORT= 會是 "undefined"。
+#+BEGIN_SRC shell
+#!/usr/bin/env sh
+src_json_file=/your_json_filename
+
+# In this sample, the JSON content = { "port": 8080 }
+PORT=`node -pe "JSON.parse(process.argv[1]).port" "$(cat ${src_json_file})"`
+echo "Your port is ${PORT}"
+#+END_SRC
+
+除了 =node= 外，也有其它的 command line json tools, 只是這些一般情況需要安裝(非默認安裝)。比如:
+- jq: [[https://stedolan.github.io/jq/]]
+- jsawk: [[https://github.com/micha/jsawk]]
+
+** command options
+實際的 shell script 有時需要從 command options 裏讀取參數，例如: =./test.sh -c config_file -d=
+( =-c= 表示配置文件; =-d= 表示調試方式 )
+
+在 shell script 裏可以用 =getopts= 操作來解析這些 options。比如下面這個例子:
+#+BEGIN_SRC shell
+#!/usr/bin/env sh
+
+conf_file=/your_default_conf_file
+debug_flag=false
+
+while getopts "c:d" opt; do
+    case "$opt" in
+    c)
+        conf_file=${OPTARG}
+        ;;
+    d)
+        debug_flag=true
+        ;;
+    esac
+done
+
+echo "conf_file  = ${conf_file}"
+echo "debug_flag = ${debug_flag}"
+#+END_SRC
+
+=getopts= 的基本用法是 =getopts OPTSTRING VARNAME [ARGS]= 。
+- =OPTSTRING= - 這個等同于 GNU getopt 裏的用法, 比如 "c:d" 有 ":" 的表示有參數。
+  "-c config_file" 中的 config_file 就是參數可以從 =OPTARG= 裏讀取。
+- =VARNAME= - 表示 option 的變量名
+- =ARGS= - 代表參數列表，默認是 =$@=  (即 shell script 的 command options )
+
+** 減少不必要的 Fork
+列幾點平時用的到的減少不必要 fork 的方法:
+- 減少不必要的 command 
+  盡量挖掘 command 自身的功能，如無必要則不使用多餘的 command。比如:
+  - =cat <file> | grep <pattern>= - 不好，因爲 =cat= 是多餘的
+  - =grep <pattern> <file>= - 比之前好，因爲減少了不必要的 =cat= 和用 pipe 傳送數據的開銷。
+- 字符串處理
+  字符串處理時盡量多用 shell 自帶的操作。只是一兩字符串的操作改善不會明顯，
+  但是如果是在 =while= loop 中的字符串操作，用此法改進就會有較大的意義了。
+  比如字符串替換: 
+  - 用了 =tr= 刪除所有數字
+    #+BEGIN_SRC shell
+    src_str=123abc
+    echo "${src_str}" |  tr -d   "[:digit:]"
+    #+END_SRC
+  - 省去 =tr= ，用如下操作可達到同樣效果:
+    #+BEGIN_SRC shell
+    src_str=123abc
+    echo "${src_str//[0-9]/}"
+    #+END_SRC
+  - =sed=, =awk=, =tr= 等都是很強的文本操作，如果不是必須，就不要用。
+  - 更多 strings 操作的例子，列在了本頁裏的 strings section 裏了
+
+** `[` vs `[[`
+=[= 和 =[[= 都可以用作 shell script 的表達式判斷。區別在於:
+ - =[= 其實是一個 command 會有一次 fork。 =[[= 是 shell 内部操作不需要 fork 一個 process。
+ - =[[= 並不是 posix 標準，默認 shell 應該是不支持的。但目前流行的 bash, zsh 肯定是支持的。
+   所以在用 =[[= 時應該把 =.sh= 的第一行 (shebang / hashbang) 改爲 =#!/usr/bin/env bash=
+   或者 =#!/bin/bash= 。
+ - =[[= 支持更多的比較方式，如 RegularExpression & Pattern  matching 只有 =[[= 支持。
+   - RegularExpression matching: 
+     #+BEGIN_SRC shell
+     [[ $name = a* ]] || echo "name does not start with an 'a': $name"
+     #+END_SRC
+   - Pattern matching:  
+     #+BEGIN_SRC shell
+     [[ $name = a* ]] || echo "name does not start with an 'a': $name"
+     #+END_SRC 
+ - 更多 =[= 與 =[[= 的比較參考: [[http://mywiki.wooledge.org/BashFAQ/031]]
+
+** shebang
+shebang / hashbang 就是 Shell Script 的第一行。這一行可以決定系統如何執行這個 Script。
+- 通常格式有大概兩類:
+  - =#!/bin/sh= 或者 =#!/bin/bash= 這樣的絕對路徑。
+  - =#!/usr/bin/env sh= 或者 =#!/usr/bin/env bash= 。 
+    表示從當前 Environment 中找到合適的 sh 或 bash。
+    如果系統裝過多個版本的 sh 或 bash，這種用法就比較好。
+    就普遍情況，系統一般只安裝一個版本的 sh 或 bash ,所以不必強制用這一格式。
+    但如果是 Perl, Python, Ruby, Node 之類的 script，則最好用這個格式。比如: =#!/usr/bin/env python=
+  - 如果考慮腳本的可移植性則應該用 =sh= 。但這樣就不能使用 =bash= 等帶來的新特性。
+    具體使用哪個需要根據具體情況來衡量。
+- 察看 file type 
+  可以用 =file <source filename>= 來查看 file type，比如:
+  #+BEGIN_SRC shell
+  % file bash_script.sh
+  ./bash_script.sh: Bourne-Again shell script, ASCII text executable
+  #+END_SRC
+
+** LOOP
+- Loop 中如果有文件輸出，可以堆在一起。比如:
+  - Loop 中用 =echo= 輸出到一個文件。不好，因爲每次 =echo= 都需要去打開一次文件。
+    #+BEGIN_SRC shell
+    #!/usr/bin/env bash
+    cnt=1
+    while [[ $cnt -lt 10 ]]; do
+        echo "Line ${cnt}" >> data_file
+        let cnt=cnt+1
+    done
+    #+END_SRC
+  - 可以用同樣的操作，只要把輸出放在 =done= 後面。
+     #+BEGIN_SRC shell
+     #!/usr/bin/env bash
+     cnt=1
+     while [[ $cnt -lt 10 ]]; do
+         echo "Line ${cnt}" 
+         let cnt=cnt+1
+     done > data_file
+     #+END_SRC
+
+** script & scriptreplay
+shell 的 script & scriptreplay 是個有趣的技術,他是用來 record shell 操作的:
+- =script= 可以把當前操作的 command 和 輸入輸出 (stdin, stderr, stdout) 存入文件。
+- =scriptreplay= 可以播放這個文件。
+
+由於只是記錄輸入輸出，所以 record 出來的文件很小。基本的使用方式:
+- record: 
+  =type commands;= 表示要錄得動作。 =exit= 表示 record 結束。
+  #+BEGIN_SRC shell
+  $ script -t 2> timing.log -a output.session
+  type commands;
+  ...
+  exit
+  #+END_SRC
+- replay: 
+  =scriptreplay timing.log output.session= ，shell 就會重新把這些輸入、輸出顯示一邊。
+
+** 使用 mirrors
+尤其是一些用來做自動部署的腳本，經常是需要頻繁訪問網絡資源。比如: =apt-get=, =npm= , =gradle= , =maven= 等。
+調整到正確的 mirror sites 可以大大加快整個 script 的過程。 
+但是一定要用可信任的站點，否則甘願慢一點。比如下面一些用到過的對 China 的 mirrors:
+- ubuntu 
+  - ubuntu china 的 source : [[http://wiki.ubuntu.com.cn/%E6%BA%90%E5%88%97%E8%A1%A8]]
+  - 注意選對自己的 ubuntu 版本
+- node
+  - npm 目前 taobao 的還算可信: [[http://npm.taobao.org/]]
+  - node-gyp: 如果不做特殊設置 node-gyp 在初次運行時，還是不會去從 mirrors site 下載。
+    可以用 =node-gyp-install= 來指定下載位置,請參考: [[https://github.com/mafintosh/node-gyp-install]]
+
+** strings
+雖然用 =tr=, =sed= , =awk= 等工具可以完成大量複雜的文本操作，
+不過爲了減少不必要的 fork 内部能完成的操作就不要借助這些工具了。
+(尤其是像在一些 =while= loop 裏執行的字符串操作, 減少 fork 一定會獲益良多.)
+比如下面這些基本的字符串操作:
++ 引用,基本用法的，如下面的例子:
+  - 例子中 =${var-DEFAULT}= 表示: 在 var 無定義時用 DEFAULT 替代 
+    ( =${var=DEFAULT}= 可以達到同樣效果 )
+  - 例子中 =${var:-DEFAULT}= 表示: 在 var 無定義或為空時用 DEFAULT 替代 
+    (=${var:=DEFAULT}= 可以達到同樣效果)
+  - 例子中 =${var+OTHER}= 表示: 在 var 被定義時用 OTHER 取代,否則為空
+  - 例子中 =${var:+OTHER}= 表示: 在 var 不為空時用 OTHER 取代,否則為空
+  - 例子中 =${!var_prefix*}= 表示: 所有 "var_prefix" 開始的 var names 
+    ( =${!var_prefix@}= 可以達到同樣效果 )
+    #+BEGIN_SRC shell
+    #!/usr/bin/env sh
+    
+    test_str="123"
+    empty_str=""
+    
+    echo "Test String is ${test_str}"                # output => Test String is 123
+    echo "Test string is ${unknown_str-DefaultVal}"  # output => Test String is DefaultVal
+    echo "Test string is ${empty_str:-EmptyVal}"     # output => Test String is EmptyVal
+    
+    echo "Test string is ${test_str+AnotherStr}"     # output => Test string is AnotherStr
+    echo "Test string is ${unknown_str+AnotherStr}"  # output => Test string is 
+    echo "Test string is ${empty_str+AnotherStr}"    # output => Test string is AnotherStr
+    
+    echo "Test string is ${test_str:+AnotherStr}"     # output => Test string is AnotherStr
+    echo "Test string is ${unknown_str:+AnotherStr}"  # output => Test string is 
+    echo "Test string is ${empty_str:+AnotherStr}"    # output => Test string is 
+    
+    test_var1="123"
+    test_var2="456"
+    _test_var3="789"
+    echo "Test Vars are ${!test_var*}"    # output => Test Vars are test_var1 test_var2
+    #+END_SRC
+  - 另外還有些有用的操作:
+    - =${var?MESSAGE}= 表示: 在 var 無定義時，輸出 MESSAGE
+    - =${var:?MESSAGE}= 表示: 在 var 無定義或為空時，輸出 MESSAGE
+- 字符长度计算，基本用法 =${#var}=
+  - 比如下面這個例子，顯示字符串長度:
+    #+BEGIN_SRC shell
+    test_str="abc"
+    echo "String length is ${#test_str}"  # output => String length is 3
+    #+END_SRC
+- 子串引用，基本用法: `${string:position:length}`
+  - position 從 0 開始計數
+  - position 可以為負數，表示倒數第幾個開始
+  - 比如下面幾個例子，右面註釋是輸出結果,注意:
+    #+BEGIN_SRC shell
+    test_str="0123456789"
+    echo "Sub string: ${test_str:2}"      # output=> 23456789
+    echo "Sub string: ${test_str:2:5}"    # output=> 23456
+    echo "Sub string: ${test_str:(-5)}"   # output=> 56789
+    echo "Sub string: ${test_str:(-5):2}" # output=> 56
+    #+END_SRC
+- 字符串替換
+ - 基本用法:
+   - =${string/substring or pattern/replacement}=
+   - =${string//substring or pattern/replacement}=
+   - =${string/#substring or pattern/replacement}=
+   - =${string/%substring or pattern/replacement}=
+ - 這些操作的格式大致是一樣的，變量/被替換的字串 或 被替換字串的表達式/替換成的字符串。
+ - 幾個操作的第一個 '/' 後面相當於一個 flag, 表示替換的方式。
+   - '/' : 表示替換第一個符合條件的
+   - '//': 表示替換所有符合條件的
+   - '/#': 符合條件並且在字符串的開頭
+   - '/%': 符合條件並且在字符串的結尾
+ - 比如下面這些個例子,右面的註釋是輸出結果:
+   #+BEGIN_SRC shell
+   test_str="12345678abc12345"
+   # substring replacement
+   echo "Replace first 123 to ---: ${test_str/123/---}"   # output=> ---45678abc12345
+   echo "Replace all 123 to ---: ${test_str//123/---}"    # output=> ---45678abc---45
+   echo "Replace prefix 123 to ---: ${test_str/#123/---}" # output=> ---45678abc12345
+   echo "Replace prefix 456 to ---: ${test_str/#456/---}" # output=> 12345678abc12345
+   echo "Replace suffix 345 to ---: ${test_str/%345/---}" # output=> 12345678abc12---
+   echo "Replace suffix 123 to ---: ${test_str/%123/---}" # output=> 12345678abc12345
+   
+   # pattern replacement
+   echo "Replace first number to -: ${test_str/[0-9]/-}"  # output=> -2345678abc12345
+   echo "Replace all numbers to -: ${test_str//[0-9]/-}"  # output=> --------abc-----
+   echo "Remove first number: ${test_str/[0-9]/}"         # output=> 2345678abc12345
+   echo "Remove all numbers: ${test_str//[0-9]/}"         # output=> abc
+   #+END_SRC
