@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+exports = module.exports = function (grunt) {
   var gruntCfg, tasks, _;
 
   _ = require('lodash');

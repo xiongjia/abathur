@@ -1,0 +1,318 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: ab - Apache HTTP server benchmarking tool
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: title:nil num:nil *:nil ^:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+#+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
+#+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
+#+HTML_HEAD: <meta http-equiv="expires" content="0" />
+#+HTML_HEAD: <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+#+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
+
+ab -  Apache HTTP server benchmarking tool 是一個 Apache HTTP Server 自帶的壓力測試工具。
+該工具可以用來做簡單的 HTTP(s) server 負載測試。
+
+* 安裝
+ab 不需要單獨安裝，他是 Apache HTTP server 的一部分。
+所以只需要在 [[http://httpd.apache.org/]]  中找到需要版本的
+Apache Httpd 的安裝方式就可以了。一些系統上也都已經自帶 Apache 了，所以可以直接使用 
+(比如: OS X，大部份 Linux 的發行版本也可以直接用包管理安裝)。
+
+ab 的可執行文件可以在 Apache httpd 的 "bin" folder 中找到。
+比較特殊的情況是 Windows。在 Windows 上, Apache 提供了 =ab.exe= 和 =abs.exe= 。
+其中 =abs.exe= 表示編譯時鏈接了 SSL 庫，可以用於 HTTPS/HTTP 的測試。
+
+* 基本使用
+ab 是一個 Command-line 工具。用戶通過 Command-line 參數來指定測試參數。比如：
+ - =ab -n 10000 -c 100 http://127.0.0.1:2333/=
+   表示向 127.0.0.1:2333 server 發送 1000 個 GET 請求，併發請求數爲 100。
+ - =ab -t 60 -c 100 http://127.0.0.1:2333/=
+   表示向 127.0.0.1:2333 server 發送 1000 個 GET 請求，併發請求數爲 100。
+
+全部參數可以用 =ab -h= 來查看。也可以上 Apache 安裝目錄找到對應的 Documentation。
+ab 的 Documentation 是 "manual/programs/ab.html.en"。 
+常用參數大概可以分爲幾個類別:
+- 指定測試的 server 和 HTTP 請求設置
+  - Target URL, 放在 Command-line 的最後一個參數
+  - HTTP Method( POST/PUT or GET。默認情況會使用 GET 請求。
+    如果需要測試 POST 則需要用 =-p= or =-u= 指定 POST 的內容文件。
+  - HTTP Content-type, 這個是 HTTP 請求 Header 的一個字段，
+    用來指定協議 Content , 比如 "text/plain" 。Post method 
+    測試時很有可能需要特殊設置這個字段。用 =-T= 可以指定。
+  - 啟用 HTTP KeepAlive ,默認是不啟用的。用 =-k= 啟用。
+  - Proxy 设置。用来指定连接 Target URL 时用的 Proxy。用 =-P= 设置。
+  - SSL 设置，指定特殊的 SSL 配置当需要测试某些 HTTP(s) 请求时。用 =-z= 设置。
+
+- 报告设置
+ ab 的測試報告有三種:
+ - 總結報告，會被輸出到 stdout 去。用戶可以自己把結果輸出到文件去。
+   格式可以是純文本的 text 或是 html (用 =-w= 指定 html 格式輸出) 。
+   在這部分報告中可以看到，測試的總的情況，比如: 測試的時間; target server;
+   requests 的個數，流量;以及所有 requests 的匯總報告。
+ - Connection times 
+   用 =-g gnuplot-file= 來設置。它是一個 csv 文件。這個文件可以被用來 gnuplot 來繪製圖表。
+   (實際上所有 csv 文件都可以被 gnupolt 拿來繪圖。) 其中包含了每一個 requests 的具體完成情況。
+   可以比較充分的反應 Server 在壓力測試情況下的響應狀況。
+ - requests 耗時的統計文件
+   用 =-e csv-filename= 來設置。它是一個 csv 文件。這個文件所含有的內容比較簡單、清晰。
+   他是所有測試中的 requests 耗時排序後的結果。爲來減小報告的長度，這個報告沒有列出每一個
+   requests 而只是列出百分比形式的結果序列。
+
+- 測試的策略
+ ab 测试的最小单位是一个 request，即一個 HTTP(s) 請求發起到結束的過程。
+ 有 2 种測試策略：time limit 和 requests limit。
+ - requests limit 
+   - =-n= 指定測試發起 requests 的個數。
+     比如: =ab -n 10 http://127.0.0.1:2333/= 表示這次測試向 server 發送 10 個 requests。
+ - time limit
+   - 用 =-t= 指定測試運行的時間，以秒爲單位。需要注意的是，ab 內部的預設 50000 
+     個 requests 爲極限。默認情況超過 50000 個 requests 發起後，即使是測試時間還沒有達到也會結束測試。
+     這個 50000 的 limit 是編譯時決定的。原因是為了生成最後的 report，
+     ab 會根據 requests 個數在測試開始時生成一個固定大小的 buffer。所以 requests 個
+     數是需要在測試開始時決定的。
+   - 有一種方式可以在使用 =-t= 的情況下指定 requests 個數: 把 =-n= 參數放在 =-t= 後面。
+     ab 在解析到 =-n= 參數時，會把 requests limit 重新覆蓋。
+     比如: =ab -t 3000 -n 10 http://127.0.0.1:2333/= - 設置最大的 requests 數爲 10，
+     所以即使時沒有到 3000 秒測試也會結束。同樣如果真的想測試超過 50000 個的 requests 也
+     可以用這個方式自己設置次數。但如果用 =-n 10 -t 3000= 這個順序，就不會只發 10 個 requests，因
+     為 ab 解析 =-t= 時，會把 requests limit 設置到 50000。
+ - 另外一個比較重要的指標是 "concurrency level"。用 =-c= 指定這個指標。
+   表示併發的 requests 個數。注意：
+   - concurrency 至少要大於 1，並且小於 20000。
+     比如: =-c 1= 合法參數, =-c -1= 是無效的, =-c 40000= 也是無效的。
+   - 如果用 =-n= 指定了 requests limit，那麼 concurrency 必須小於 requests limit。
+     比如: =-c 10 -n 100= 是合法的， =-c 10 -n 5= 則不合法。
+
+* 輸出報告
+要看懂 ab 的輸出報告，首先應該需要知道 ab 的測試指標，即 request 的定義和它的指標。
+其次是 request 結果指標在報告中的表示方式。
+
+** request 的測試指標
+一個正常 request 的流程如下面這個簡圖所示: (正常是指，沒有遇到類似網路或 Server 問題，不牽涉錯誤處理的情況)
+- 左側是 Client, 右側是 Server, 中間的分割線也代表時間的走向。
+- Client 用於一個 requests 的流程:
+  - [Begin Connection] 開始建立和 Server 的 Socket 連接
+  - [Connected] 成功建立連接
+  - [Begin write request] 開始發送 HTTP request 
+  - [End write request] HTTP 請求發送完畢
+  - [Watting server response] 等待 Server 回應
+  - [Begin receive response] 開始接收 Server 回應
+  - [End receive response] 接收到所有 Server 回應
+  - [Close Connection] 關閉連接
+  #+begin_src plantuml :file ../assets/data/ab-request.png
+  title Client Request
+  activate Client
+  activate Server
+  Client  -> Server: [Begin Connection]
+  Client <-> Server: [Connected]
+  Client  -> Server: [Begin write request]
+  Client  -> Server: [End write request]
+  Client  -> Client: [Watting server response]
+  Server  -> Client: [Begin receive response]
+  Server  -> Client: [End receive response]
+  Client <-> Server: [Close Connection]
+  deactivate Server
+  deactivate Client
+  #+end_src
+
+ab 的 request 統計指標: ctime, dtime, ttime, wait。
+ - ctime: \\
+   ctime = [Connected] - [Begin Connection] 它表示連接建立所花費的時間。
+   它等於 [Connected] 的時間點減去 [Begin Connection] 的時間點。
+   這個值很大程度上和網路環境有關，Server 越"近"可能就越小。也和部分測試參數有關,
+   比如: "concurrency level" 增大也會增大 ctime; Target URL 是 HTTPS 用於連接的時間也會增大。
+   這個值更多說明的是網路環境或者 OS Socket 設置上的問題，對 Server 的實現意義不是很明顯。
+ - ttime: \\
+   ttime = [Close Connection] - [Begin Connection] 它表示整個 request 花費的時間。
+   它等於 [Close Connection] 的時間點減去 [Begin Connection] 的時間點。
+ - dtime: \\
+   dtime = ttime - ctime 或者說 dtime = [Close Connection] - [Begin write request] 
+   它表示正個 request 除開建立連接部分所花費的時間。
+ - wait: \\
+   wait = [Begin receive response] - [End write request] 它表示 Client 在發送完所有請求數據後，
+   等待 Server 回應的時間。
+   這個值非常有意義，很多程度上說明了 Server 本身的處理能力。
+
+** 報告樣例
+一個簡單測試和其報告的內容，運行測試  =ab -n 10 -g report.tsv -e report.csv http://127.0.0.1:2333/get-data=
+把輸出得報告分成幾個部來看:
+
+- Server Info
+  #+begin_src text
+  Server Software:        mserv
+  Server Hostname:        127.0.0.1
+  Server Port:            2333
+  #+end_src
+  這個比較顯而易見表示測試 Server 的 hostname & port。其中 "Server Software" 
+  是 ab 從 response 中得 "Server" 字段中得到的。
+
+- Target Document
+  #+begin_src text
+  Document Path:          /get-data
+  Document Length:        1024 bytes
+  #+end_src
+  表示響應在 Server 上的 url path 部分和相應頁面的大小。
+
+- Test Info
+  #+begin_src text
+  Concurrency Level:      1
+  Time taken for tests:   0.008 seconds
+  Complete requests:      10
+  Failed requests:        0
+  Write errors:           0
+  Total transferred:      11400 bytes
+  HTML transferred:       10240 bytes
+  Requests per second:    1295.17 [#/sec] (mean)
+  Time per request:       0.772 [ms] (mean)
+  Time per request:       0.772 [ms] (mean, across all concurrent requests)
+  Transfer rate:          1441.89 [Kbytes/sec] received
+  #+end_src
+  包含了測試的總體情況。大多數字段可以通過字面意義理解。
+  - 之前的策略是 =-n 10= 所以可以看到 "Complete requests" 爲 10。
+  - 每一個 "Document Length" 是 1024 bytes 這一點在 Target Document 的
+    報告部分已經列出來了。所以 "HTML transferred" 是 10 * 1024 bytes。
+
+- Connection times 
+  #+begin_src text
+  Connection Times (ms)
+                min  mean[+/-sd] median   max
+  Connect:        0    0   0.0      0       0
+  Processing:     0    1   0.3      1       1
+  Waiting:        0    1   0.2      1       1
+  Total:          0    1   0.3      1       1
+  #+end_src
+  這個部分是 ab 把所有 requests 的指標的一個統計輸出。
+  - 所有的列: "min" 最小值；"max" 最大值；"mean" 均值；[+/-]sd 方差；median 中位數。
+  - 所有的行: "Connect" - 對應之前提到 request 的 ctime; "Processing" - 對應之前提到 request 的 dtime;
+    "Waiting" - 對應之前提到 request 的 wait ; "Total" - 對應之前提到 request 的 ttime。
+
+- Percentage of the requests served
+  #+begin_src text
+  Percentage of the requests served within a certain time (ms)
+   50%      1
+   66%      1
+   75%      1
+   80%      1
+   90%      1
+   95%      1
+   98%      1
+   99%      1
+  100%      1 (longest request)   
+  #+end_src
+  ab 在結束測試後會吧所有 request 結果用 ttime 排序。比如測試用了 -n 10。
+  報告中 "50% = 1" 表示排名 10 * 50% 也就是第 5 名 的 request ttime 的毫秒數。
+  報告中 "100% = 1 (longest request)" 表示最後一名的也就耗時最長的一個 request 的毫秒數。
+  注意: 如果用 =-n 1= 來測試，ab 會不再輸出這部分。因為 1 個 request 時,百分比的意義不存在。
+
+- report.csv
+  #+begin_src text
+  Percentage served,Time in ms
+  0,0.481
+  1,0.481
+  ... ... (省略)
+  98,0.000
+  99,0.000
+  #+end_src
+  其內容和 "Percentage of the requests served" 一致，只是詳細列出了 1% 到 100% 到所有百分比並且採用了 csv 格式。
+
+- report.tsv
+  #+begin_src text
+  starttime	seconds	ctime	dtime	ttime	wait
+  Sun May 18 01:39:44 2014	1400348384	0	0	0	0
+  Sun May 18 01:39:44 2014	1400348384	0	0	1	0
+  Sun May 18 01:39:44 2014	1400348384	0	0	1	0
+  Sun May 18 01:39:44 2014	1400348384	0	0	1	0
+  Sun May 18 01:39:44 2014	1400348384	0	1	1	0
+  Sun May 18 01:39:44 2014	1400348384	0	1	1	1
+  Sun May 18 01:39:44 2014	1400348384	0	1	1	1
+  Sun May 18 01:39:44 2014	1400348384	0	1	1	1
+  Sun May 18 01:39:44 2014	1400348384	0	1	1	1
+  Sun May 18 01:39:44 2014	1400348384	0	1	1	1
+  #+end_src
+  可以看出總共 10 行，也正好是 10 個 requests 的完成指標。這個是一個 Tab 分割的 tsv 文件。
+  (這文件行的排序是以 ttime 爲關鍵字的升序排列。) 
+  所有的列: 
+   - "starttime" 就是 [Begin Connection] 的時間點的 c runtime 庫返回的字符串。
+   - "seconds" 也是 [Begin Connection] 只是格式用了毫秒數沒有轉化成字符串。
+   - "ctime"; "dtime"; "ttime" 和 "wait" 之前已經提過。
+ 
+* 更多使用方式
+** Mock Server
+為了方便之後的測試，我用 Node 寫了一個簡單 HTTP Mock Server。
+這個 Mock Server 可以在我的 gist 中找到: [[https://gist.github.com/xiongjia/428402521312456ceccf]] 。
+啟用這個 Mock Server 的過程: 
+#+begin_src shell
+git clone https://gist.github.com/428402521312456ceccf.git mserv
+cd mserv
+npm install
+node index.js
+#+end_src
+
+使用方式已經寫在了 "+README.md" 裏:
+- 默認端口號是 2333
+- 用 =node index.js= 或 =node index.js --cluster= 後者會啟用 Node 的 Cluster feature。
+- "/get-data" 測試，Server 會按照客戶端要求來返回 response。比如:
+  ~http://127.0.0.1:2333/get-data?len=2048&delay=500~ 表示 server 在 500 毫秒後，返回 2048 bytes 的數據。
+- "/basic-auth"，是基本的 HTTP authorization 測試: =http://127.0.0.1:2333/basic-auth=
+
+** 測試 Node Cluster 特性
+Node 提供 Cluster 特性，讓多進程協同工作。以達到充分利用 Server CPU 的目的。這裡的目的是用 ab 來測試一下啟用 Cluster
+前後 Server 處理時間的變化。
+- 測試 *沒有* 啟用 Cluster 情況下的 Server
+  - 用 =node index.js= 啟動之前提到的 Mock Server。(這種狀態下，Node 只開啓一個進程來提供服務。)
+  - ab 測試策略: =ab -n 20000 -c 200 -g disable-cluster.tsv http://127.0.0.1:2333/get-data?len=8192&delay=500= 
+    以 200 爲併發數，總共發送 20000 個請求，並且讓 server 在 500 ms 後返回 8192 bytes 數據回來。
+    報告放入 "disable-csv.tsv" 文件中。
+- 測試啟用 Cluster 情況下的 Server
+  - 用 =node index.js --cluster= 啟動之前提到的 Mock Server。
+    這種狀態下，Node 會用開多個進程來提供服務。併發性應該更高。併發數取決與 CPU 個數，我是在 8 cpu 的機器上測試的。
+  - 用同樣的 ab 測試策略，只是改一下輸出報告的文件名:  
+    ~ab -n 20000 -c 200 -g cluster.tsv http://127.0.0.1:2333/get-data?len=8192&delay=500~ 
+- 用 gnupolt 來比較一下 2 種測試報告。
+  在下面這個報告中，綠線代表 "Disable Cluster" 的情況，紅線代表 "Enable Cluster" 的情況。
+  Y 軸代表耗時(越小越好)，測試中設置了 "delay=500" 所有 Y 軸是從 500 開始的。
+  X 軸代表 Request 的個數所有是從 0 到 20000。
+  雖然不是很明顯，不過可以看出紅線更加平滑一些。也就是說啟用 Cluster 後 Node Server 的處理速度更快一些。
+#+begin_src text
+TODO img
+#+end_src
+
+生成上面這個報告圖片所使用的 gnuplot 腳本:
+ - 第一部分用來設置輸出格式到 .png。
+ - 第二部分用來設置圖片的 title 和 X,Y 軸信息。
+ - 最後一部分把 "cluster.tsv" 和 "disable-cluster.tsv" 的第 5 列 (ttime) 放入 gnuplot 的數據輸入。
+#+begin_src text
+# set output format
+set terminal png
+set output "cluster.png"
+set size 1,0.7
+
+# set graph format
+set title "Node Cluster Test"
+set grid y
+set xlabel "Request"
+set ylabel "Response time (ms)"
+
+# set output data
+set datafile separator "\t"
+plot "cluster.tsv" using 5 smooth sbezier with lines title "Enable Cluster", \
+    "disable-cluster.tsv" using 5 smooth sbezier with lines title "Disable Cluster"
+#+end_src 
+
+* 優缺點
+** 優點:
+- 使用/操作上簡單；易理解。
+- 輸出報告簡單、清晰。
+** 缺點:
+個人覺得這些缺點在使用 Apache JMeter 時是可以避免的，只是 JMeter 學習起來比 ab 麻煩許多。
+- HTTP(s) 之外的沒有支持；HTTP(s) 本身如果 request 很複雜也比較難用。
+- 不能對每一個具體 request 做額外的設置。每一個 request 的行為必須一樣，不能在參數上做出改動。
+- 測試流程上無法控制，比如:每個 request 都是連續的，有是會讓 Server 誤認有人在攻擊 Server。
+- 測試以一台機器爲單位，不能把測試分佈到多台機器上。
+
+* 參考
+- ab 手冊 "manual/programs/ab.html.en" 或者 Apache (2.2) 在線手冊 [[http://httpd.apache.org/docs/2.2/programs/ab.html]]
+- ab 的源代碼。可以上 [[http://httpd.apache.org/]] 找到或者 github 的 mirror [[https://github.com/apache/httpd/blob/trunk/support/ab.c]]
