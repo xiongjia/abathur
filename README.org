@@ -4,6 +4,25 @@
 My Org static website
 ** Org project settings
 #+BEGIN_SRC emacs-lisp
+  ;; org settings
+  (setq org-ditaa-jar-path "~/<ditaa folder>/ditaa0_9.jar")
+  (setq org-plantuml-jar-path "~/<plantuml folder>/plantuml.jar")
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+  (setq org-confirm-babel-evaluate nil)
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((emacs-lisp . t)
+      (dot . t)
+      (ditaa . t)
+      (gnuplot . t)
+      (plantuml . t)
+      (js . t)
+      (python . t)
+      (ruby . t)
+      (shell . t)
+      (org . t)
+      (latex . t)))
+
   ;; project
   (defconst abathur-root
     (expand-file-name "<the root folder>"

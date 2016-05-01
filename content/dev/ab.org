@@ -276,9 +276,9 @@ Node 提供 Cluster 特性，讓多進程協同工作。以達到充分利用 Se
   Y 軸代表耗時(越小越好)，測試中設置了 "delay=500" 所有 Y 軸是從 500 開始的。
   X 軸代表 Request 的個數所有是從 0 到 20000。
   雖然不是很明顯，不過可以看出紅線更加平滑一些。也就是說啟用 Cluster 後 Node Server 的處理速度更快一些。
-#+begin_src text
-TODO img
-#+end_src
+  #+CAPTION: ab cluster test
+  #+NAME: fig:ab-cluster-test
+  [[file:../assets/img/ab-cluster-test.png]]
 
 生成上面這個報告圖片所使用的 gnuplot 腳本:
  - 第一部分用來設置輸出格式到 .png。
@@ -303,10 +303,10 @@ plot "cluster.tsv" using 5 smooth sbezier with lines title "Enable Cluster", \
 #+end_src 
 
 * 優缺點
-** 優點:
+** 優點
 - 使用/操作上簡單；易理解。
 - 輸出報告簡單、清晰。
-** 缺點:
+** 缺點
 個人覺得這些缺點在使用 Apache JMeter 時是可以避免的，只是 JMeter 學習起來比 ab 麻煩許多。
 - HTTP(s) 之外的沒有支持；HTTP(s) 本身如果 request 很複雜也比較難用。
 - 不能對每一個具體 request 做額外的設置。每一個 request 的行為必須一樣，不能在參數上做出改動。

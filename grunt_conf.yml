@@ -59,6 +59,12 @@ gruntCopy: &gruntCopy
     src:
       - '*.map'
     dest: 'dist/assets/css/'
+  img:
+    expand: true
+    cwd: 'content/assets/img'
+    src:
+      - '*'
+    dest: 'dist/assets/img/'
   data:
     expand: true
     cwd: 'content/assets/data'
@@ -135,6 +141,11 @@ gruntImagemin: &gruntImagemin
         src:
           - '**/*.png'
         dest: 'dist/assets/data/'
+      - expand: true
+        cwd: 'dist/assets/img/'
+        src:
+          - '**/*.png'
+        dest: 'dist/assets/img/'
 
 # grunt config root
 root:
