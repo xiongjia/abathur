@@ -11,7 +11,7 @@ exports = module.exports = function (grunt) {
 
   /* tasks */
   tasks = {
-    noCompress: ['clean', 'bower', 'jshint', 'copy', 'concat']
+    noCompress: ['clean', 'bower', 'jshint', 'copy', 'concat', 'imagemin']
   };
   tasks.build = ['noCompress', 'cssmin', 'uglify', 'htmlmin'];
   tasks.serv = tasks.server = ['build', 'connect', 'watch'];

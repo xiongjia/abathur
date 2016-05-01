@@ -59,6 +59,12 @@ gruntCopy: &gruntCopy
     src:
       - '*.map'
     dest: 'dist/assets/css/'
+  data:
+    expand: true
+    cwd: 'content/assets/data'
+    src:
+      - '*.png'
+    dest: 'dist/assets/data/'
 
 # task config - concat
 gruntConcat: &gruntConcat
@@ -118,6 +124,18 @@ gruntConnect: &gruntConnect
       debug: true
       base: 'dist'
 
+# task config - imagemin
+gruntImagemin: &gruntImagemin
+  dynamic:
+    options:
+      optimizationLevel: 3
+    files:
+      - expand: true
+        cwd: 'dist/assets/data/'
+        src:
+          - '**/*.png'
+        dest: 'dist/assets/data/'
+
 # grunt config root
 root:
   bower: *gruntBower
@@ -130,3 +148,5 @@ root:
   htmlmin: *gruntHtmlmin
   watch: *gruntWatch
   connect: *gruntConnect
+  imagemin: *gruntImagemin
+
