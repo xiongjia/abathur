@@ -18,3 +18,4 @@ npm-debug.log
 # output files
 /dist/
 /output/
+/content/assets/data/*.png
