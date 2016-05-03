@@ -12,3 +12,73 @@
 #+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
 
+* MS Windows Automation API
+** MSAA and UIA
+目前 MS Windows 提供了 MSAA 和 UIA :
+- Microsoft Active Accessibility (MSAA)
+  - 很早被引入，所以很多控件都支持。
+  - 引入的最初目的是辅助特殊人群使用电脑，所以 Automation 的功能不强。
+  - 可以通过，MSAA 提供的 COM Interface。
+  - 自定义的 UI Control 也需要要实现对应的 MSAA 接口。
+- Microsoft UI Automation (UIA)
+  - 可以通过 .Net Interface 访问。
+  - MS 新的 UI Framework 基本都支持，比如 WPF, Windows Forms。
+  - UIA 内部会使用 MSAA bridge 来访问兼容比较老的 UI Control。
+  - 通过提供各种 UIA Pattern 的方式来方便 Test Automation 的访问，同样 UI Control 开发也只需要提供对应的实现。对于 UI 控件测试者和开发者都更友好、便利些。
+
+** Assistant Tools
+有開源的工具和 MS 提供的工具。通過輔助工具可以幫助開發或這測試者查看、監視或者調用 UI Control 上的 UIA/MSAA 屬性和方法。
+
+*** MS Tools
+- 現在 MS 提供的 Testing tools 能在 http://msdn.microsoft.com/en-us/library/dd373661.aspx 上找到詳細情況。
+- 時間推移，好幾個 MS 提供的工具都已經被放棄了。
+  比如常用的 UISpy 被放棄了(可能是功能上和 Open Source 的 UIA Verify 類似)。
+  [[http://msdn.microsoft.com/en-us/library/ms727247.aspx]] 官方說法是: 
+  "The UI Spy tool is obsolete and no longer available. Developers should use
+  other tools such as Inspect.exe that are available
+  in the Windows Software Development Kit (SDK). For more info, see Testing
+  Tools."  \\
+  我自己保留了一份舊版本的 binary 在我的 DropBox 共享目錄裡:  [[https://www.dropbox.com/sh/8tpu53m88cskvmp/AAC99Yy-pb1mlsP5AF9RwTila/dev-tools/ms.uia][ms.uia-tools in my DropBox]] 
+  | uispy.zip          | UISpy         |
+  | inspect.zip        | Inspect       |
+  | acc.explorer32.zip | AccExplorer32 |
+  | acc.event.zip      | AccEvent      |
+
+*** Open source tools
+- UIA Verify - UI Automation Verify (UIA Verify) Test Automation Framework 
+  - 可以在 [[http://uiautomationverify.codeplex.com/]] 上找到代碼和 Release 的版本。
+  - 功能類似於 MS 的 UISpy
+- AccChecker - UI Accessibility Checker
+  - 可以在 [[http://acccheck.codeplex.com/]] 上找到代碼和 Release 的版本。
+  - 功能類似於 MS 的 AccExplorer
+
+** SDK
+- TestStack White [[https://github.com/TestStack/White]]
+  White 是一個 UIA 的封裝,可以避免直接與 MS UIA 較複雜的接口打交道。而且 Whilte 封裝了部分 Native Winidows API (TestStack.White.WindowsAPI) 可以操作就有的窗口。
+  - 這是一份開源實現,其代碼可以在 Github 上找到 [[https://github.com/TestStack/White]]
+  - White 支持 NuGet 包管理,可以方便的加到另外一個工程。
+  - White 文檔不夠詳細，如果有興趣和時間可以幫助他們補充。文檔倉庫: [[https://github.com/TestStack/TestStack.docs]]
+    在線瀏覽: [[http://teststack.azurewebsites.net/]]
+  - 我在項目裡沒有用過 White,自己寫的一些小測試是經常使用的。開發接口是方便很多的。缺點可能就是: 文檔不足吧。
+    有些控件我自己也沒有細測過不好在穩定性上做出評論。不過從 Github 上看用戶還是很多的。
+- 直接使用 MS UIA 
+  - 需要閱讀基本的接口文檔 [[http://msdn.microsoft.com/en-us/library/windows/desktop/ee684076%28v=vs.85%29.aspx]]
+  - 另外可以上 UIA 的 blog 找些 Sample 看看 [[http://blogs.msdn.com/b/winuiautomation/]]
+
+* My practice
+- ps.uia - [[https://github.com/xiongjia/ps.uia]]
+  - 我的基本想法是在 Powershell 里调用 MS UIAutomation 接口。基本上就是用 reflector 去调用 .Net UIA 对象。
+  - 我希望是 Pure Script 不要用 Native or .Net Managed code 去,操作 UIA。(不過好像有很多困難)
+  - 目前只是實現了幾個簡單查詢和 Pattern 操作.覺得深入可能還是只能寫一些 Managed code。
+
+* Resource
+- Microsoft Windows UI Automation Blog
+  - [[http://blogs.msdn.com/b/winuiautomation/]]
+- Introduction to Microsoft Active Accessibility
+  - [[http://www.codeproject.com/Articles/18290/Introduction-to-Microsoft-Active-Accessibility]]
+- MSAA in Mozilla  Gecko  ( Firefox 提供的 MSAA 接口)
+  - [[http://www.mozilla.org/access/windows/msaa-server]]
+  - [[http://www.mozilla.org/access/windows/at-apis]]
+- Windows Automation API SDK Tools 
+  - [[http://blogs.msdn.com/b/winuiautomation/archive/2009/06/03/windows-automation-api-sdk-tools.aspx]]
+ 
