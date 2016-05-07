@@ -26,6 +26,7 @@ gruntJSHint: &gruntJSHint
   config:
     src:
       - 'content/assets/js/abathur.js'
+      - 'content/assets/js/ganalytics.js'
 
 # task config - clean
 gruntClean: &gruntClean
@@ -83,6 +84,7 @@ gruntConcat: &gruntConcat
     src:
       - 'bower_components/jquery/jquery.js'
       - 'content/assets/js/abathur.js'
+      - 'content/assets/js/ganalytics.js'
     dest: *mainJS
 
 # task config - cssmin
