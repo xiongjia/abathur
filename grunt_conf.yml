@@ -7,6 +7,9 @@ abathur:
   output: &output 'output'
   mainCSS: &mainCSS 'dist/assets/css/main_v0.1.css'
   mainJS: &mainJS 'dist/assets/js/main_v0.1.js'
+  rsyncSrc: &rsyncSrc './dist/'
+  rsyncDest: &rsyncDest 'lexj@xj-labs.net:xj-labs.net'
+  siteRoot: &siteRoot 'http://www.xj-labs.net'
 
 # task config - bower
 gruntBower: &gruntBower
@@ -149,6 +152,26 @@ gruntImagemin: &gruntImagemin
           - '**/*.png'
         dest: 'dist/assets/img/'
 
+# task config - rsync
+gruntRsync: &gruntRsync
+  options:
+    args:
+      - '--verbose'
+    recursive: true
+  dist:
+    options:
+      src: *rsyncSrc
+      dest: *rsyncDest
+
+# task config - sitemap
+gruntSitemap: &gruntSitemap
+  dist:
+    pattern:
+      - 'dist/**/*.html'
+    siteRoot: 'dist'
+    homepage: *siteRoot
+    changefreq: 'weekly' 
+
 # grunt config root
 root:
   bower: *gruntBower
@@ -162,4 +185,5 @@ root:
   watch: *gruntWatch
   connect: *gruntConnect
   imagemin: *gruntImagemin
-
+  rsync: *gruntRsync
+  sitemap: *gruntSitemap

@@ -27,6 +27,7 @@
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-rsync": "^1.0.1",
+    "grunt-sitemap": "^1.2.1",
     "load-grunt-tasks": "^3.5.0",
     "lodash": "^4.11.1"
   },
