@@ -66,15 +66,21 @@
 
 * github
 ** Awesome
-    - [[https://github.com/MaximAbramchuck/awesome-interviews][Awesome Interviews]]
-    - [[https://github.com/dhamaniasad/awesome-postgres][Awesome postgres]]
-    - [[https://github.com/numetriclabz/awesome-db][Awesome DB]]
-    - [[https://github.com/akullpp/awesome-java][Awesome Java]]
-    - [[https://github.com/lauris/awesome-scala][Awesome Scala]]
-    - Awesome VIM: 
-      - [[https://github.com/matteocrippa/awesome-vim]]
-      - [[https://github.com/akrawchyk/awesome-vim]]
-    - [[https://github.com/atinfo/awesome-test-automation][Awesome test automation]]
+    - Misc
+      - [[https://github.com/MaximAbramchuck/awesome-interviews][Awesome Interviews]]
+    - C/C++
+      - [[https://github.com/rigtorp/awesome-modern-cpp][Awesome Modern C++]]
+    - Databases
+      - [[https://github.com/dhamaniasad/awesome-postgres][Awesome postgres]]
+      - [[https://github.com/numetriclabz/awesome-db][Awesome DB]]
+    - Java
+      - [[https://github.com/akullpp/awesome-java][Awesome Java]]
+      - [[https://github.com/lauris/awesome-scala][Awesome Scala]]
+    - Vim: 
+      - [[https://github.com/matteocrippa/awesome-vim][Awesome Vim (matteocrippa)]]
+      - [[https://github.com/akrawchyk/awesome-vim][Awesome Vim (akrawchyk)]]
+    - Testing tools/frameworks
+        - [[https://github.com/atinfo/awesome-test-automation][Awesome test automation]]
 ** Awesome CN 
     - [[https://github.com/jobbole/awesome-java-cn][Awesome Java CN]]
 ** Java
