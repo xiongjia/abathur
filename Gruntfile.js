@@ -24,6 +24,7 @@ exports = module.exports = function (grunt) {
   tasks.build = ['noCompress', 'cssmin', 'uglify', 'htmlmin'];
   tasks.serv = tasks.server = ['build', 'connect', 'watch'];
   tasks.dbgServ = ['noCompress', 'connect', 'watch'];
+  tasks.check = ['build', 'connect', 'checkPages'];
   tasks.default = tasks.build;
   _.mapKeys(tasks, function (val, key) {
     grunt.registerTask(key, val);

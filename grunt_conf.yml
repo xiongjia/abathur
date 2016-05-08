@@ -172,6 +172,47 @@ gruntSitemap: &gruntSitemap
     homepage: *siteRoot
     changefreq: 'weekly' 
 
+# task config - checkPages
+gruntCheckPages: &gruntCheckPages
+  dev:
+    options:
+      checkLinks: false
+      onlySameDomain: true
+      queryHashes: true
+      noRedirects: true
+      noLocalLinks: true
+      noEmptyFragments: false
+      checkXhtml: false
+      checkCaching: true
+      checkCompression: false
+      maxResponseTime: 2000
+      summary: true
+      pageUrls:
+        - 'http://localhost:9001/'
+        - 'http://localhost:9001/favicon.ico'
+        - 'http://localhost:9001/sitemap.xml'
+        - 'http://localhost:9001/index.html'
+        - 'http://localhost:9001/about.html'
+        - 'http://localhost:9001/missing.html'
+        - 'http://localhost:9001/forbidden.html'
+        - 'http://localhost:9001/assets/css/main_v0.1.css'
+        - 'http://localhost:9001/assets/js/main_v0.1.js'
+        - 'http://localhost:9001/assets/data/ab-request.png'
+        - 'http://localhost:9001/assets/img/ab-cluster-test.png'
+        - 'http://localhost:9001/dev/ab.html'
+        - 'http://localhost:9001/dev/bookmarks.html'
+        - 'http://localhost:9001/dev/boost.html'
+        - 'http://localhost:9001/dev/scratch.html'
+        - 'http://localhost:9001/dev/shell.html'
+        - 'http://localhost:9001/dev/tips.html'
+        - 'http://localhost:9001/dev/vim.html'
+        - 'http://localhost:9001/dev/vim-fanfou.html'
+        - 'http://localhost:9001/dev/win-uia.html'
+        - 'http://localhost:9001/game/ingress.html'
+        - 'http://localhost:9001/game/minecraft.html'
+        - 'http://localhost:9001/general/emoticon.html'
+        - 'http://localhost:9001/general/txt.html'
+
 # grunt config root
 root:
   bower: *gruntBower
@@ -187,3 +228,4 @@ root:
   imagemin: *gruntImagemin
   rsync: *gruntRsync
   sitemap: *gruntSitemap
+  checkPages: *gruntCheckPages
