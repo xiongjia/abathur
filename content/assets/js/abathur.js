@@ -96,6 +96,7 @@
         toc.hide();
         return;
       }
+      toc.css('display', 'block');
 
       /* google cse */
       toc.after('<div style="width: 100%;">' +
