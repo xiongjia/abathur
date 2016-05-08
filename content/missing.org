@@ -4,7 +4,8 @@
 #+EMAIL: lexiongjia@gmail.com
 #+OPTIONS: title:nil num:nil ^:nil
 #+HTML_INCLUDE_STYLE: nil
-#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+#+HTML_DOCTYPE: <!doctype html>
+#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 #+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
 #+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
 #+HTML_HEAD: <meta http-equiv="expires" content="0" />

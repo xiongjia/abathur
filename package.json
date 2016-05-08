@@ -11,7 +11,8 @@
   "scripts": {
     "build": "npm prune & npm install & grunt",
     "serv": "grunt serv",
-    "dbgServ": "grunt dbgServ"
+    "dbgServ": "grunt dbgServ",
+    "check": "grunt check"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -27,6 +28,7 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-htmlhint": "^0.9.13",
     "grunt-rsync": "^1.0.1",
     "grunt-sitemap": "^1.2.1",
     "load-grunt-tasks": "^3.5.0",

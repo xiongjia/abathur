@@ -21,10 +21,11 @@ exports = module.exports = function (grunt) {
       'sitemap'
     ]
   };
-  tasks.build = ['noCompress', 'cssmin', 'uglify', 'htmlmin'];
+  tasks.build = ['noCompress', 'cssmin', 'uglify', 'htmlmin', 'htmlhint'];
   tasks.serv = tasks.server = ['build', 'connect', 'watch'];
-  tasks.dbgServ = ['noCompress', 'connect', 'watch'];
+  tasks.dbgServ = ['noCompress', 'htmlhint', 'connect', 'watch'];
   tasks.check = ['build', 'connect', 'checkPages'];
+  tasks.publish = ['check', 'rsync'];
   tasks.default = tasks.build;
   _.mapKeys(tasks, function (val, key) {
     grunt.registerTask(key, val);

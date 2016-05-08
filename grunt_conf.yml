@@ -172,6 +172,12 @@ gruntSitemap: &gruntSitemap
     homepage: *siteRoot
     changefreq: 'weekly' 
 
+# task config - htmlhint
+gruntHtmlhint: &gruntHtmlhint
+  pages:
+    src:
+      - 'dist/**/*.html'
+
 # task config - checkPages
 gruntCheckPages: &gruntCheckPages
   dev:
@@ -229,3 +235,4 @@ root:
   rsync: *gruntRsync
   sitemap: *gruntSitemap
   checkPages: *gruntCheckPages
+  htmlhint: *gruntHtmlhint
