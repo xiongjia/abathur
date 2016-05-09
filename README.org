@@ -4,6 +4,7 @@
 My Org static website
 ** Org project settings
 #+BEGIN_SRC emacs-lisp
+  ;; emacs theme is base16-twilight-light
   ;; org settings
   (setq org-ditaa-jar-path "~/<ditaa folder>/ditaa0_9.jar")
   (setq org-plantuml-jar-path "~/<plantuml folder>/plantuml.jar")
@@ -44,7 +45,7 @@ My Org static website
      :section-numbers nil
      :html-head-include-default-style  nil
      :html-head-include-scripts nil
-     :html-postamble "<script type='text/javascript' src='/assets/js/main_v0.1.js'></script>"
+     :html-postamble "<script type=\"text/javascript\" src=\"/assets/js/main_v0.1.js\"></script>"
      :html-preamble  "")
     ("abathur" :components ("abathur-content"))))
 #+END_SRC
