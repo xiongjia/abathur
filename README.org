@@ -4,7 +4,7 @@
 My Org static website
 ** Org project settings
 #+BEGIN_SRC emacs-lisp
-  ;; emacs theme is base16-twilight-light
+  ;; emacs theme is base16-google-dark 
   ;; org settings
   (setq org-ditaa-jar-path "~/<ditaa folder>/ditaa0_9.jar")
   (setq org-plantuml-jar-path "~/<plantuml folder>/plantuml.jar")
