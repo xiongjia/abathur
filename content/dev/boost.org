@@ -100,3 +100,10 @@ asio 是一個 I/O Framework 經常被用於異步的 I/O 操作
   - 可以用 curl 來測試這個 proxy。比如: ~curl --socks5 localhost:9090 http://www.boost.org/~
   - 對於得 CMakeLists.txt 配置了對於得 Boost ASIO 和 Log， 
     並且在 Windows 上用了 boost static library。
+
+** DLL
+DLL 是 boost 1.61 后，加入的。
+- 一个简单的 Boost DLL 测试，用来加载和使用公用 DLL/SO 里的 plugin
+  - 代码的 gist: [[https://gist.github.com/xiongjia/50198166b65cb5dab13a339ac9843618][https://gist.github.com/xiongjia/50198166b65cb5dab13a339ac9843618]]
+  - ~1_plugin.cxx~ 和 ~1_plugin.hxx~ 是 Plugin 的定义和实现
+  - ~0_main.cxx~ 是测试入口
