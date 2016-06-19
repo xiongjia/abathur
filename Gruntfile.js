@@ -1,9 +1,9 @@
 'use strict';
 
 exports = module.exports = function (grunt) {
-  var gruntCfg, tasks, _;
+  let gruntCfg, tasks;
 
-  _ = require('lodash');
+  const _ = require('lodash');
   /* load grunt config and plugins */
   require('load-grunt-tasks')(grunt);
   gruntCfg = grunt.file.readYAML('grunt_conf.yml');

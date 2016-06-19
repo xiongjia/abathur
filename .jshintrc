@@ -16,6 +16,7 @@
   "node": true,
   "browser": true,
   "jquery": true,
+  "esversion": 6,
   "predef" : [
     "abCtx",
     "_"

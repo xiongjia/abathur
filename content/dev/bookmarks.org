@@ -24,6 +24,19 @@
 ** 食
     - [[http://www.douban.com/note/507577279/][一瓶鲣鱼汁引发的自家制牛肉饭]]
 
+* Resources
+- 電子書 ( .pdf; .epub; .mobi; .azw3 )
+  - [[http://www.salttiger.com/][SaltTiger]] (技術向書籍) 
+  - [[http://it-ebooks.info/][it-ebooks]] (技術向書籍) 
+  - [[https://www.gitbook.com/explore][gitbook]] (用 gitbook 寫的文檔或書。) 
+- Game
+  - [[http://www.g-cores.com][機核網]]
+  - 功略视频
+    - Overwatch (守望先锋)
+      - [[http://www.bilibili.com/video/av4860032/][(合集)守望先锋地图详解系列]] (B 站上的合集)
+- Podcasts
+  - [[http://ipn.li/][IPN]]
+
 * DEV
 ** Utility
   - Maven 
@@ -114,6 +127,7 @@
   - [[http://jsfiddle.net/][JS Fiddle]]
   - [[http://jsperf.com/][JS performance playground]]
   - [[http://www.jsnice.org/][jsnice]] (反編譯 js)
+  - [[http://www.es6fiddle.net/][ES 6 Fiddle]]
 ** Lint: 
   - JSON Lint: 
     - [[http://jsonlint.org/]]
@@ -129,6 +143,7 @@
 ** Misc:
   - [[http://runnable.com/][Runnable]] (Online Vitrual Environment)
   - [[https://searchcode.com/][Source code search engine]]
+  - [[https://www.libhunt.com/][LibHunt]]
   - Markdown Editor:
     - [[http://dillinger.io/]]
     - [[https://github.com/joemccann/dillinger]]
@@ -141,14 +156,3 @@
 * Tools
 - [[http://mitmproxy.org/][mitmproxy (翻)]] , python 實現的用與調試的 proxy 類似于 fiddler 
 
-* Resources
-- 電子書 ( .pdf; .epub; .mobi; .azw3 )
-  - [[http://www.salttiger.com/][SaltTiger]] (技術向書籍) 
-  - [[http://it-ebooks.info/][it-ebooks]] (技術向書籍) 
-  - [[https://www.gitbook.com/explore][gitbook]] (用 gitbook 寫的文檔或書。) 
-- Game
-  - [[http://www.g-cores.com][機核網]]
-- Podcasts
-  - [[http://ipn.li/][IPN]]
-
-    
