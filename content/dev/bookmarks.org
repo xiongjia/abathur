@@ -48,7 +48,11 @@
     - [[https://www.gitbook.com/book/windor/beginners-guide-to-scala/details][Scala 初学者指南]]
   - git
     - [[http://paulhammant.com/2013/04/05/what-is-trunk-based-development/][What is Trunk Based Development?]]
- 
+  - misc
+    - Google Style guides
+      - [[https://github.com/google/styleguide][Google style guide (github, EN)]]
+      - [[https://github.com/zh-google-styleguide/zh-google-styleguide][Google style guid (github, 中文非官方)]]
+
 ** news subscription
   - [[http://nodeweekly.com/][Node Weekly (node.js weekly news)]]
   - [[http://llvmweekly.org/][LLVM Weekly]] 
@@ -65,7 +69,9 @@
   - [[https://github.com/for-GET/know-your-http-well][KNOW YOUR HTTP * WELL: http specs, status code, methods]] 
   - [[http://wiki.jikexueyuan.com/project/chrome-devtools/][Chrome Developer Tools]]
   - [[http://info.9iphp.com/essential-skills-every-web-developer-should-have/][WEB 开发者应该有哪些必备的技能]]
- 
+*** JavaScript
+    - [[https://github.com/ericdouglas/ES6-Learning][ES6 Learning]]
+
 ** Database
   - [[https://dev.mysql.com/doc/internals/en/guided-tour.html][mysql internals : mysql 代碼閲讀指導]]
 
