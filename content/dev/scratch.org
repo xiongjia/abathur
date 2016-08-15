@@ -14,8 +14,8 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
 
 日常的一些草稿，代码片段。
-- 基本上把代码共享在了我的 gist 上: [[https://gist.github.com/xiongjia]]
-- 如果是需要编译的，一般会写一个 CMakeLists.txt ; clone 下来后可以用 cmake 直接编译
+- 基本上把代码共享在了我的 [[https://gist.github.com/xiongjia][gist]] 和 [[https://github.com/xiongjia/scratch][github scratch repository]] 上
+- 如果是这类要编译的，一般会写一个 CMakeLists.txt
 
 * Boost
 Boost 的 sample 都写了一个 CMakeList.txt, clone 后应该可以直接编译。
@@ -120,7 +120,7 @@ unit_test_framework 是 boost 自帶的一套 c/c++ unit test framework.
     [[https://leetcode.com][leetcode]] 上的 SHELL 題目，和我目前的解法。
     - 寫在了我的 github page 裏: [[http://xiongjia.github.io/dev/2015/06/23/shell-problems/]]
 
-* Node.js
+* JavaScript/Node.js
 ** Dump node v8 heap
    通過 node-heapdump 來 dump 當前得 v8 狀態，隨後可以通過 Chrome developer tool 來檢測這個 dump 文件。
    - gist: [[https://gist.github.com/xiongjia/7688374]]
@@ -153,8 +153,12 @@ unit_test_framework 是 boost 自帶的一套 c/c++ unit test framework.
    - 具體參考 gist 中的 readme
 
 ** NContext
-   利用 node.js 的 'vm' module 為 script 創建一個獨特的 context
-   - gist: [[https://gist.github.com/xiongjia/b70406b710b3c19573f6]]
+利用 node.js 的 'vm' module 為 script 創建一個獨特的 context
+- gist: [[https://gist.github.com/xiongjia/b70406b710b3c19573f6]]
+
+** JS Promise patterns 
+实现了一部分日常要用到的 Promise 用例。比如：Series, Parallel, Race, Retry
+- [[https://github.com/xiongjia/scratch/tree/master/js-promise-tests][JS Promise Tests]]
 
 * PowerShell
 ** MS UIAutomation

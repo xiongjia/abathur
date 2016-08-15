@@ -15,15 +15,6 @@
 
 日常看到的文章、网址等的备忘和分类
 
-* 日常
-** 电影
-    - [[http://www.spider.com.cn/][蜘蛛網 (購票用)]]
-** 天气/空气
-    - [[http://aqicn.org/city/shanghai/][PM 2.5 上海]]
-    - [[http://sh.weather.com.cn/][天氣預報上海]]
-** 食
-    - [[http://www.douban.com/note/507577279/][一瓶鲣鱼汁引发的自家制牛肉饭]]
-
 * Resources
 - 電子書 ( .pdf; .epub; .mobi; .azw3 )
   - [[http://www.salttiger.com/][SaltTiger]] (技術向書籍) 
@@ -36,86 +27,87 @@
       - [[http://www.bilibili.com/video/av4860032/][(合集)守望先锋地图详解系列]] (B 站上的合集)
 - Podcasts
   - [[http://ipn.li/][IPN]]
+  - [[https://codetimecn.com/][代码时间]]
 
 * DEV
 ** Utility
-  - Maven 
-    - [[http://books.sonatype.com/mvnex-book/reference/][Maven by Example]]
-    - [[http://books.sonatype.com/mvnref-book/reference/][Maven The Complete Reference]]
-  - Scala
-    - [[http://twitter.github.io/scala_school/][Scala School!]]
-    - [[http://twitter.github.io/effectivescala/][Effective Scala]]
-    - [[https://www.gitbook.com/book/windor/beginners-guide-to-scala/details][Scala 初学者指南]]
-  - git
-    - [[http://paulhammant.com/2013/04/05/what-is-trunk-based-development/][What is Trunk Based Development?]]
-  - misc
-    - Google Style guides
-      - [[https://github.com/google/styleguide][Google style guide (github, EN)]]
-      - [[https://github.com/zh-google-styleguide/zh-google-styleguide][Google style guid (github, 中文非官方)]]
+- Maven 
+  - [[http://books.sonatype.com/mvnex-book/reference/][Maven by Example]]
+  - [[http://books.sonatype.com/mvnref-book/reference/][Maven The Complete Reference]]
+- Scala
+  - [[http://twitter.github.io/scala_school/][Scala School!]]
+  - [[http://twitter.github.io/effectivescala/][Effective Scala]]
+  - [[https://www.gitbook.com/book/windor/beginners-guide-to-scala/details][Scala 初学者指南]]
+- git
+  - [[http://paulhammant.com/2013/04/05/what-is-trunk-based-development/][What is Trunk Based Development?]]
+- misc
+  - Google Style guides
+    - [[https://github.com/google/styleguide][Google style guide (github, EN)]]
+    - [[https://github.com/zh-google-styleguide/zh-google-styleguide][Google style guid (github, 中文非官方)]]
 
 ** news subscription
-  - [[http://nodeweekly.com/][Node Weekly (node.js weekly news)]]
-  - [[http://llvmweekly.org/][LLVM Weekly]] 
-  - [[http://www.nosqlweekly.com/][NoSQL Weekly]]
-  - [[http://mysqlnewsletter.com/][Weekly MySQL News]]
-  - [[http://dbweekly.com/][DB Weekly]]
-  - [[http://postgresweekly.com/][Postgres Weekly]]
-  - [[http://weekly.manong.io/][码农周刊]]
-  - [[http://toutiao.io/][开发者头条]]
-  - [[http://www.javacodegeeks.com/][Java Code Geek]]
+- [[http://nodeweekly.com/][Node Weekly (node.js weekly news)]]
+- [[http://llvmweekly.org/][LLVM Weekly]] 
+- [[http://www.nosqlweekly.com/][NoSQL Weekly]]
+- [[http://mysqlnewsletter.com/][Weekly MySQL News]]
+- [[http://dbweekly.com/][DB Weekly]]
+- [[http://postgresweekly.com/][Postgres Weekly]]
+- [[http://weekly.manong.io/][码农周刊]]
+- [[http://toutiao.io/][开发者头条]]
+- [[http://www.javacodegeeks.com/][Java Code Geek]]
 
 ** web tech
-  - 一份簡單的 http2 現狀的描述: [[http://daniel.haxx.se/http2/][http2-explained]] or [[https://github.com/bagder/http2-explained][http2-explained (github)]]
-  - [[https://github.com/for-GET/know-your-http-well][KNOW YOUR HTTP * WELL: http specs, status code, methods]] 
-  - [[http://wiki.jikexueyuan.com/project/chrome-devtools/][Chrome Developer Tools]]
-  - [[http://info.9iphp.com/essential-skills-every-web-developer-should-have/][WEB 开发者应该有哪些必备的技能]]
+- 一份簡單的 http2 現狀的描述: [[http://daniel.haxx.se/http2/][http2-explained]] or [[https://github.com/bagder/http2-explained][http2-explained (github)]]
+- [[https://github.com/for-GET/know-your-http-well][KNOW YOUR HTTP * WELL: http specs, status code, methods]] 
+- [[http://wiki.jikexueyuan.com/project/chrome-devtools/][Chrome Developer Tools]]
+- [[http://info.9iphp.com/essential-skills-every-web-developer-should-have/][WEB 开发者应该有哪些必备的技能]]
 *** JavaScript
-    - [[https://github.com/ericdouglas/ES6-Learning][ES6 Learning]]
-
+ - [[https://github.com/ericdouglas/ES6-Learning][ES6 Learning]]
+ - [[https://github.com/getify/You-Dont-Know-JS][You Don't Know JS (book series)]]
 ** Database
-  - [[https://dev.mysql.com/doc/internals/en/guided-tour.html][mysql internals : mysql 代碼閲讀指導]]
+- [[https://dev.mysql.com/doc/internals/en/guided-tour.html][mysql internals : mysql 代碼閲讀指導]]
 
 * Stack Overflow
 ** shell
-    - [[http://stackoverflow.com/questions/5014823/how-to-profile-a-bash-shell-script][How to profile a bash shell script?]]
+- [[http://stackoverflow.com/questions/5014823/how-to-profile-a-bash-shell-script][How to profile a bash shell script?]]
 ** c/c++
-    - [[http://stackoverflow.com/questions/3007312/resolving-lnk4098-defaultlib-msvcrt-conflicts-with][Resolving LNK4098: defaultlib 'MSVCRT' conflicts with]]
+- [[http://stackoverflow.com/questions/3007312/resolving-lnk4098-defaultlib-msvcrt-conflicts-with][Resolving LNK4098: defaultlib 'MSVCRT' conflicts with]]
 ** git
-    - [[http://stackoverflow.com/questions/3258243/git-check-if-pull-needed][check if pull needed]]
-    - [[http://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git][What's the difference between HEAD^ and HEAD~ in Git?]]
+- [[http://stackoverflow.com/questions/3258243/git-check-if-pull-needed][check if pull needed]]
+- [[http://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git][What's the difference between HEAD^ and HEAD~ in Git?]]
 
 * github
 ** Awesome
-    - Misc
-      - [[https://github.com/MaximAbramchuck/awesome-interviews][Awesome Interviews]]
-    - C/C++
-      - [[https://github.com/rigtorp/awesome-modern-cpp][Awesome Modern C++]]
-    - Databases
-      - [[https://github.com/dhamaniasad/awesome-postgres][Awesome postgres]]
-      - [[https://github.com/numetriclabz/awesome-db][Awesome DB]]
-    - Java
-      - [[https://github.com/akullpp/awesome-java][Awesome Java]]
-      - [[https://github.com/lauris/awesome-scala][Awesome Scala]]
-    - Vim: 
-      - [[https://github.com/matteocrippa/awesome-vim][Awesome Vim (matteocrippa)]]
-      - [[https://github.com/akrawchyk/awesome-vim][Awesome Vim (akrawchyk)]]
-    - Testing tools/frameworks
-        - [[https://github.com/atinfo/awesome-test-automation][Awesome test automation]]
+- Misc
+  - [[https://github.com/MaximAbramchuck/awesome-interviews][Awesome Interviews]]
+- C/C++
+  - [[https://github.com/rigtorp/awesome-modern-cpp][Awesome Modern C++]]
+- Databases
+  - [[https://github.com/dhamaniasad/awesome-postgres][Awesome postgres]]
+  - [[https://github.com/numetriclabz/awesome-db][Awesome DB]]
+- Java
+  - [[https://github.com/akullpp/awesome-java][Awesome Java]]
+  - [[https://github.com/lauris/awesome-scala][Awesome Scala]]
+- Vim: 
+  - [[https://github.com/matteocrippa/awesome-vim][Awesome Vim (matteocrippa)]]
+  - [[https://github.com/akrawchyk/awesome-vim][Awesome Vim (akrawchyk)]]
+- Testing tools/frameworks
+    - [[https://github.com/atinfo/awesome-test-automation][Awesome test automation]]
 ** Awesome CN 
-    - [[https://github.com/jobbole/awesome-java-cn][Awesome Java CN]]
+- [[https://github.com/jobbole/awesome-java-cn][Awesome Java CN]]
 ** Java
-    - [[https://github.com/winterbe/java8-tutorial][A Guide to Java 8]]
-    - [[https://github.com/iluwatar/java-design-patterns][Design patterns implemented in Java]]
-    - [[https://github.com/cxxr/better-java][Better Java]]
+- [[https://github.com/winterbe/java8-tutorial][A Guide to Java 8]]
+- [[https://github.com/iluwatar/java-design-patterns][Design patterns implemented in Java]]
+- [[https://github.com/cxxr/better-java][Better Java]]
 ** c++
-    - [[https://github.com/isocpp/CppCoreGuidelines][C++ Core Guidelines]]
+- [[https://github.com/isocpp/CppCoreGuidelines][C++ Core Guidelines]]
 ** database
-    - [[https://github.com/ty4z2008/Qix/blob/master/pg.md][PostgreSQL(数据库)资料]]
+- [[https://github.com/ty4z2008/Qix/blob/master/pg.md][PostgreSQL(数据库)资料]]
 ** Minecraf
-    - [[https://github.com/showcases/hacking-minecraft][Hacking Minecraft (showcases)]]
-    - Minecraft Overviewer 
-      - [[https://github.com/overviewer/Minecraft-Overviewer]]
-      - [[http://docs.overviewer.org/en/latest/]]
+- [[https://github.com/showcases/hacking-minecraft][Hacking Minecraft (showcases)]]
+- Minecraft Overviewer 
+  - [[https://github.com/overviewer/Minecraft-Overviewer]]
+  - [[http://docs.overviewer.org/en/latest/]]
 
 * Others
 - Gu Lu's Blog: 一些遊戲開發資料
@@ -124,41 +116,51 @@
 
 * Online Tools
 ** Mirrors:
-    - [[http://mirrors.neusoft.edu.cn/][We - 开源镜像站]] (大陸地區比較快比如 Cygwin, Apache, Android SDK 等的鏡像)
-    - [[https://ruby.taobao.org/][RubyGems 镜像]] - 淘宝网 (大陸地區 Ruby 用戶可加速)
-    - [[http://npm.taobao.org/][淘宝 NPM 镜像]] - (大陸地區 Node.js 用戶可加速)
-    - [[http://mirrors.163.com/][网易开源镜像站]] (有各個 Linux 發行版本的包管理, 如: Ubuntu, ArchLinux 等)
-    - [[http://maven.oschina.net][maven 中國]]
+- [[http://mirrors.neusoft.edu.cn/][We - 开源镜像站]] (大陸地區比較快比如 Cygwin, Apache, Android SDK 等的鏡像)
+- [[https://ruby.taobao.org/][RubyGems 镜像]] - 淘宝网 (大陸地區 Ruby 用戶可加速)
+- [[http://npm.taobao.org/][淘宝 NPM 镜像]] - (大陸地區 Node.js 用戶可加速)
+- [[http://mirrors.163.com/][网易开源镜像站]] (有各個 Linux 發行版本的包管理, 如: Ubuntu, ArchLinux 等)
+- [[http://maven.oschina.net][maven 中國]]
+- [[https://mirrors.tuna.tsinghua.edu.cn/][清华大学 TUNA 镜像源]] (主要用这里的 elpa ) 
 ** JavaScript: 
-  - [[http://jsfiddle.net/][JS Fiddle]]
-  - [[http://jsperf.com/][JS performance playground]]
-  - [[http://www.jsnice.org/][jsnice]] (反編譯 js)
-  - [[http://www.es6fiddle.net/][ES 6 Fiddle]]
+- [[http://jsfiddle.net/][JS Fiddle]]
+- [[http://jsperf.com/][JS performance playground]]
+- [[http://www.jsnice.org/][jsnice]] (反編譯 js)
+- [[http://www.es6fiddle.net/][ES 6 Fiddle]]
 ** Lint: 
-  - JSON Lint: 
-    - [[http://jsonlint.org/]]
-    - [[https://github.com/arc90/jsonlintdotcom]]
-  - YAML Lint:
-    - [[http://yamllint.com/]]
-    - [[https://github.com/gilltots/yamllint]]
-  - JS-YAML parser (Lint):
-    - [[http://nodeca.github.io/js-yaml/]]
-    - [[https://github.com/nodeca/js-yaml]]
+- JSON Lint: 
+  - [[http://jsonlint.org/]]
+  - [[https://github.com/arc90/jsonlintdotcom]]
+- YAML Lint:
+  - [[http://yamllint.com/]]
+  - [[https://github.com/gilltots/yamllint]]
+- JS-YAML parser (Lint):
+  - [[http://nodeca.github.io/js-yaml/]]
+  - [[https://github.com/nodeca/js-yaml]]
 ** Database:
-  - [[http://sqlfiddle.com/][SQL Filddle]]
+- [[http://sqlfiddle.com/][SQL Filddle]]
 ** Misc:
-  - [[http://runnable.com/][Runnable]] (Online Vitrual Environment)
-  - [[https://searchcode.com/][Source code search engine]]
-  - [[https://www.libhunt.com/][LibHunt]]
-  - Markdown Editor:
-    - [[http://dillinger.io/]]
-    - [[https://github.com/joemccann/dillinger]]
-  - 圖片處理:
-    - [[http://www.watereffect.net/][水反處理]]
-    - [[https://cloudconvert.com/][cloudconvert]] 各种格式间的转换，比如: webp, jpg, png 等
-  - Douban 統計
-    - [[http://readingtaste.com/][個人年度統計器]]
+- [[http://runnable.com/][Runnable]] (Online Vitrual Environment)
+- [[https://searchcode.com/][Source code search engine]]
+- [[https://www.libhunt.com/][LibHunt]]
+- Markdown Editor:
+  - [[http://dillinger.io/]]
+  - [[https://github.com/joemccann/dillinger]]
+- 圖片處理:
+  - [[http://www.watereffect.net/][水反處理]]
+  - [[https://cloudconvert.com/][cloudconvert]] 各种格式间的转换，比如: webp, jpg, png 等
+- Douban 統計
+  - [[http://readingtaste.com/][個人年度統計器]]
 
 * Tools
 - [[http://mitmproxy.org/][mitmproxy (翻)]] , python 實現的用與調試的 proxy 類似于 fiddler 
+
+* 日常
+** 电影
+    - [[http://www.spider.com.cn/][蜘蛛網 (購票用)]]
+** 天气/空气
+    - [[http://aqicn.org/city/shanghai/][PM 2.5 上海]]
+    - [[http://sh.weather.com.cn/][天氣預報上海]]
+** 食
+- [[http://www.douban.com/note/507577279/][一瓶鲣鱼汁引发的自家制牛肉饭]]
 

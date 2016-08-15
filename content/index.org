@@ -17,35 +17,35 @@
 
 * Technology
 ** DEV
-   此分类用于记录开发用到的基础知识或者 Framework; Open Source 的总结或备忘:
-   - Others:
-     - [[file:dev/boost.org][Boost]] - Boost 資料整理；使用備忘。
-     - [[file:dev/scratch.org][Scratch]]  - 一些日常用到的草稿，代码片段
-     - [[file:dev/vim.org][Vim]]  - Vim 的一些日常使用
-     - [[file:dev/shell.org][Shell]] - Shell Script 的備忘或總結 
-   - Performance Testing Tools/Frameworks: 
-     - [[file:dev/ab.org][ab]] - Apache HTTP server benchmarking tool
-   - GUI Testing Tools/Frameworks:
-     - [[file:dev/win-uia.org][Windows UI Automation]] - MS UIA ( MS 提供的 GUI 測試接口) 的備忘或總結
+此分类用于记录开发用到的基础知识或者 Framework; Open Source 的总结或备忘:
+- Others:
+  - [[file:dev/boost.org][Boost]] - Boost 資料整理；使用備忘。
+  - [[file:dev/scratch.org][Scratch]]  - 一些日常用到的草稿，代码片段
+  - [[file:dev/vim.org][Vim]]  - Vim 的一些日常使用
+  - [[file:dev/shell.org][Shell]] - Shell Script 的備忘或總結 
+- Performance Testing Tools/Frameworks: 
+  - [[file:dev/ab.org][ab]] - Apache HTTP server benchmarking tool
+- GUI Testing Tools/Frameworks:
+  - [[file:dev/win-uia.org][Windows UI Automation]] - MS UIA ( MS 提供的 GUI 測試接口) 的備忘或總結
 ** MISC
-   此分类用于记录一些辅助工具的用法和其他一些无法分类的东西:
-   - [[file:dev/bookmarks.org][Bookmarks]] - 日常看到的文章、网址等的备忘
-   - [[file:dev/tips.org][Tips]] - 小常识
+此分类用于记录一些辅助工具的用法和其他一些无法分类的东西:
+- [[file:dev/bookmarks.org][Bookmarks]] - 日常看到的文章、网址等的备忘
+- [[file:dev/tips.org][Tips]] - 日常用到的套路
 
 * Practices
-  此分类用于记录自己实现的一些工具(挖过的坑):
-  - [[file:dev/vim-fanfou.org][vim-fanfou]]  - 一个基于 VIM Plugin 实现的 [[http://fanfou.com/][Fanfou]] (饭否) client， 
-    代码 (Python + Vim Script) 所在的 github repository: [[https://github.com/xiongjia/vim-fanfou]]  
-  - [[https://www.npmjs.com/package/nspider][nspider]] - 在一个 Node.js 实现的 Web Spider 封装。可以通过 npm install nspider 从 npm 安装。
-    github repository: [[https://github.com/xiongjia/nspider][nspider]]
+此分类用于记录自己实现的一些工具(挖过的坑):
+- [[file:dev/vim-fanfou.org][vim-fanfou]]  - 一个基于 VIM Plugin 实现的 [[http://fanfou.com/][Fanfou]] (饭否) client， 
+  代码 (Python + Vim Script) 所在的 github repository: [[https://github.com/xiongjia/vim-fanfou]]  
+- [[https://www.npmjs.com/package/nspider][nspider]] - 在一个 Node.js 实现的 Web Spider 封装。可以通过 npm install nspider 从 npm 安装。
+  github repository: [[https://github.com/xiongjia/nspider][nspider]]
 
 * Others
 ** 日常
-   此分类用于记录 3 次元的数据:
-   - [[file:general/emoticon.org][顏文字]] - 日常颜文字备用，以及一些工具
-   - [[file:general/txt.org][段子/转载]] - 杂七杂八得文字
+此分类用于记录 3 次元的数据:
+- [[file:general/emoticon.org][顏文字]] - 日常颜文字备用，以及一些工具
+- [[file:general/txt.org][段子/转载]] - 杂七杂八得文字
 
 ** Games
-   此分类用于记录 2.5 次元的数据:
-   - [[file:game/minecraft.org][Minecraft]] - Minecraft 资料收集
-   - [[file:game/ingress.org][Ingress]] - Ingress 资料收集
+此分类用于记录 2.5 次元的数据:
+- [[file:game/minecraft.org][Minecraft]] - Minecraft 资料收集
+- [[file:game/ingress.org][Ingress]] - Ingress 资料收集
