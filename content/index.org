@@ -22,7 +22,8 @@
   - [[file:dev/boost.org][Boost]] - Boost 資料整理；使用備忘。
   - [[file:dev/scratch.org][Scratch]]  - 一些日常用到的草稿，代码片段
   - [[file:dev/vim.org][Vim]]  - Vim 的一些日常使用
-  - [[file:dev/shell.org][Shell]] - Shell Script 的備忘或總結 
+  - [[file:dev/shell.org][Shell]] - Shell Script 的備忘或總結
+  - [[file:dev/bat.org][bat]] - Windows batch file 日常用到套路
 - Performance Testing Tools/Frameworks: 
   - [[file:dev/ab.org][ab]] - Apache HTTP server benchmarking tool
 - GUI Testing Tools/Frameworks:

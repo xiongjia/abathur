@@ -210,6 +210,7 @@ gruntCheckPages: &gruntCheckPages
         - 'http://localhost:9001/dev/boost.html'
         - 'http://localhost:9001/dev/scratch.html'
         - 'http://localhost:9001/dev/shell.html'
+        - 'http://localhost:9001/dev/bat.html'
         - 'http://localhost:9001/dev/tips.html'
         - 'http://localhost:9001/dev/vim.html'
         - 'http://localhost:9001/dev/vim-fanfou.html'
