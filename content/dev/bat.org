@@ -14,11 +14,12 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
 
 记录一些工作，生活中用到的 Windows Batch 的"套路"。
+
 俺自己日常用的 Windows 脚本一部分是 bat 一部分是 PowerShell 主要都可以在我的
 Github 的这个仓库找到: [[https://github.com/xiongjia/dotfiles/tree/master/win][DotFiles - Windows scripts]]
 
 * Patterns 
-** Path
+** Path/Environment
 *** bat file pat
 当前 bat 脚本文件所在的路径
 #+BEGIN_SRC bat
@@ -48,6 +49,48 @@ del /F /Q %_tmp_file%
 endlocal
 #+END_SRC
 
+*** Check file/variable
+检查文件或环境变量是否存在或被定义
+#+BEGIN_SRC bat
+@echo off
+setlocal
+:: file is not exist
+if not exist c:\test_filename (
+    echo "cannot find the file"
+)
+else (
+    echo "find the file"
+)
+:: file is exist 
+if exist c:\test_filename (
+    echo "find the file"
+)
+else (
+    echo "cannot find the file"
+)
+:: ENV_VAR is not defined
+if not defined ENV_VAR_NAME (
+    echo "Env var is not defined"
+)
+else (
+    echo "Env var is defined"
+)
+endlocal
+#+END_SRC
+
+*** Scan files
+遍历目录中的文件。
+#+BEGIN_SRC bat
+@echo off
+setlocal
+:: Scan the .exe files in c:\windows folder
+set _src_dir=c:\Windows
+for %%i in ("%_src_dir%\*.exe") do (
+    echo filename: %%i
+)
+endlocal
+#+END_SRC
+
 ** Strings
 *** string replacement
 替换 time 中的冒号和空格。
@@ -63,3 +106,75 @@ echo After replacement %_time_str%
 endlocal
 #+END_SRC
 
+*** strings list
+遍历 strings list 的 for 循环。
+#+BEGIN_SRC bat
+@echo off
+setlocal EnableDelayedExpansion
+set "_strings=test1 test2 test3"
+set /a _index=0
+for %%i in (%_strings%) do (
+    echo Strings[!_index!] %%i
+    set /a _index+=1
+)
+endlocal
+#+END_SRC
+
+** Misc
+*** Retry
+根据 process exit code 来判断成功或失败，重试 10 次，每次重试间隔 10 秒
+#+BEGIN_SRC bat
+@echo off
+setlocal
+
+set _max_retry=10
+
+echo Begin: %date% - %time%
+set /a _tries=0
+:_RETRY
+:: this node process will always return exitCode 1
+node -pe "process.exit(1);"
+set _exit_code=%errorlevel%
+echo Exit Code: %_exit_code%; tries: %_tries%
+:: Check the exit code and re-run the process if the exit code is not zero
+if %_exit_code%==0 goto _END
+set /a _tries+=1
+echo Retry: %date% - %time%
+:: sleep 10 seconds before re-run the process
+timeout 10
+if %_tries% LEQ %_max_retry% ( goto _RETRY ) else ( goto _END )
+
+:_END
+echo End: tryies=%_tries%; Exit code: %_exit_code%; %date% - %time%
+endlocal
+#+END_SRC
+
+*** Prompt
+提示 "Are you sure (y/[n])?" 如果输入 'y' 就继续，否则退出
+#+BEGIN_SRC bat
+@echo off
+setlocal
+
+set /P _are_you_sure=Are you sure (y/[n])?
+if /I "%_are_you_sure%" NEQ "y" goto _EXIT
+echo add your script here...
+:_EXIT
+endlocal
+#+END_SRC
+
+*** Import another file
+从 src.bat 导入到调用者 Batch file
+- Source Batch file ( src.bat ) 
+#+BEGIN_SRC bat
+@echo off
+set _test_data1=test data
+#+END_SRC
+- Caller Batch file
+#+BEGIN_SRC bat
+@echo off
+setlocal
+:: Import the src.bat
+call %~dp0%.\src.bat
+echo %_test_data1%
+endlocal
+#+END_SRC
