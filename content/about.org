@@ -15,7 +15,7 @@
 
 * 俺
 #+BEGIN_SRC javascript
-var self = {
+let self = {
   mail: 'lexiongjia@gmail.com',
   sites: {
     github: 'https://github.com/xiongjia',
