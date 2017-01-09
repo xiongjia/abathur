@@ -1,0 +1,36 @@
+# -*- mode: org; mode: auto-fill -*-
+#+TITLE: Track
+#+AUTHOR: xiong-jia.le
+#+EMAIL: lexiongjia@gmail.com
+#+OPTIONS: title:nil num:nil ^:nil
+#+HTML_INCLUDE_STYLE: nil
+#+HTML_DOCTYPE: <!doctype html>
+#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+#+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
+#+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
+#+HTML_HEAD: <meta http-equiv="expires" content="0" />
+#+HTML_HEAD: <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+#+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
+
+记录一些解决过的坑，问题 (开始自 2017 年)
+
+* Database
+** PostgreSQL
+- PostgreSQL 9.3.x JSON Element Parse issue
+  - 问题
+    - server log 里有这样的 error log: "cannot extract element from a scalar" 
+    - 本地没有重现：本地 pg 已经升到了 pg 9.4+ ；另一个原因是没有正确的测试数据
+    - 从实际数据库中用 "\copy" 把错误的库导出到 .csv 再导入到本地的 pg 9.3.x 来重现问题
+  - 原因
+    - 在 9.3.x 中下面这些 SQL 会引起 "cannot extract element from a scalar" 错误，
+      但 9.4+ 中不会错误
+      - "SELECT ('123'::json)->>'key' AS data;" , 9.3.x 不能从 number json 取 key
+      - "SELECT (null::json)->>'key' AS data;", 9.3.x 不能从 null json 取 key
+  - 解决
+    - 显然不能让 server 升级 pg version, 只能修改 SQL。
+      使用 "json_extract_path_text()" / json_extract_path()" , 9.3+ 
+      都可以保证得到 json object 的某个 key。
+      比如："SELECT json_extract_path_text('123'::json, 'key') AS data;"
+
+* Node.js
