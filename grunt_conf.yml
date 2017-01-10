@@ -215,6 +215,7 @@ gruntCheckPages: &gruntCheckPages
         - 'http://localhost:9001/dev/vim.html'
         - 'http://localhost:9001/dev/vim-fanfou.html'
         - 'http://localhost:9001/dev/win-uia.html'
+        - 'http://localhost:9001/dev/track.html'
         - 'http://localhost:9001/game/ingress.html'
         - 'http://localhost:9001/game/minecraft.html'
         - 'http://localhost:9001/general/emoticon.html'
