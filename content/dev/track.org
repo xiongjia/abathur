@@ -31,6 +31,27 @@
     - 显然不能让 server 升级 pg version, 只能修改 SQL。
       使用 "json_extract_path_text()" / json_extract_path()" , 9.3+ 
       都可以保证得到 json object 的某个 key。
-      比如："SELECT json_extract_path_text('123'::json, 'key') AS data;"
+      比如： "SELECT json_extract_path_text('123'::json, 'key') AS data;"
 
 * Node.js
+- request 发送 form data 的 post 请求时固定发生 Connection timeout error
+  - 问题
+    - 用 node.js request 发送文件到 server 用的是 post form data 的方式，有时会
+      出现 connection timeout。网路没有问题，文件也不是很大。实现大概如下: 
+      #+BEGIN_SRC javascript
+      const formData = {
+        file: fs.createReadStream('the file name')
+      };
+      request.post({url:'https://test-site.com/upload', formData: formData }, (err) => {
+        /* got the timeout error here */
+      });
+      #+END_SRC
+  - 原因
+    - client 的代码有一些失败的 retry, 当 server 返回 500 等错误时。client 会在
+      发一次。
+    - server 检查 file format，正好第一个请求 upload 了错误的文件。
+    - Client 再 retry request post 时没有重新 create stream 导致 connection
+      timeout
+  - 解决
+    - 可以在 retry 时 re-create stream，不过再发一次意义不大。所以最后的修改时检
+      查错误和请求类型放弃 retry。
