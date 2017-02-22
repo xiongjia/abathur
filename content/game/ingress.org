@@ -29,8 +29,9 @@
 - G+ 上的 [[https://plus.google.com/communities/107172143025899099525][Shanghai Enlightened]]
 - [[http://enl.sh/][上海启蒙军]]
 - QQ Groups :
-  - Shanghai Enlightened: 287575595
-  - Sh-Enl-PD (上海浦东): 99948968
+  - Shanghai Enlightened (绿军爱生活的水群): 287575595
+  - Sh-Enl-PD (上海浦东水): 99948968
+  - 另有一个萌新群，可能牵涉人员名单泄露我不列了。需要的可以进入 Ingress 的 "COMM" 里问。
 - [[https://www.ingress.com/intel][Ingress 全球形势总揽图]] 可以用 IITC (Ingress Intel Total Conversion) add-on 以
   得更多信息。不过据说官方持反对态度，所有有封号危险。
 - Github 上的 [[https://github.com/GhostFlying/ingress-tutorials][Ingress Tutorials]]

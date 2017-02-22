@@ -55,3 +55,20 @@
   - 解决
     - 可以在 retry 时 re-create stream，不过再发一次意义不大。所以最后的修改时检
       查错误和请求类型放弃 retry。
+
+* Java
+- 厂内某基于 Akka 系统，运行数小时或一天规律的发生 Out of memory exception
+  - 问题
+    - 自己模仿调用 Akka 测试，并不发生 memory leak。所以猜测是系统中某错误调用导
+      致。也确认了不是 Akka 版本问题。
+    - 试图用增大 =-Xmx= 的 workaround。但是也只是延长了系统工作时间，最后仍
+      然会出现 Out of memory。
+  - 解决
+    - 用 jmap 监视运行过程中哪些 class 的 instances 在过多的分配。比如: =jmap
+      -histo:live <jvm pid>=
+    - 发生 memory leak 后用 jmap dump 出 jvm 的 memory。比如: =jmap -dump:file=<dump
+      file> <jvm pid>=
+    - 用 Memory Analyzer (MAT) 或其它 tools 分析 dump file。
+    - 根据分析的结果，在一些位置加 logger 
+    - 最后发现有个原本只该发生一次的事件，发生了无数次。改对这处就没有之前的
+      memory leak 了。
