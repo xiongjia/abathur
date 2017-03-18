@@ -72,3 +72,44 @@
     - 根据分析的结果，在一些位置加 logger 
     - 最后发现有个原本只该发生一次的事件，发生了无数次。改对这处就没有之前的
       memory leak 了。
+- Selenium WebDriver 发生 "Unable to find a free port" 的异常
+  - 问题
+    - 厂里的某个系统要求在一个系统 (OS) 上用 WebDriver 运行多个测试。也就是一个
+      操作系统商要运行多个  Chrome / Firefox 以及 chromedriver / geckodriver。
+    - 以 Chrome 为例，ChromeDriver 启动时相当于启动了一个 REST API Server。所以
+      每个 ChromeDriver 需要一个 port。
+    - 默认的 Selenium 实现会自动的寻找 Free port。本地测试无论是 Windows 还是
+      Linux 在同时启动多个 WebDriver 时都没有遇到过问题。
+    - 问题只发生在 AWS 上的部份 Linux 上。在这个 Linux 环境中,所有的 WebDriver
+      都在试图具体占用 1024 port。所以只有第一个能成功，后启动的都会发生 "Unable
+      to find a free port" 的异常
+  - 原因
+    - 在阅读了 WebDriver find free ports 的实现后。发现 WebDriver 在 Linux Find
+      Free ports 是不同于其它 OS 的。
+    - 在 Linux 中, WebDriver 会通过 Kernel 设置 =net.ipv4.ip_local_port_range=
+      来寻找可用的 Free port 的范围。
+    - 比如: "net.ipv4.ip_local_port_range = 1024 50000"，表示本地 Free ports 的
+      范围是 1024 ~ 50000。WebDriver 会避开这段，所以他会只找 50000 开外的 Port
+    - 在错误发生的 Linux 环境中，正好因其它原因这个设置是
+      "net.ipv4.ip_local_port_range = 1024 65535" (可能是想充份利用资源)。65535
+      是可分配的最大 Port。所以 WebDriver 无法找到 Free port 都尝试使用 1024
+      port
+  - 解决
+    - 修改 =net.ipv4.ip_local_port_range= ，留出足够的空间给 WebDriver
+    - 一个教训是，虽然 Java 是跨平台的。但有时也会有平台差异的实现。要有时间多测
+      发布的平台。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
