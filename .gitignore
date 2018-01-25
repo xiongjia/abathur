@@ -8,14 +8,18 @@ ehthumbs.db
 Desktop.ini
 $RECYLE.BIN/
 
-# nodejs
-/node_modules/
-npm-debug.log
+# IDE or Editor generated files
+*.swp
+tags
+.tern-port
+.tmp
+.sass-cache
 
-# bower
-/bower_components/
+# nodejs projects
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # output files
 /dist/
-/output/
-/content/assets/data/*.png
