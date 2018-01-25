@@ -3,6 +3,7 @@
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const path = require('path');
+const platform = require('os').platform();
 
 const argv = require('yargs').argv;
 const pkg = require('./package.json');
@@ -14,7 +15,10 @@ const conf = {
   DEBUG: !!argv.debug,
   BUILD_TS: buildTM.valueOf(),
   BUILD_TM: buildTM.toISOString(),
-  POSTAMBLE: '<include src="components/postamble.html"></include>'
+  BUILD_OS: platform,
+  POSTAMBLE: '<include src="components/postamble.html"></include>',
+  BROWSER: argv.browser ||
+    (platform === 'win32') ? 'chrome.exe' : 'google chrome'
 };
 
 const dirs = {
