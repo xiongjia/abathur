@@ -9,6 +9,7 @@ exports = module.exports = (opts) => {
       '**/*.js',
       '!node_modules/**',
       '!dist/**',
+      '!build/**',
       '!content/assets/js/**'
     ];
     return gulp.src(jsSrc)

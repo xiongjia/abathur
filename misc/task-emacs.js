@@ -1,0 +1,17 @@
+'use strict';
+
+exports = module.exports = (opts) => {
+  const gulp = require('gulp');
+  const gutil = require('gulp-util');
+  const { EmacsExec } = require('./emacs-exec.js');
+  const emacsExec = new EmacsExec({
+    logger: gutil.log
+  });
+
+  gulp.task('org-exports:full', (cb) => {
+    emacsExec.orgExport({ force: true }, cb);
+  });
+  gulp.task('org-exports:delta', (cb) => {
+    emacsExec.orgExport({ force: false }, cb);
+  });
+};
