@@ -12,6 +12,11 @@
     "rbuild": "npm i & gulp",
     "build": "gulp"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.2",
+    "gulp-util": "^3.0.8"
+  },
   "dependencies": {}
 }
