@@ -35,4 +35,5 @@
     (not (string= (getenv "_AB_ORG_PROJECT_FORCE_EXPORT") nil)))
   (message "Exporting org project %s" orgProject)
   (message "force export %s" forceExport)
+  (message "force export :(%s)" (getenv "_AB_ORG_PROJECT_FORCE_EXPORT"))
   (org-publish-project orgProject forceExport))

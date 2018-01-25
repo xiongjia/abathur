@@ -12,7 +12,7 @@ class EmacsExec {
     this.emacsHome = dirs.EMACS_HOME;
     this.orgBaseDir = dirs.ORG_BASE;
     this.orgOutputDir = dirs.ORG_OUTPUT;
-    this.orgPostamble = conf.postamble;
+    this.orgPostamble = conf.POSTAMBLE;
     this.log('EmacsExec: home %s', this.emacsHome);
   }
 
@@ -21,9 +21,11 @@ class EmacsExec {
       _AB_BASE_DIR: this.orgBaseDir,
       _AB_OUTPUT_DIR: this.orgOutputDir,
       _AB_POSTAMBLE: this.orgPostamble,
-      _AB_ORG_PROJECT_FORCE_EXPORT: args.force ? 'force' : undefined,
       HOME: this.emacsHome
     };
+    if (args.force) {
+      exportArgs._AB_ORG_PROJECT_FORCE_EXPORT = 'force';
+    }
     this.run({
       elScript: path.join(__dirname, 'emacs-org-export.el'),
       env: { ...process.env, ...exportArgs }
@@ -46,13 +48,7 @@ class EmacsExec {
   mkCmd(args) {
     return {
       bin: 'emacs',
-      args: [
-        '--batch',
-        '--script',
-        args.elScript,
-        '-f',
-        'export'
-      ],
+      args: [ '--batch', '--script', args.elScript, '-f', 'export' ],
       env: args.env || { ...process.env, ...{ HOME: this.emacsHome }},
       cwd: args.cwd || process.cwd()
     };

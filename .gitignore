@@ -24,3 +24,5 @@ emacs*.log*
 
 # output files
 /build/
+/dist/
+/content/assets/data/

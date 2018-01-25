@@ -14,12 +14,21 @@ const conf = {
   DEBUG: !!argv.debug,
   BUILD_TS: buildTM.valueOf(),
   BUILD_TM: buildTM.toISOString(),
-  POSTAMBLE: '{{placehold}}'
+  POSTAMBLE: '<include src="components/postamble.html"></include>'
 };
 
 const dirs = {
   CONTENT: 'content',
   DIST: 'dist',
+  DEST_CSS: 'dist/css',
+  DEST_CSS_MAP: '.',
+  DEST_FONTS: 'dist/fonts',
+  DEST_JS: 'dist/js',
+  DEST_JS_MAP: '.',
+  BUILD: 'build',
+  SRC: 'src',
+  SRC_BOOTSTRAP_SASS: 'node_modules/bootstrap-sass',
+  SRC_JQUERY: 'node_modules/jquery',
   EMACS_LOG: path.join('emacs-output.log'),
   EMACS_HOME: argv.emacsHome ||
     process.env._emacs_home ||
