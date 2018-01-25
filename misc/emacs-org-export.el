@@ -34,4 +34,5 @@
   (setq forceExport
     (not (string= (getenv "_AB_ORG_PROJECT_FORCE_EXPORT") nil)))
   (message "Exporting org project %s" orgProject)
+  (message "force export %s" forceExport)
   (org-publish-project orgProject forceExport))

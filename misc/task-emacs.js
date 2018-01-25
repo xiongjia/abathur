@@ -4,9 +4,7 @@ exports = module.exports = (opts) => {
   const gulp = require('gulp');
   const gutil = require('gulp-util');
   const { EmacsExec } = require('./emacs-exec.js');
-  const emacsExec = new EmacsExec({
-    logger: gutil.log
-  });
+  const emacsExec = new EmacsExec({...opts, ...{ logger: gutil.log }});
 
   gulp.task('org-exports:full', (cb) => {
     emacsExec.orgExport({ force: true }, cb);

@@ -6,13 +6,13 @@ const fs = require('fs');
 
 class EmacsExec {
   constructor(opts) {
-    this.log = opts.logger;
-    this.emacsLog = path.join('emacs-output.log');
-    this.emacsHome = opts.emacsHome ||
-      process.env._emacs_home || process.env.HOME;
-    this.orgBaseDir = path.join(__dirname, '../content');
-    this.orgOutputDir = path.join(__dirname, '../build/output');
-    this.orgPostamble = '{{placehold}}';
+    const { conf, logger, dirs } = opts;
+    this.log = logger;
+    this.emacsLog = dirs.EMACS_LOG;
+    this.emacsHome = dirs.EMACS_HOME;
+    this.orgBaseDir = dirs.ORG_BASE;
+    this.orgOutputDir = dirs.ORG_OUTPUT;
+    this.orgPostamble = conf.postamble;
     this.log('EmacsExec: home %s', this.emacsHome);
   }
 
@@ -21,7 +21,7 @@ class EmacsExec {
       _AB_BASE_DIR: this.orgBaseDir,
       _AB_OUTPUT_DIR: this.orgOutputDir,
       _AB_POSTAMBLE: this.orgPostamble,
-      _AB_ORG_PROJECT_FORCE_EXPORT: !!args.force,
+      _AB_ORG_PROJECT_FORCE_EXPORT: args.force ? 'force' : undefined,
       HOME: this.emacsHome
     };
     this.run({
@@ -33,15 +33,26 @@ class EmacsExec {
         cb(err);
         return;
       }
-      /* TODO check process exit code */
-      cb(null, {});
+      this.log('org export finished: %j', result);
+      const { code } = result;
+      if (code !== 0) {
+        cb(new Error(`Org Export error: exit ${code}.`));
+      } else {
+        cb();
+      }
     });
   }
 
   mkCmd(args) {
     return {
       bin: 'emacs',
-      args: [ '--batch', '--script', args.elScript ],
+      args: [
+        '--batch',
+        '--script',
+        args.elScript,
+        '-f',
+        'export'
+      ],
       env: args.env || { ...process.env, ...{ HOME: this.emacsHome }},
       cwd: args.cwd || process.cwd()
     };
