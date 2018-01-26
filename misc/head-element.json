@@ -1,0 +1,11 @@
+{
+  "link": [{
+    "rel": "icon",
+    "sizes": "32x32",
+    "href": "/assets/favicon-32x32.png"
+  }, {
+    "rel": "icon",
+    "sizes": "16x16",
+    "href": "/assets/favicon-16x16.png"
+  }]
+}

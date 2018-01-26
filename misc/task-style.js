@@ -21,6 +21,6 @@ exports = module.exports = (opts) => {
       .pipe(sass(sassOpts))
       .pipe(cleanCSS({ compatibility: 'ie8' }))
       .pipe(gulpif(!conf.DEBUG, rev()))
-      .pipe(gulp.dest(dirs.DEST_CSS));
+      .pipe(gulp.dest(dirs.DIST_CSS));
   });
 };

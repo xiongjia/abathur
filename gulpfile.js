@@ -2,9 +2,9 @@
 
 const gulp = require('gulp');
 const gutil = require('gulp-util');
+const seq = require('gulp-sequence');
 const path = require('path');
 const platform = require('os').platform();
-
 const argv = require('yargs').argv;
 const pkg = require('./package.json');
 const buildTM = new Date();
@@ -12,6 +12,8 @@ const buildTM = new Date();
 const conf = {
   NAME: pkg.name,
   DESC: pkg.description,
+  DEV_NAME: pkg.author,
+  DEV_URL: pkg.repository.url,
   DEBUG: !!argv.debug,
   BUILD_TS: buildTM.valueOf(),
   BUILD_TM: buildTM.toISOString(),
@@ -24,13 +26,15 @@ const conf = {
 const dirs = {
   CONTENT: 'content',
   DIST: 'dist',
-  DEST_CSS: 'dist/css',
-  DEST_CSS_MAP: '.',
-  DEST_FONTS: 'dist/fonts',
-  DEST_JS: 'dist/js',
-  DEST_JS_MAP: '.',
+  DIST_CSS: 'dist/css',
+  DIST_CSS_MAP: '.',
+  DIST_FONTS: 'dist/fonts',
+  DIST_ASSETS: 'dist/assets',
+  DIST_JS: 'dist/js',
+  DIST_JS_MAP: '.',
   BUILD: 'build',
   SRC: 'src',
+  HDR_ELEMENTS: path.join(__dirname, 'misc/head-element.json'),
   SRC_BOOTSTRAP_SASS: 'node_modules/bootstrap-sass',
   SRC_JQUERY: 'node_modules/jquery',
   EMACS_LOG: path.join('emacs-output.log'),
@@ -46,4 +50,5 @@ gutil.log(' conf = %j', conf);
 gutil.log(' dirs = %j', dirs);
 
 require('./misc/tasks.js')({ conf: conf, dirs: dirs });
+gulp.task('default', [ 'lint' ]);
 gulp.task('default', [ 'lint' ]);

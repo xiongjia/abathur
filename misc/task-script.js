@@ -13,8 +13,7 @@ exports = module.exports = (opts) => {
       dirs.SRC_JQUERY + '/dist/jquery.min.js',
       dirs.SRC_BOOTSTRAP_SASS + '/assets/javascripts/bootstrap.min.js'
     ];
-    return gulp.src(libs)
-      .pipe(gulp.dest(dirs.DEST_JS));
+    return gulp.src(libs).pipe(gulp.dest(dirs.DIST_JS));
   });
 
   gulp.task('js:bundle', () => {
@@ -41,6 +40,6 @@ exports = module.exports = (opts) => {
       .pipe(buffer())
       .pipe(gulpif(!conf.DEBUG, uglify()))
       .pipe(gulpif(!conf.DEBUG, rev()))
-      .pipe(gulp.dest(dirs.DEST_JS));
+      .pipe(gulp.dest(dirs.DIST_JS));
   });
 };

@@ -6,7 +6,7 @@ exports = module.exports = (opts) => {
   const path = require('path');
   const { dirs, conf } = opts;
 
-  gulp.task('pages', [ 'sass', 'js' ], () => {
+  gulp.task('pages', [ 'sass', 'js', 'assets' ], () => {
     const posthtml = require('gulp-posthtml');
     const htmlbeautify = require('gulp-html-beautify');
     const htmlmin = require('gulp-htmlmin');
@@ -18,21 +18,21 @@ exports = module.exports = (opts) => {
     });
     const injCSSBlock = '<!-- inject:css --><!-- endinject -->';
     const injJSBlock = '<!-- inject:js --><!-- endinject -->';
+    const injHdrBlock = ' <posthtml-head-elements></posthtml-head-elements>';
     const injItems = gulp.src([
       dirs.DIST + '/**/*.css',
       dirs.DIST + '/**/jquery*.js',
       dirs.DIST + '/**/bootstrap*.js',
       dirs.DIST + '/**/bundle*.js'
     ], { read: false });
+    const headElements = require('posthtml-head-elements')({
+      headElements: dirs.HDR_ELEMENTS
+    });
 
-
-    /* TODO
-     *   1. update html head
-     *   2. inject js & css
-     */
     return gulp.src([ dirs.ORG_OUTPUT + '/**/*.html' ])
+      .pipe(injectStr.before('<title>', injHdrBlock))
       .pipe(posthtml(() => ({
-        plugins: [ include ],
+        plugins: [ include, headElements ],
         options: {}
       })))
       .pipe(injectStr.after('</title>', injCSSBlock))

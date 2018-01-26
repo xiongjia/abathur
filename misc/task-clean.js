@@ -10,4 +10,9 @@ exports = module.exports = (opts) => {
   gulp.task('clean:pages', () => del([ dirs.DIST + '/**/*.html' ]));
   gulp.task('clean:css', () => del([ dirs.DIST + '/css/**/*' ]));
   gulp.task('clean:js', () => del([ dirs.DIST + '/js/**/*' ]));
+
+  gulp.task('clean:assets:img', () => del([ dirs.DIST + '/assets/img/**/*' ]));
+  gulp.task('clean:assets:fav', () => {
+    return del([ dirs.DIST + '/assets/favicon*.{ico,png}' ]);
+  });
 };
