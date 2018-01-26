@@ -1,6 +1,7 @@
 'use strict';
 
-import debug from 'debug';
+import * as misc from './misc.js';
+import MainApp from './app.js';
 
 /* app conf */
 const appConf = {
@@ -8,6 +9,12 @@ const appConf = {
   version: process.env.ENV_VER
 };
 
-debug.enable('scratch:*');
-const dbg = debug('scratch:app');
+/* init log */
+misc.initDbgLog(appConf);
+const dbg = misc.mkDbgLog('main');
 dbg('app conf: %j', appConf);
+
+$(document).ready(function() {
+  const app = new MainApp(appConf);
+  app.run();
+});

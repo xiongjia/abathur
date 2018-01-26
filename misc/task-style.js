@@ -19,7 +19,7 @@ exports = module.exports = (opts) => {
 
     return gulp.src([ dirs.SRC + '/**/*.scss' ])
       .pipe(sass(sassOpts))
-      .pipe(cleanCSS({ compatibility: 'ie8' }))
+      .pipe(gulpif(!conf.DEBUG, cleanCSS({ compatibility: 'ie8' })))
       .pipe(gulpif(!conf.DEBUG, rev()))
       .pipe(gulp.dest(dirs.DIST_CSS));
   });

@@ -2,6 +2,14 @@
 @import "bootstrap";
 @import "bootstrap/theme";
 
+$pgMarginTop: 70px;
+
 body {
-  margin-top: 70px;
+  margin-top: $pgMarginTop;
 }
+
+#abSidebar {
+  padding: 5px;
+  h2 { display: none; }
+}
+

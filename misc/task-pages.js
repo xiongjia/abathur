@@ -16,9 +16,10 @@ exports = module.exports = (opts) => {
     const include = require('posthtml-include')({
       root: path.join(__dirname, '..', dirs.SRC)
     });
+
     const injCSSBlock = '<!-- inject:css --><!-- endinject -->';
     const injJSBlock = '<!-- inject:js --><!-- endinject -->';
-    const injHdrBlock = ' <posthtml-head-elements></posthtml-head-elements>';
+    const injHdrBlock = '<posthtml-head-elements></posthtml-head-elements>';
     const injItems = gulp.src([
       dirs.DIST + '/**/*.css',
       dirs.DIST + '/**/jquery*.js',
@@ -29,10 +30,14 @@ exports = module.exports = (opts) => {
       headElements: dirs.HDR_ELEMENTS
     });
 
+    const exp = require('posthtml-expressions')({
+      locals: { ...conf }
+    });
+
     return gulp.src([ dirs.ORG_OUTPUT + '/**/*.html' ])
       .pipe(injectStr.before('<title>', injHdrBlock))
       .pipe(posthtml(() => ({
-        plugins: [ include, headElements ],
+        plugins: [ include, headElements, exp ],
         options: {}
       })))
       .pipe(injectStr.after('</title>', injCSSBlock))

@@ -17,6 +17,7 @@ exports = module.exports = (opts) => {
 
     gulp.watch(dirs.BUILD + '/output/**/*.html', [ 'html-watch' ]);
     gulp.watch(dirs.SRC + '/**/*.scss', [ 'html-watch' ]);
+    gulp.watch(dirs.SRC + '/**/*.html', [ 'html-watch' ]);
     gulp.watch(dirs.SRC + '/assets/fav*.png', [ 'assets-watch:fav' ]);
     gulp.watch(dirs.SRC + '/assets/img/**/*', [ 'html-watch' ]);
     gulp.watch(dirs.SRC + '/**/*.js', [ 'html-watch' ]);
