@@ -13,6 +13,7 @@ class EmacsExec {
     this.orgBaseDir = dirs.ORG_BASE;
     this.orgOutputDir = dirs.ORG_OUTPUT;
     this.orgPostamble = conf.POSTAMBLE;
+    this.orgPreamble = conf.PREAMBLE;
     this.log('EmacsExec: home %s', this.emacsHome);
   }
 
@@ -21,6 +22,7 @@ class EmacsExec {
       _AB_BASE_DIR: this.orgBaseDir,
       _AB_OUTPUT_DIR: this.orgOutputDir,
       _AB_POSTAMBLE: this.orgPostamble,
+      _AB_PREAMBLE: this.orgPreamble,
       HOME: this.emacsHome
     };
     if (args.force) {

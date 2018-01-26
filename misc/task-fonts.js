@@ -7,6 +7,6 @@ exports = module.exports = (opts) => {
 
   gulp.task('fonts', () => {
     const src = [ dirs.SRC_BOOTSTRAP_SASS + '/assets/fonts/**/*' ];
-    return gulp.src(src).pipe(gulp.dest(dirs.DEST_FONTS));
+    return gulp.src(src).pipe(gulp.dest(dirs.DIST_FONTS));
   });
 };

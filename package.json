@@ -9,8 +9,13 @@
   },
   "license": "MIT",
   "scripts": {
+    "clean": "gulp clean",
+    "lint": "gulp lint",
     "rbuild": "npm i & gulp",
-    "build": "gulp"
+    "build": "gulp",
+    "buildDebug": "gulp --debug",
+    "serv": "gulp serv --debug",
+    "servNoExport": "gulp serv --debug --disableOrgExport"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

@@ -15,10 +15,12 @@ const conf = {
   DEV_NAME: pkg.author,
   DEV_URL: pkg.repository.url,
   DEBUG: !!argv.debug,
+  NO_ORG_EXPORT: !!argv.disableOrgExport,
   BUILD_TS: buildTM.valueOf(),
   BUILD_TM: buildTM.toISOString(),
   BUILD_OS: platform,
   POSTAMBLE: '<include src="components/postamble.html"></include>',
+  PREAMBLE: '<include src="components/preamble.html"></include>',
   BROWSER: argv.browser ||
     (platform === 'win32') ? 'chrome.exe' : 'google chrome'
 };
@@ -50,5 +52,13 @@ gutil.log(' conf = %j', conf);
 gutil.log(' dirs = %j', dirs);
 
 require('./misc/tasks.js')({ conf: conf, dirs: dirs });
-gulp.task('default', [ 'lint' ]);
-gulp.task('default', [ 'lint' ]);
+
+gulp.task('default', [ 'build' ]);
+gulp.task('build', (cb) => {
+  const buildTasks = [ 'fonts', 'lint' ];
+  if (!conf.NO_ORG_EXPORT) {
+    buildTasks.push('org-exports:full');
+  }
+  const cleanTask = conf.NO_ORG_EXPORT ? 'clean:dist' : 'clean';
+  seq(cleanTask, buildTasks, 'pages')(cb);
+});

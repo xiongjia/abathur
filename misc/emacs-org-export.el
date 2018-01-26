@@ -6,6 +6,7 @@
 (setq baseDir (getenv "_AB_BASE_DIR"))
 (setq outputDir (getenv "_AB_OUTPUT_DIR"))
 (setq postamble (getenv "_AB_POSTAMBLE"))
+(setq preamble (getenv "_AB_PREAMBLE"))
 
 (setq org-publish-project-alist
   `(
@@ -26,7 +27,7 @@
      :html-head-include-default-style  nil
      :html-head-include-scripts nil
      :html-postamble ,postamble
-     :html-preamble "")
+     :html-preamble ,preamble)
     ("abOrg" :components ("abOrgContent"))))
 
 (defun export ()

@@ -5,7 +5,9 @@ exports = module.exports = (opts) => {
   const del = require('del');
   const { dirs } = opts;
 
-  gulp.task('clean:all', () => del([ dirs.DEST, dirs.BUILD ]));
+  gulp.task('clean', [ 'clean:all' ]);
+  gulp.task('clean:all', () => del([ dirs.DIST, dirs.BUILD ]));
+  gulp.task('clean:dist', () => del([ dirs.DIST ]));
   gulp.task('clean:orgOutput', () => del([ dirs.BUILD + '/output' ]));
   gulp.task('clean:pages', () => del([ dirs.DIST + '/**/*.html' ]));
   gulp.task('clean:css', () => del([ dirs.DIST + '/css/**/*' ]));
