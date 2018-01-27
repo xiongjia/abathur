@@ -4,18 +4,24 @@ exports = module.exports = (opts) => {
   const gulp = require('gulp');
   const { dirs, conf } = opts;
 
-  gulp.task('deploy', function() {
+  gulp.task('deploy', () => {
     const rsync = require('gulp-rsync');
     const rsyncOpt = {
       root: dirs.DIST + '/',
       hostname: conf.DEPLOY_HOST,
-      destination: conf.DEPLOY_DEST,
-      archive: true,
-      silent: false,
-      compress: true
+      destination: conf.DEPLOY_DEST
     };
 
     return gulp.src(dirs.DIST + '/**')
       .pipe(rsync(rsyncOpt));
+  });
+
+  gulp.task('sitemap', [ 'clean:pkg:sitemap' ], () => {
+    const sitemap = require('gulp-sitemap');
+    gulp.src(dirs.DIST + '/**/*.html', { read: false })
+      .pipe(sitemap({
+        siteUrl: conf.DEPLOY_SITE
+      }))
+      .pipe(gulp.dest(dirs.DIST));
   });
 };

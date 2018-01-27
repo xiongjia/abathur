@@ -24,7 +24,8 @@ const conf = {
   BROWSER: argv.browser ||
     (platform === 'win32') ? 'chrome.exe' : 'google chrome',
   DEPLOY_HOST: 'lexj@xj-labs.net',
-  DEPLOY_DEST: 'xj-labs.net'
+  DEPLOY_DEST: 'xj-labs.net',
+  DEPLOY_SITE: 'http://xj-labs.net'
 };
 
 const dirs = {
@@ -63,5 +64,5 @@ gulp.task('build', (cb) => {
     buildTasks.push('org-exports:full');
   }
   const cleanTask = conf.NO_ORG_EXPORT ? 'clean:dist' : 'clean';
-  seq(cleanTask, buildTasks, 'pages')(cb);
+  seq(cleanTask, buildTasks, 'pages', 'sitemap')(cb);
 });
