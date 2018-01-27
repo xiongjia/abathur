@@ -15,15 +15,16 @@ export default class MainApp {
     dbg('  pgInf: %j', this.pgInf);
   }
 
-  run() {
-    dbg('main app run');
+  initNavbar() {
     if (this.pgInf.isAbout) {
       $('#btnAbout').addClass('active');
     }
     if (this.pgInf.isHome) {
       $('#btnHome').addClass('active');
     }
+  }
 
+  initContent() {
     const elData = $('#content');
     if (elData) {
       elData.detach().appendTo('#abContent');
@@ -33,5 +34,35 @@ export default class MainApp {
     if (elToc) {
       elToc.detach().appendTo('#abSidebar');
     }
+  }
+
+  initDisqus() {
+    try {
+      dbg('init disqus');
+      const disqusShortname = 'myvimwiki';
+      const dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = `//${disqusShortname}.disqus.com/embed.js`;
+      $('#disqus_thread').append(dsq);
+    } catch (err) {
+      dbg('init disqus erro: %s', err.toString());
+    }
+  }
+
+  updatePg() {
+    $('a[href]').each(function() {
+      if (this.href.indexOf(window.location.host) === -1) {
+        $(this).attr({ target: '_blank', title: this.href });
+      }
+    });
+  }
+
+  run() {
+    dbg('main app run');
+    this.initNavbar();
+    this.initContent();
+    this.initDisqus();
+    this.updatePg();
   }
 };

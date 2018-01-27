@@ -5,11 +5,24 @@ exports = module.exports = (opts) => {
   const gutil = require('gulp-util');
   const { dirs, conf } = opts;
 
-  gulp.task('assets', [ 'assets:img', 'assets:fav', 'assets:cfg' ]);
+  const assets = [ 'assets:img', 'assets:fav', 'assets:cfg', 'assets:dat' ];
+  gulp.task('assets', assets);
+
+  gulp.task('assets:dat', [ 'clean:assets:dat' ], () => {
+    const imagemin = require('gulp-imagemin');
+    const src = [ dirs.ORG_BASE + '/assets/data/**/*'];
+    return gulp.src(src)
+      .pipe(imagemin())
+      .pipe(gulp.dest(dirs.DIST + '/assets/data'));
+  });
 
   gulp.task('assets:img', [ 'clean:assets:img' ], () => {
     const imagemin = require('gulp-imagemin');
-    return gulp.src(dirs.SRC + '/assets/img/**/*')
+    const src = [
+      dirs.SRC + '/assets/img/**/*',
+      dirs.ORG_BASE + '/assets/img/**/*'
+    ];
+    return gulp.src(src)
       .pipe(imagemin())
       .pipe(gulp.dest(dirs.DIST + '/assets/img'));
   });
