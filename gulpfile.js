@@ -36,6 +36,7 @@ const dirs = {
   DIST_JS_MAP: '.',
   BUILD: 'build',
   SRC: 'src',
+  SCRIPTS: 'misc',
   HDR_ELEMENTS: path.join(__dirname, 'misc/head-element.json'),
   SRC_BOOTSTRAP_SASS: 'node_modules/bootstrap-sass',
   SRC_JQUERY: 'node_modules/jquery',

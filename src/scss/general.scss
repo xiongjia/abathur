@@ -1,0 +1,60 @@
+$pgMarginTop: 88px;
+
+body {
+  margin-top: $pgMarginTop;
+  max-width: 98%;
+  font: normal normal normal 16px/1.6em Open Sans, sans-serif;
+  color: #333
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Trebuchet MS, Helvetica, sans-serif;
+  font-weight: bold;
+  line-height: 100%;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2.0em; color: #000000;
+}
+
+h2 {
+  font-size: 1.8em; color: #404040;
+  border-bottom: 1px solid #ddd;
+}
+
+h3 {
+  font-size: 1.6em; color: #707070;
+}
+
+h4 {
+  font-size: 1.4em; color: #909090;
+}
+h5 {
+  font-size: 1.2em; color: #989898;
+}
+h6 {
+  font-size: 1.0em; color: #9c9c9c;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+li {
+  margin: 0.3em auto;
+}
+
+.example {
+  display: block;
+  white-space: pre;
+  margin: 1em 0px 1em;
+  background-color:transparent;
+  border: 0px
+}
+
+td.gsc-clear-button {
+  display: none !important;
+}

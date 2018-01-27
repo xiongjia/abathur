@@ -1,17 +1,7 @@
 # -*- mode: org; mode: auto-fill -*-
 #+TITLE: Shell
-#+AUTHOR: xiong-jia.le
-#+EMAIL: lexiongjia@gmail.com
 #+OPTIONS: title:nil num:nil *:nil ^:nil
-#+HTML_INCLUDE_STYLE: nil
 #+HTML_DOCTYPE: <!doctype html>
-#+HTML_HEAD: <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-#+HTML_HEAD: <meta http-equiv="cache-control" content="max-age=0" />
-#+HTML_HEAD: <meta http-equiv="cache-control" content="no-cache" />
-#+HTML_HEAD: <meta http-equiv="expires" content="0" />
-#+HTML_HEAD: <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-#+HTML_HEAD: <meta http-equiv="pragma" content="no-cache" />
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/main_v0.1.css" /> 
 
 俺覺得 Shell Script 的主要難點是需要較廣的知識面。有時會與不會只是對於某個 command 的了解與否。 
 (比如: 不了解 =tail= , =head= 等就不能方便的讀取行。不了解 =pgrep= 不能方便的查找 process。)

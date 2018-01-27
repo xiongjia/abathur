@@ -1,22 +1,7 @@
 /* main.scss */
 @import "bootstrap";
 @import "bootstrap/theme";
-
-$pgMarginTop: 70px;
-
-body {
-  margin-top: $pgMarginTop;
-}
-
-#abSidebar {
-  padding: 5px;
-  h2 { display: none; }
-}
-
-.hrFooter {
-  height: 1px;
-  background-color: gray;
-  border-color: transparent;
-  width: 98%;
-}
-
+@import "scss/general.scss";
+@import "scss/footer.scss";
+@import "scss/sidebar.scss";
+@import "scss/content.scss";

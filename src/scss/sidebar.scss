@@ -1,0 +1,29 @@
+
+#abSidebar {
+  padding: 5px;
+  h2 {
+    display: none;
+  }
+}
+
+#table-of-contents {
+  font-size: 12pt;
+  line-height: 128%;
+  padding: 0;
+  padding-left: 8px;
+  padding-bottom: 8px;
+  padding-top: 0px;
+}
+
+#table-of-contents #text-table-of-contents {
+  text-align: left;
+  padding: 5px;
+}
+
+#table-of-contents ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 18px;
+}
+
+#table-of-contents li { color: #eff; }

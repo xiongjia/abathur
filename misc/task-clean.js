@@ -17,4 +17,5 @@ exports = module.exports = (opts) => {
   gulp.task('clean:assets:fav', () => {
     return del([ dirs.DIST + '/assets/favicon*.{ico,png}' ]);
   });
+  gulp.task('clean:assets:cfg', () => del([ dirs.DIST + '/.htaccess' ]));
 };
