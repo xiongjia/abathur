@@ -15,7 +15,8 @@
     "build": "gulp",
     "buildDebug": "gulp --debug",
     "serv": "gulp serv --debug",
-    "servNoExport": "gulp serv --debug --disableOrgExport"
+    "servNoExport": "gulp serv --debug --disableOrgExport",
+    "deploy": "gulp deploy"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
