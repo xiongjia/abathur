@@ -22,7 +22,9 @@ const conf = {
   POSTAMBLE: '<include src="components/postamble.html"></include>',
   PREAMBLE: '<include src="components/preamble.html"></include>',
   BROWSER: argv.browser ||
-    (platform === 'win32') ? 'chrome.exe' : 'google chrome'
+    (platform === 'win32') ? 'chrome.exe' : 'google chrome',
+  DEPLOY_HOST: 'lexj@xj-labs.net',
+  DEPLOY_DEST: 'xj-labs.net'
 };
 
 const dirs = {

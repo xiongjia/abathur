@@ -5,7 +5,7 @@ exports = module.exports = (opts) => {
   const gutil = require('gulp-util');
   const { dirs, conf } = opts;
 
-  const assets = [ 'assets:img', 'assets:fav', 'assets:cfg', 'assets:dat' ];
+  const assets = [ 'assets:img', 'assets:favico', 'assets:cfg', 'assets:dat' ];
   gulp.task('assets', assets);
 
   gulp.task('assets:dat', [ 'clean:assets:dat' ], () => {
@@ -31,6 +31,11 @@ exports = module.exports = (opts) => {
     const rename = require('gulp-rename');
     return gulp.src(dirs.SCRIPTS + '/htaccess')
       .pipe(rename('/.htaccess'))
+      .pipe(gulp.dest(dirs.DIST));
+  });
+
+  gulp.task('assets:favico', [ 'assets:fav' ], () => {
+    return gulp.src(dirs.DIST + '/assets/favicon.ico')
       .pipe(gulp.dest(dirs.DIST));
   });
 

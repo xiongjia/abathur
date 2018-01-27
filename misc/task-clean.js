@@ -16,7 +16,10 @@ exports = module.exports = (opts) => {
   gulp.task('clean:assets:img', () => del([ dirs.DIST + '/assets/img/**/*' ]));
   gulp.task('clean:assets:dat', () => del([ dirs.DIST + '/assets/data/**/*' ]));
   gulp.task('clean:assets:fav', () => {
-    return del([ dirs.DIST + '/assets/favicon*.{ico,png}' ]);
+    return del([
+      dirs.DIST + '/assets/favicon*.{ico,png}',
+      dirs.DIST + '/fav*.{ico,png}'
+    ]);
   });
   gulp.task('clean:assets:cfg', () => del([ dirs.DIST + '/.htaccess' ]));
 };
