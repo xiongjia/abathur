@@ -70,6 +70,7 @@
 ** Awesome
 - Misc
   - [[https://github.com/MaximAbramchuck/awesome-interviews][Awesome Interviews]]
+  - [[https://github.com/binhnguyennus/awesome-scalability][Awesome scalability]]
 - C/C++
   - [[https://github.com/rigtorp/awesome-modern-cpp][Awesome Modern C++]]
 - Databases
