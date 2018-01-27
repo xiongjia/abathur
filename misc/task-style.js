@@ -17,7 +17,7 @@ exports = module.exports = (opts) => {
       includePaths: [ dirs.SRC_BOOTSTRAP_SASS + '/assets/stylesheets' ]
     };
 
-    return gulp.src([ dirs.SRC + '/**/*.scss' ])
+    return gulp.src([ dirs.SRC + '/main.scss' ])
       .pipe(sass(sassOpts))
       .pipe(gulpif(!conf.DEBUG, cleanCSS({ compatibility: 'ie8' })))
       .pipe(gulpif(!conf.DEBUG, rev()))

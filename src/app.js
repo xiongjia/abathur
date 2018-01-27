@@ -9,7 +9,23 @@ export default class MainApp {
     this.pgInf = {
       wrkPath: wrkPath,
       isHome: (wrkPath === '/' || wrkPath === '/index.html'),
-      isAbout: (wrkPath === '/about.html')
+      isAbout: (wrkPath === '/about.html'),
+      showSidebar: (() => {
+        if (wrkPath === '/forbidden.html' ||
+            wrkPath === '/missing.html') {
+          return false;
+        } else {
+          return true;
+        }
+      })(),
+      showDisqus: (() => {
+        if (wrkPath === '/forbidden.html' ||
+            wrkPath === '/missing.html') {
+          return false;
+        } else {
+          return true;
+        }
+      })()
     };
     dbg('main app created');
     dbg('  pgInf: %j', this.pgInf);
@@ -34,9 +50,15 @@ export default class MainApp {
     if (elToc) {
       elToc.detach().appendTo('#abSidebar');
     }
+    if (!this.pgInf.showSidebar) {
+      $('#abSidePanel').remove();
+    }
   }
 
   initDisqus() {
+    if (!this.pgInf.showDisqus) {
+      return;
+    }
     try {
       dbg('init disqus');
       const disqusShortname = 'myvimwiki';
