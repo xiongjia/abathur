@@ -6,26 +6,19 @@ const dbg = misc.mkDbgLog('app');
 export default class MainApp {
   constructor(appConf) {
     const wrkPath = (window.location.pathname).toLowerCase();
+    const pgCtx = (() => {
+      if (typeof abCtx !== 'undefined') {
+        return abCtx;
+      } else {
+        return { disableToc: false, disableDisq: false };
+      }
+    })();
     this.pgInf = {
       wrkPath: wrkPath,
       isHome: (wrkPath === '/' || wrkPath === '/index.html'),
       isAbout: (wrkPath === '/about.html'),
-      showSidebar: (() => {
-        if (wrkPath === '/forbidden.html' ||
-            wrkPath === '/missing.html') {
-          return false;
-        } else {
-          return true;
-        }
-      })(),
-      showDisqus: (() => {
-        if (wrkPath === '/forbidden.html' ||
-            wrkPath === '/missing.html') {
-          return false;
-        } else {
-          return true;
-        }
-      })()
+      showSidebar: !pgCtx.disableToc,
+      showDisqus: !pgCtx.disableDisq
     };
     dbg('main app created');
     dbg('  pgInf: %j', this.pgInf);

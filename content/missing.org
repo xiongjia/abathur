@@ -2,6 +2,7 @@
 #+TITLE: Missing
 #+OPTIONS: title:nil num:nil ^:nil
 #+HTML_DOCTYPE: <!doctype html>
+#+HTML_HEAD: <script type="text/javascript"> var abCtx = { disableToc: true, disableDisq: true }; </script>
 
 * Page Not Found
 Sorry, but the page you were trying to view does not exist. \\

@@ -13,7 +13,7 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "globals": {},
+  "globals": { "abCtx": true },
   "rules": {
     "indent": [ "error", 2 ],
     "quotes": [ "error", "single" ],
