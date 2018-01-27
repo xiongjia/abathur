@@ -9,7 +9,11 @@ exports = module.exports = (opts) => {
     const rsyncOpt = {
       root: dirs.DIST + '/',
       hostname: conf.DEPLOY_HOST,
-      destination: conf.DEPLOY_DEST
+      destination: conf.DEPLOY_DEST,
+      chmod: 'ugo=rwX',
+      compress: true,
+      archive: true,
+      delete: true
     };
 
     return gulp.src(dirs.DIST + '/**')
