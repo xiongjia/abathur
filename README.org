@@ -1,52 +1,25 @@
 # -*- mode: org; mode: auto-fill -*-
 #+TITLE: Abathur
+
 * Introduction
 My Org static website
-** Org project settings
-#+BEGIN_SRC emacs-lisp
-  ;; emacs theme is base16-google-dark 
-  ;; org settings
-  (setq org-ditaa-jar-path "~/<ditaa folder>/ditaa0_9.jar")
-  (setq org-plantuml-jar-path "~/<plantuml folder>/plantuml.jar")
-  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
-  (setq org-confirm-babel-evaluate nil)
-  (org-babel-do-load-languages
-    'org-babel-load-languages
-    '((emacs-lisp . t)
-      (dot . t)
-      (ditaa . t)
-      (gnuplot . t)
-      (plantuml . t)
-      (js . t)
-      (python . t)
-      (ruby . t)
-      (shell . t)
-      (org . t)
-      (latex . t)))
 
-  ;; project
-  (defconst abathur-root
-    (expand-file-name "<the root folder>"
-    "abathur root folder.")
-  (setq org-publish-project-alist `(
-    ("abathur-content"
-     :base-directory ,(concat abathur-root "/content")
-     :publishing-directory ,(concat abathur-root "/output")
-     :base-extension "org"
-     :recursive t
-     :publishing-function org-html-publish-to-html
-     :headline-levels 4
-     :auto-preamble t
-     :auto-sitemap nil
-     :export-creator-info nil 
-     :export-author-info nil
-     :auto-postamble nil
-     :table-of-contents nil
-     :section-numbers nil
-     :html-head-include-default-style  nil
-     :html-head-include-scripts nil
-     :html-postamble "<script type=\"text/javascript\" src=\"/assets/js/main_v0.1.js\"></script>"
-     :html-preamble  "")
-    ("abathur" :components ("abathur-content"))))
-#+END_SRC
+** Building scripts
+*** `npm run build` - generate the static web site 
+*** `npm run serv`  - generate the site and launch a local server
+*** `npm run clean` - clean local data (build & dist folders)
+*** `npm run deploy` - upload the result to target host
 
+** Folders
+*** `content` - the Emacs Org project
+*** `src` - the site js, scss and other resource file
+*** `misc` - the gulp tasks
+*** `dist` - the base folder of the website
+*** `build` - temp folders for building scripts
+
+** Dependencies
+*** bootstrap - the ui library
+*** gulp and gulp plugins
+*** browserify & babelify
+*** posthtml & posthtml plugins
+*** rsync tools for auto-deploy
