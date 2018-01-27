@@ -5,20 +5,29 @@
 My Org static website
 
 ** Building scripts
-*** `npm run build` - generate the static web site 
-*** `npm run serv`  - generate the site and launch a local server
-*** `npm run clean` - clean local data (build & dist folders)
-*** `npm run deploy` - upload the result to target host
+*** `npm run build` 
+    generate the static web site
+*** `npm run serv`
+    generate the site and launch a local server
+*** `npm run clean`
+    clean local data (build & dist folders)
+*** `npm run deploy`
+    upload the result to target host
 
 ** Folders
-*** `content` - the Emacs Org project
-*** `src` - the site js, scss and other resource file
-*** `misc` - the gulp tasks
-*** `dist` - the base folder of the website
-*** `build` - temp folders for building scripts
+*** `content`
+    the Emacs Org project
+*** `src`
+    the site js, scss and other resource file
+*** `misc`
+    the gulp tasks
+*** `dist`
+    the base folder of the website
+*** `build`
+    temp folders for building scripts
 
 ** Dependencies
-*** bootstrap - the ui library
+*** bootstrap
 *** gulp and gulp plugins
 *** browserify & babelify
 *** posthtml & posthtml plugins
