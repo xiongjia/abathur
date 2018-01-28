@@ -3,7 +3,7 @@
 #+OPTIONS: title:nil num:nil ^:nil
 #+HTML_DOCTYPE: <!doctype html>
 
-记录一些解决过的坑，问题 (开始自 2017 年)
+记录一些解决过的坑，问题等等 
 
 * Database
 ** PostgreSQL
@@ -11,7 +11,7 @@
   - 问题
     - server log 里有这样的 error log: "cannot extract element from a scalar" 
     - 本地没有重现：本地 pg 已经升到了 pg 9.4+ ；另一个原因是没有正确的测试数据
-    - 从实际数据库中用 "\copy" 把错误的库导出到 .csv 再导入到本地的 pg 9.3.x 来重现问题
+    - 从实际数据库中用 copy command 把错误的库导出到 .csv 再导入到本地的 pg 9.3.x 来重现问题
   - 原因
     - 在 9.3.x 中下面这些 SQL 会引起 "cannot extract element from a scalar" 错误，
       但 9.4+ 中不会错误
@@ -88,3 +88,13 @@
     - 修改 =net.ipv4.ip_local_port_range= ，留出足够的空间给 WebDriver
     - 一个教训是，虽然 Java 是跨平台的。但有时也会有平台差异的实现。要有时间多测
       发布的平台。
+- Gradle dependency lock
+  - 问题
+    - 在没有代码变化的前提下，CI job 生成的新 jar 出现了 Exception 
+    - 检查后发现是一些依赖的 3rd party jar 文件被自动更新了
+  - 原因
+    - 没有在 gradle project 中增加 version lock 的设置
+  - 解决
+    - 使用 =nebula.dependency-lock= 来锁定 versions
+    - 中间还遇到了一些插曲，还用到了点其它 plugin。
+      记录在了一篇 blog 中: [[http://xiongjia.github.io/dev/2017/11/26/gradle-dependency-lock][Gradle dependency lock]]
