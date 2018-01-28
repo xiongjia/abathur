@@ -15,6 +15,7 @@
     "build": "gulp",
     "buildDebug": "gulp --debug",
     "serv": "gulp serv --debug",
+    "servDelta": "gulp serv --debug --delta",
     "servNoExport": "gulp serv --debug --disableOrgExport",
     "deploy": "gulp deploy"
   },

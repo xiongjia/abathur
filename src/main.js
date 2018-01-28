@@ -2,6 +2,7 @@
 
 import * as misc from './misc.js';
 import MainApp from './app.js';
+import ganalytics from './ganalytics.js';
 
 /* app conf */
 const appConf = {
@@ -17,6 +18,7 @@ dbg('app conf: %j', appConf);
 
 /* main app */
 $(document).ready(function() {
+  ganalytics();
   const app = new MainApp(appConf);
   app.run();
 });

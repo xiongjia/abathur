@@ -15,6 +15,7 @@ const conf = {
   DEV_NAME: pkg.author,
   DEV_URL: pkg.repository.url,
   DEBUG: !!argv.debug,
+  DELTA: !!argv.delta,
   NO_ORG_EXPORT: !!argv.disableOrgExport,
   BUILD_TS: buildTM.valueOf(),
   BUILD_TM: buildTM.toISOString(),
@@ -61,8 +62,8 @@ gulp.task('default', [ 'build' ]);
 gulp.task('build', (cb) => {
   const buildTasks = [ 'fonts', 'lint' ];
   if (!conf.NO_ORG_EXPORT) {
-    buildTasks.push('org-exports:full');
+    buildTasks.push(conf.DELTA ? 'org-exports:delta' : 'org-exports:full');
   }
-  const cleanTask = conf.NO_ORG_EXPORT ? 'clean:dist' : 'clean';
+  const cleanTask = conf.NO_ORG_EXPORT || conf.DELTA ? 'clean:dist' : 'clean';
   seq(cleanTask, buildTasks, 'pages', 'sitemap')(cb);
 });
