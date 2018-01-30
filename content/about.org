@@ -9,11 +9,11 @@ let self = {
   mail: 'lexiongjia@gmail.com',
   sites: {
     github: 'https://github.com/xiongjia',
-    blog: 'http://xiongjia.github.io/',
+    blog: 'https://xiongjia.github.io/',
     google: 'https://google.com/+XiongJiaLe',
-    facebook: 'http://www.facebook.com/xiongjia.le',
+    facebook: 'https://www.facebook.com/xiongjia.le',
     twitter: 'https://twitter.com/XiongJia',
-    douban: 'http://www.douban.com/people/lexiongjia',
+    douban: 'https://www.douban.com/people/lexiongjia',
     fanfou: 'http://fanfou.com/xiongjia_le',
     zhihu: 'http://www.zhihu.com/people/xiongjia'
   },

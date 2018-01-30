@@ -26,7 +26,7 @@ const conf = {
     (platform === 'win32') ? 'chrome.exe' : 'google chrome',
   DEPLOY_HOST: 'lexj@xj-labs.net',
   DEPLOY_DEST: 'xj-labs.net',
-  DEPLOY_SITE: 'http://xj-labs.net'
+  DEPLOY_SITE: 'https://xj-labs.net'
 };
 
 const dirs = {
