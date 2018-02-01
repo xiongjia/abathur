@@ -1,5 +1,20 @@
 'use strict';
 
+const uncssBootstrapIgnore = [
+  /\.affix/,
+  /\.alert/,
+  /\.close/,
+  /\.collaps/,
+  /\.fade/,
+  /\.has/,
+  /\.help/,
+  /\.in/,
+  /\.modal/,
+  /\.open/,
+  /\.popover/,
+  /\.tooltip/
+];
+
 exports = module.exports = (opts) => {
   const gulp = require('gulp');
   const { dirs, conf } = opts;
@@ -9,6 +24,8 @@ exports = module.exports = (opts) => {
     const sass = require('gulp-sass');
     const rev = require('gulp-rev');
     const cleanCSS = require('gulp-clean-css');
+    const postcss = require('gulp-postcss');
+    const uncss = require('postcss-uncss');
 
     const sassOpts = {
       outputStyle: 'nested',
@@ -17,9 +34,19 @@ exports = module.exports = (opts) => {
       includePaths: [ dirs.SRC_BOOTSTRAP_SASS + '/assets/stylesheets' ]
     };
 
+    const postcssPlugin = [
+      uncss({
+        html: [ dirs.SRC + '/**/*.html' ],
+        ignore: [ ...uncssBootstrapIgnore ]
+      }),
+    ];
+
     return gulp.src([ dirs.SRC + '/main.scss' ])
       .pipe(sass(sassOpts))
-      .pipe(gulpif(!conf.DEBUG, cleanCSS({ compatibility: 'ie8' })))
+      .pipe(postcss(postcssPlugin))
+      .pipe(gulpif(!conf.DEBUG, cleanCSS({
+        level: { 1: {specialComments: 0} }
+      })))
       .pipe(gulpif(!conf.DEBUG, rev()))
       .pipe(gulp.dest(dirs.DIST_CSS));
   });
