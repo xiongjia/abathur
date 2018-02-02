@@ -36,8 +36,11 @@ exports = module.exports = (opts) => {
 
     const postcssPlugin = [
       uncss({
-        html: [ dirs.SRC + '/**/*.html' ],
-        ignore: [ ...uncssBootstrapIgnore ]
+        html: [
+          dirs.SRC + '/**/*.html',
+          dirs.ORG_OUTPUT + '/**/*.html'
+        ],
+        ignore: [ ...uncssBootstrapIgnore, ...[ /#ab.*/, /#table.*/]]
       }),
     ];
 
