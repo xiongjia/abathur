@@ -6,9 +6,10 @@ exports = module.exports = (opts) => {
   const { dirs } = opts;
 
   gulp.task('clean', [ 'clean:all' ]);
-  gulp.task('clean:all', () => del([ dirs.DIST, dirs.BUILD ]));
+  gulp.task('clean:all', () => del([ dirs.BUILD ]));
   gulp.task('clean:dist', () => del([ dirs.DIST ]));
   gulp.task('clean:orgOutput', () => del([ dirs.BUILD + '/output' ]));
+  gulp.task('clean:orgStage', () => del([ dirs.BUILD + '/stage' ]));
   gulp.task('clean:pages', () => del([ dirs.DIST + '/**/*.html' ]));
   gulp.task('clean:css', () => del([ dirs.DIST + '/css/**/*' ]));
   gulp.task('clean:js', () => del([ dirs.DIST + '/js/**/*' ]));

@@ -2,6 +2,7 @@
 
 const uncssBootstrapIgnore = [
   /\.affix/,
+  /\.active/,
   /\.alert/,
   /\.close/,
   /\.collaps/,
@@ -38,7 +39,7 @@ exports = module.exports = (opts) => {
       uncss({
         html: [
           dirs.SRC + '/**/*.html',
-          dirs.ORG_OUTPUT + '/**/*.html'
+          dirs.ORG_STAGE + '/**/*.html'
         ],
         ignore: [ ...uncssBootstrapIgnore, ...[ /#ab.*/, /#table.*/]]
       }),

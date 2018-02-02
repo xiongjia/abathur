@@ -21,14 +21,16 @@ My Org static website
     the site js, scss and other resource file
 *** `misc`
     the gulp tasks
-*** `dist`
-    the base folder of the website
 *** `build`
     temp folders for building scripts
+*** `build/dist`
+    the base folder of the website
 
 ** Dependencies
 *** bootstrap
 *** gulp and gulp plugins
 *** browserify & babelify
+*** cheerio for convert org export html files
 *** posthtml & posthtml plugins
 *** rsync tools for auto-deploy
+    

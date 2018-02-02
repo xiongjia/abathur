@@ -17,7 +17,6 @@ export default class MainApp {
       wrkPath: wrkPath,
       isHome: (wrkPath === '/' || wrkPath === '/index.html'),
       isAbout: (wrkPath === '/about.html'),
-      showSidebar: !pgCtx.disableToc,
       showDisqus: !pgCtx.disableDisq
     };
     dbg('main app created');
@@ -30,21 +29,6 @@ export default class MainApp {
     }
     if (this.pgInf.isHome) {
       $('#btnHome').addClass('active');
-    }
-  }
-
-  initContent() {
-    const elData = $('#content');
-    if (elData) {
-      elData.detach().appendTo('#abContent');
-    }
-
-    const elToc = $('#table-of-contents');
-    if (elToc) {
-      elToc.detach().appendTo('#abSidebar');
-    }
-    if (!this.pgInf.showSidebar) {
-      $('#abSidePanel').remove();
     }
   }
 
@@ -76,7 +60,6 @@ export default class MainApp {
   run() {
     dbg('main app run');
     this.initNavbar();
-    this.initContent();
     this.initDisqus();
     this.updatePg();
   }

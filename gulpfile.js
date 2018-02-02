@@ -31,12 +31,12 @@ const conf = {
 
 const dirs = {
   CONTENT: 'content',
-  DIST: 'dist',
-  DIST_CSS: 'dist/css',
+  DIST: 'build/dist',
+  DIST_CSS: 'build/dist/css',
   DIST_CSS_MAP: '.',
-  DIST_FONTS: 'dist/fonts',
-  DIST_ASSETS: 'dist/assets',
-  DIST_JS: 'dist/js',
+  DIST_FONTS: 'build/dist/fonts',
+  DIST_ASSETS: 'build/dist/assets',
+  DIST_JS: 'build/dist/js',
   DIST_JS_MAP: '.',
   BUILD: 'build',
   SRC: 'src',
@@ -49,7 +49,8 @@ const dirs = {
     process.env._emacs_home ||
     process.env.HOME,
   ORG_BASE: path.join(__dirname, './content'),
-  ORG_OUTPUT: path.join(__dirname, './build/output')
+  ORG_OUTPUT: path.join(__dirname, './build/output'),
+  ORG_STAGE: 'build/stage'
 };
 
 gutil.log('Abathur: ');

@@ -34,7 +34,7 @@ exports = module.exports = (opts) => {
       locals: { ...conf }
     });
 
-    return gulp.src([ dirs.ORG_OUTPUT + '/**/*.html' ])
+    return gulp.src([ dirs.ORG_STAGE + '/**/*.html' ])
       .pipe(injectStr.before('<title>', injHdrBlock))
       .pipe(posthtml(() => ({
         plugins: [ include, headElements, exp ],

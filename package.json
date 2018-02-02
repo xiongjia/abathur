@@ -13,7 +13,7 @@
     "lint": "gulp lint",
     "rbuild": "npm i & gulp",
     "build": "gulp",
-    "buildDebug": "gulp --debug",
+    "buildDebug": "gulp --debug --delta",
     "serv": "gulp serv --debug",
     "servDelta": "gulp serv --debug --delta",
     "servNoExport": "gulp serv --debug --disableOrgExport",
@@ -29,6 +29,7 @@
     "envify": "^4.1.0",
     "eslint": "^4.16.0",
     "gulp": "^3.9.1",
+    "gulp-cheerio": "^0.6.3",
     "gulp-clean-css": "^3.9.2",
     "gulp-eslint": "^4.0.2",
     "gulp-favicons": "^2.2.7",
@@ -60,6 +61,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
     "debug": "^3.1.0",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.4"
   }
 }
