@@ -3,6 +3,8 @@
 (load-file "~/.emacs.d/init.el")
 (message "elisp script org export")
 
+(setf org-html-mathjax-template "")
+
 (setq baseDir (getenv "_AB_BASE_DIR"))
 (setq outputDir (getenv "_AB_OUTPUT_DIR"))
 (setq postamble (getenv "_AB_POSTAMBLE"))
