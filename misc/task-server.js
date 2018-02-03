@@ -2,6 +2,7 @@
 
 exports = module.exports = (opts) => {
   const browserSync = require('browser-sync').create();
+  const seq = require('gulp-sequence');
   const gulp = require('gulp');
   const { dirs, conf } = opts;
   const reload = (cb) => {
@@ -15,7 +16,6 @@ exports = module.exports = (opts) => {
       browser: conf.BROWSER
     });
 
-    gulp.watch(dirs.BUILD + '/output/**/*.html', [ 'html-watch' ]);
     gulp.watch(dirs.SRC + '/**/*.scss', [ 'html-watch' ]);
     gulp.watch(dirs.SRC + '/**/*.html', [ 'html-watch' ]);
     gulp.watch(dirs.SRC + '/assets/fav*.png', [ 'assets-watch:fav' ]);
@@ -27,6 +27,8 @@ exports = module.exports = (opts) => {
   gulp.task('assets-watch:fav', [ 'assets:fav' ], (cb) => reload(cb));
   gulp.task('html-watch', [ 'pages' ], (cb) => reload(cb));
   if (!conf.NO_ORG_EXPORT) {
-    gulp.task('org-watch', [ 'org-exports:delta' ]);
+    gulp.task('org-watch', (cb) => {
+      seq('org-exports:watch', 'pages')(() => reload(cb));
+    });
   }
 };

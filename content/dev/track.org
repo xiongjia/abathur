@@ -23,7 +23,7 @@
       都可以保证得到 json object 的某个 key。
       比如： "SELECT json_extract_path_text('123'::json, 'key') AS data;"
 
-* Node.js
+* JS
 - request 发送 form data 的 post 请求时固定发生 Connection timeout error
   - 问题
     - 用 node.js request 发送文件到 server 用的是 post form data 的方式，有时会
@@ -45,6 +45,20 @@
   - 解决
     - 可以在 retry 时 re-create stream，不过再发一次意义不大。所以最后的修改时检
       查错误和请求类型放弃 retry。
+
+- The ignore list of postcss uncss
+  - 问题
+    - 通过 postcss 的 uncss plugin 来减小最终 css 的文件大小。
+    - 因为 bootstrap 中有大量的用不到的 style，所以文件可以减小很多。
+    - 不过减小后，有些样式会找不到。导致了网页样式错误。
+  - 原因
+    - 主要是 uncss 不能从 js 中准确找到所有用到的 style。
+  - 解决
+    - 在 uncss option 中加入 ignore list，明确告诉 uncss 不要优化掉对应的 class,
+      id or tag。
+    - 比如 uncss wiki 上有列出，bootstrap 的 ignore list: [[https://github.com/giakki/uncss/wiki/Using-uncss-with-Bootstrap][Using uncss with Bootstrap]]
+    - 自己自定义的 style 如果是在 .js 里使用到的也需要加。可以在命名时候加入一个
+      固定的 prefix , 随后用对应的表达式来过滤。
 
 * Java
 - 厂内某基于 Akka 系统，运行数小时或一天规律的发生 Out of memory exception

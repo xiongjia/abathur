@@ -58,6 +58,9 @@ exports = module.exports = (opts) => {
 
   gulp.task('org-exports:full', (cb) => seq('exports-full', 'org-stage')(cb));
   gulp.task('org-exports:delta', (cb) => seq('exports-delta', 'org-stage')(cb));
+  gulp.task('org-exports:watch', (cb) => {
+    seq('exports-delta', 'org-stage-watch')(cb);
+  });
 
   gulp.task('exports-full', [ 'clean:orgOutput' ], (cb) => {
     emacsExec.orgExport({ force: true }, cb);
@@ -67,7 +70,14 @@ exports = module.exports = (opts) => {
     emacsExec.orgExport({ force: false }, cb);
   });
 
-  gulp.task('org-stage', [ 'clean:orgStage' ], (cb) => {
+  gulp.task('org-stage-watch', () => {
+    const cheerio = require('gulp-cheerio');
+    return gulp.src(dirs.ORG_OUTPUT + '/**/*.html')
+      .pipe(cheerio(orgConvert))
+      .pipe(gulp.dest(dirs.ORG_STAGE));
+  });
+
+  gulp.task('org-stage', [ 'clean:orgStage' ], () => {
     const cheerio = require('gulp-cheerio');
     return gulp.src(dirs.ORG_OUTPUT + '/**/*.html')
       .pipe(cheerio(orgConvert))
