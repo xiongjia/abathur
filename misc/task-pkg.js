@@ -13,7 +13,9 @@ exports = module.exports = (opts) => {
       chmod: 'ugo=rwX',
       compress: true,
       archive: true,
-      delete: true
+      delete: true,
+      clean: true,
+      recursive: true
     };
 
     return gulp.src(dirs.DIST + '/**')
