@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "start": "gulp serv --debug --delta",
     "clean": "gulp clean",
     "lint": "gulp lint",
     "rbuild": "npm i & gulp",

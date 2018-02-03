@@ -57,7 +57,7 @@ gutil.log('Abathur: ');
 gutil.log(' conf = %j', conf);
 gutil.log(' dirs = %j', dirs);
 
-require('./misc/tasks.js')({ conf: conf, dirs: dirs });
+require('./misc/tasks.js')({ conf, dirs });
 
 gulp.task('default', [ 'build' ]);
 gulp.task('build', (cb) => {
