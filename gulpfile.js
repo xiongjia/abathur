@@ -38,8 +38,10 @@ const dirs = {
   DIST_ASSETS: 'build/dist/assets',
   DIST_JS: 'build/dist/js',
   DIST_JS_MAP: '.',
+  DIST_PROJECTS: 'build/dist/projects',
   BUILD: 'build',
   SRC: 'src',
+  SRC_PROJECTS: path.join(__dirname, 'projects'),
   SCRIPTS: 'misc',
   HDR_ELEMENTS: path.join(__dirname, 'misc/head-element.json'),
   SRC_BOOTSTRAP_SASS: 'node_modules/bootstrap-sass',
@@ -61,7 +63,7 @@ require('./misc/tasks.js')({ conf, dirs });
 
 gulp.task('default', [ 'build' ]);
 gulp.task('build', (cb) => {
-  const buildTasks = [ 'fonts', 'lint' ];
+  const buildTasks = [ 'fonts', 'lint', 'projects' ];
   if (!conf.NO_ORG_EXPORT) {
     buildTasks.push(conf.DELTA ? 'org-exports:delta' : 'org-exports:full');
   }

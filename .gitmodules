@@ -1,0 +1,3 @@
+[submodule "projects/capsule"]
+	path = projects/capsule
+	url = https://github.com/xiongjia/capsule.git

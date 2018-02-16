@@ -10,7 +10,8 @@ exports = module.exports = (opts) => {
       '!node_modules/**',
       '!dist/**',
       '!build/**',
-      '!content/assets/js/**'
+      '!content/assets/js/**',
+      '!projects/**'
     ];
     return gulp.src(jsSrc)
       .pipe(eslint())

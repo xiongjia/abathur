@@ -21,10 +21,10 @@ exports = module.exports = (opts) => {
     const injJSBlock = '<!-- inject:js --><!-- endinject -->';
     const injHdrBlock = '<posthtml-head-elements></posthtml-head-elements>';
     const injItems = gulp.src([
-      dirs.DIST + '/**/*.css',
-      dirs.DIST + '/**/jquery*.js',
-      dirs.DIST + '/**/bootstrap*.js',
-      dirs.DIST + '/**/bundle*.js'
+      dirs.DIST + '/css/**/*.css',
+      dirs.DIST + '/js/**/jquery*.js',
+      dirs.DIST + '/js/**/bootstrap*.js',
+      dirs.DIST + '/js/**/bundle*.js'
     ], { read: false });
     const headElements = require('posthtml-head-elements')({
       headElements: dirs.HDR_ELEMENTS

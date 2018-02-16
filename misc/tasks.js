@@ -11,4 +11,5 @@ exports = module.exports = (opts) => {
   require('./task-server.js')(opts);
   require('./task-assets.js')(opts);
   require('./task-pkg.js')(opts);
+  require('./task-projects.js')(opts);
 };

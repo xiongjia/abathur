@@ -10,9 +10,9 @@
   "license": "MIT",
   "scripts": {
     "start": "gulp serv --debug --delta",
+    "setup": "npm i & cd projects/capsule & npm i",
     "clean": "gulp clean",
     "lint": "gulp lint",
-    "rbuild": "npm i & gulp",
     "build": "gulp",
     "buildDebug": "gulp --debug --delta",
     "serv": "gulp serv --debug",
