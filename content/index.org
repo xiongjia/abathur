@@ -27,7 +27,12 @@
 * Practices
 此分类用于记录自己实现的一些工具(挖过的坑):
 - [[file:dev/vim-fanfou.org][vim-fanfou]]  - 一个基于 VIM Plugin 实现的 [[http://fanfou.com/][Fanfou]] (饭否) client， 
-  代码 (Python + Vim Script) 所在的 github repository: [[https://github.com/xiongjia/vim-fanfou]]  
+  代码 (Python + Vim Script) 所在的 github repository:
+  [[https://github.com/xiongjia/vim-fanfou]]  
+- [[https://github.com/xiongjia/abathur][recycle.bin]] - 基于 Emacs Org 的文档生成。结合 browserify , Posthtml 等
+  工具改良成的 Org Static Website generator 
+- [[https://github.com/xiongjia/capsule][capsule]] - 学习 Bootstrap , Webpack, React 时写的小工具。正好用于整理日常玩
+  Ingress 时收集的 Portal.
 - [[https://www.npmjs.com/package/nspider][nspider]] - 在一个 Node.js 实现的 Web Spider 封装。可以通过 npm install nspider 从 npm 安装。
   github repository: [[https://github.com/xiongjia/nspider][nspider]]
 
