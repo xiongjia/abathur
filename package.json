@@ -50,6 +50,7 @@
     "gulp-sitemap": "^5.0.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
+    "optipng-bin": "^6.0.0",
     "postcss-uncss": "^0.16.1",
     "posthtml-expressions": "^1.1.0",
     "posthtml-head-elements": "^0.5.0",
